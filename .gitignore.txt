@@ -1,0 +1,10 @@
+# 忽略 Qt 的编译输出文件夹
+build/
+build-*/
+*.user
+
+# 忽略 Visual Studio 或编译产生的临时文件
+*.obj
+*.pdb
+*.ilk
+*.exe
