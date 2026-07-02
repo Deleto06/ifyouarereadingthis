@@ -77,6 +77,11 @@
   "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\yvals.h" \
   "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\yvals_core.h" \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QEvent \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\QList \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\QObject \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\QRect \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSize \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSizeF \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\q17memory.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\q20bit.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\q20functional.h \
@@ -87,6 +92,7 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\q23type_traits.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\q23utility.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qabstracteventdispatcher.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qabstractitemmodel.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qalgorithms.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qalloc.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qanystringview.h \
@@ -115,6 +121,8 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcontainerinfo.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcontainertools_impl.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcontiguouscache.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcoreapplication.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcoreapplication_platform.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcoreevent.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qdarwinhelpers.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qdatastream.h \
@@ -133,12 +141,15 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qglobalstatic.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qhash.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qhashfunctions.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qiodevice.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qiodevicebase.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qitemselectionmodel.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qiterable.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qiterator.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlatin1stringview.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qline.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlist.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlocale.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlogging.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qmalloc.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qmap.h \
@@ -148,6 +159,7 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qmetatype.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qminmax.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qnamespace.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qnativeinterface.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qnumeric.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qobject.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qobject_impl.h \
@@ -159,6 +171,7 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qprocessordetection.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qrect.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qrefcount.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qregularexpression.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qscopedpointer.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qscopeguard.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qset.h \
@@ -204,23 +217,32 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtversionchecks.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtypeinfo.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtypes.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qurl.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qutf8stringview.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qvariant.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qvarlengtharray.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qversiontagging.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qxptype_traits.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qyieldcpu.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\QCloseEvent \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\QTransform \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qaction.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qbitmap.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qbrush.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qcolor.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qcursor.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qevent.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qeventpoint.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qfont.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qfontinfo.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qfontmetrics.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qfontvariableaxis.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qguiapplication.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qguiapplication_platform.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qicon.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qimage.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qinputdevice.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qinputmethod.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qkeysequence.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpaintdevice.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpainterpath.h \
@@ -228,23 +250,43 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpen.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpixelformat.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpixmap.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpointingdevice.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpolygon.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qregion.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qrgb.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qrgba64.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qscreen.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qscreen_platform.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtgui-config.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtguiexports.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtguiglobal.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtransform.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qvalidator.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qvector2d.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\qvectornd.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qwindowdefs.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qwindowdefs_win.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\QGraphicsPixmapItem \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\QGraphicsScene \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\QListWidgetItem \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\QMainWindow \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractitemdelegate.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractitemview.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractscrollarea.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractslider.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractspinbox.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qframe.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qgraphicsitem.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qgraphicsscene.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qlistview.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qlistwidget.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qmainwindow.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qrubberband.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qsizepolicy.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qslider.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qstyle.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qstyleoption.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qtabbar.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qtabwidget.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qtwidgets-config.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qtwidgetsexports.h \
@@ -641,23 +683,21 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsDependencies
 
 "C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\assert.h":
 
-C:\opencv\build\include\opencv2\calib.hpp:
-
 "C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\corecrt_stdio_config.h":
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qexceptionhandling.h:
-
-C:\opencv\build\include\opencv2\core\neon_utils.hpp:
-
-"C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\corecrt_search.h":
-
-C:\opencv\build\include\opencv2\core\cvdef.h:
 
 C:\opencv\build\include\opencv2\flann\dist.h:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cfloat":
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsConfigVersion.cmake:
+
+C:\opencv\build\include\opencv2\core\neon_utils.hpp:
+
+C:\opencv\build\include\opencv2\core\cvdef.h:
+
+"C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\corecrt_search.h":
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\sstream":
 
@@ -729,8 +769,6 @@ C:\opencv\build\include\opencv2\flann\random.h:
 
 "C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\stddef.h":
 
-C:\opencv\build\include\opencv2\core\hal\interface.h:
-
 "C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\stdio.h":
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qrefcount.h:
@@ -739,13 +777,13 @@ C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CheckCXXCompilerFlag.cmake:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\new":
 
-"C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\stdlib.h":
-
-C:\opencv\build\include\opencv2\core\fast_math.hpp:
-
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qcolor.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6EntryPointPrivate\Qt6EntryPointPrivateTargetsPrecheck.cmake:
+
+C:\opencv\build\include\opencv2\core\fast_math.hpp:
+
+"C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\stdlib.h":
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QICOPluginTargets-debug.cmake:
 
@@ -761,11 +799,11 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomCycloneDXHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qminmax.h:
 
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\FindPackageMessage.cmake:
+
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\ostream":
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6GuiTargets-debug.cmake:
-
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\FindPackageMessage.cmake:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\array":
 
@@ -776,6 +814,8 @@ C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\FindPackageMessage.cmake:
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cassert":
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6EntryPointPrivate\Qt6EntryPointPrivateTargets.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qnativeinterface.h:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\chrono":
 
@@ -809,19 +849,19 @@ C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CMakeRCInformation.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qfunctionpointer.h:
 
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake:
-
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cstdlib":
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qpointingdevice.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsAdditionalTargetInfo.cmake:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\initializer_list":
 
-"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\functional":
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake:
 
 C:\opencv\build\include\opencv2\core\check.hpp:
 
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake:
+"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\functional":
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgIconPluginAdditionalTargetInfo.cmake:
 
@@ -879,6 +919,8 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qfunctionaltools_impl.h:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\typeinfo":
 
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\QListWidgetItem:
+
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Core\Qt6CoreConfigVersionImpl.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsConfigVersionImpl.cmake:
@@ -895,6 +937,8 @@ C:\opencv\build\include\opencv2\dnn\layer.hpp:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vadefs.h":
 
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qscreen.h:
+
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\variant":
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vcruntime_string.h":
@@ -903,17 +947,17 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtformat_impl.h:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector":
 
+C:\opencv\build\include\opencv2\photo.hpp:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicDependencyHelpers.cmake:
+
 C:\opencv\build\include\opencv2\video\tracking.hpp:
+
+C:\opencv\build\include\opencv2\core\cv_cpu_dispatch.h:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\version":
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qyieldcpu.h:
-
-C:\opencv\build\include\opencv2\core\cv_cpu_dispatch.h:
-
-C:\opencv\build\include\opencv2\photo.hpp:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicDependencyHelpers.cmake:
 
 C:\qtdevelop\20260701\20260701\mainwindow.ui:
 
@@ -926,6 +970,30 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QICOPluginTargets.cmake:
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\QEvent:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QJpegPluginTargets-relwithdebinfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\QList:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtresource.h:
+
+C:\opencv\build\include\opencv2\stitching\detail\seam_finders.hpp:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\QObject:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qsize.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qglobalstatic.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginTargets-debug.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\QRect:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QTuioTouchPluginAdditionalTargetInfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSize:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSizeF:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsDependencies.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\q17memory.h:
 
@@ -942,6 +1010,8 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6GuiConfigVersion.cmake:
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\q20iterator.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\q20memory.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qrubberband.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\q20type_traits.h:
 
@@ -960,6 +1030,8 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\q23utility.h:
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qabstracteventdispatcher.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qabstractitemmodel.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qalgorithms.h:
 
@@ -989,11 +1061,13 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qbasicatomic.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qbasictimer.h:
 
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\FindThreads.cmake:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qbindingstorage.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qline.h:
 
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\FindThreads.cmake:
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qscreen_platform.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsVersionlessAliasTargets.cmake:
 
@@ -1035,6 +1109,8 @@ C:\Qt\6.11.1\msvc2022_64\include\QtGui\qbrush.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginAdditionalTargetInfo.cmake:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qevent.h:
+
 C:\opencv\build\include\opencv2\objdetect\face.hpp:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsConfig.cmake:
@@ -1059,6 +1135,12 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcontiguouscache.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qaction.h:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcoreapplication.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicCMakeHelpers.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcoreapplication_platform.h:
+
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QWindowsIntegrationPluginTargets-relwithdebinfo.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcoreevent.h:
@@ -1071,9 +1153,9 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QGifPluginTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qendian.h:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtclasshelpermacros.h:
-
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtclasshelpermacros.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qdebug.h:
 
@@ -1101,17 +1183,15 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginTargets-
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qglobal.h:
 
-C:\opencv\build\include\opencv2\stitching\detail\seam_finders.hpp:
-
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qsize.h:
-
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qglobalstatic.h:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6GuiTargetsPrecheck.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qhashfunctions.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtFeatureCommon.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qiodevice.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qitemselectionmodel.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qiterable.h:
 
@@ -1120,6 +1200,8 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qiterator.h:
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlatin1stringview.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlist.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlocale.h:
 
 C:\opencv\build\include\opencv2\video\background_segm.hpp:
 
@@ -1169,6 +1251,14 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qrect.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qsystemdetection.h:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtgui-config.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\Qt6Targets.cmake:
+
+C:\opencv\build\include\opencv2\core\cvstd_wrapper.hpp:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qregularexpression.h:
+
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsDependencies.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qscopedpointer.h:
@@ -1193,8 +1283,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QInsightTrackerPluginAdditionalTarg
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qsharedpointer_impl.h:
 
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qspan.h:
 
 C:\opencv\build\include\opencv2\objdetect\graphical_code_detector.hpp:
@@ -1204,6 +1292,8 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qstdlibdetection.h:
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qstringalgorithms.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtaggedpointer.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\QTransform:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qstringbuilder.h:
 
@@ -1221,6 +1311,8 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qstringlist.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qstringmatcher.h:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qguiapplication_platform.h:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qswap.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qsysinfo.h:
@@ -1229,19 +1321,17 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtdeprecationdefinitions.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtmetamacros.h:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtextstream.h:
-
-C:\opencv\build\OpenCVConfig-version.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6GuiDependencies.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QJpegPluginAdditionalTargetInfo.cmake:
 
+C:\opencv\build\OpenCVConfig-version.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtextstream.h:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtnoop.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtpreprocessorsupport.h:
-
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtresource.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qversiontagging.h:
 
@@ -1261,13 +1351,17 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtypeinfo.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtypes.h:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qurl.h:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qutf8stringview.h:
+
+C:\opencv\build\include\opencv2\core\exception.hpp:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qvariant.h:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsDependencies.cmake:
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractslider.h:
 
-C:\opencv\build\include\opencv2\core\exception.hpp:
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsDependencies.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qvarlengtharray.h:
 
@@ -1277,9 +1371,13 @@ C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qtwidgetsexports.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsTargets-debug.cmake:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\QCloseEvent:
+
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\Qt6ConfigVersion.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qcursor.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qeventpoint.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qfont.h:
 
@@ -1297,7 +1395,15 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsConfig.cmake
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QWindowsIntegrationPluginTargets.cmake:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qguiapplication.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QICOPluginTargetsPrecheck.cmake:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qicon.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qinputdevice.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qinputmethod.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qkeysequence.h:
 
@@ -1319,12 +1425,6 @@ C:\Qt\6.11.1\msvc2022_64\include\QtGui\qwindowdefs.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qrgba64.h:
 
-C:\opencv\build\include\opencv2\core\cvstd_wrapper.hpp:
-
-C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtgui-config.h:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\Qt6Targets.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtguiexports.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtguiglobal.h:
@@ -1336,6 +1436,12 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QICOPluginAdditionalTargetInfo.cmak
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QTuioTouchPluginTargetsPrecheck.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qtransform.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qvalidator.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qvector2d.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qvectornd.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qwindowdefs_win.h:
 
@@ -1351,15 +1457,47 @@ C:\opencv\build\include\opencv2\objdetect\charuco_detector.hpp:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\FindWrapAtomic.cmake:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractitemdelegate.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicExternalProjectHelpers.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractitemview.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractscrollarea.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Core\Qt6CoreTargets-relwithdebinfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsVersionlessTargets.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsTargets-relwithdebinfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractspinbox.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qframe.h:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qgraphicsitem.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qgraphicsscene.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qlistview.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qtabbar.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomCommonGenerationHelpers.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qlistwidget.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qmainwindow.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QJpegPluginTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qsizepolicy.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qslider.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qstyle.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qstyleoption.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qtabwidget.h:
 
@@ -1377,23 +1515,15 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\Qt6VersionlessAliasTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtFeature.cmake:
 
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Internal\CheckSourceCompiles.cmake:
-
-C:\opencv\build\include\opencv2\core\cvstd.hpp:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicAppleHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QMinimalIntegrationPluginTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicCMakeEarlyPolicyHelpers.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicCMakeHelpers.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicCMakeVersionHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginConfig.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicExternalProjectHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicFinalizerHelpers.cmake:
 
@@ -1403,9 +1533,9 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicGitHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsAdditionalTargetInfo.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicPluginHelpers.cmake:
-
 C:\opencv\build\include\opencv2\core\affine.hpp:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicPluginHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicPluginHelpers_v2.cmake:
 
@@ -1413,17 +1543,15 @@ C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomAttributionHelpers.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomCommonGenerationHelpers.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomCpeHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomDepHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomDocumentNamespaceHelpers.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomExternalReferenceHelpers.cmake:
-
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomExternalReferenceHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicSbomFileHelpers.cmake:
 
@@ -1473,12 +1601,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Core\Qt6CoreTargets-debug.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsTargets-debug.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Core\Qt6CoreTargets-relwithdebinfo.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsVersionlessTargets.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsTargets-relwithdebinfo.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Core\Qt6CoreTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsTargets.cmake:
@@ -1498,10 +1620,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsConfigVersionImpl.cm
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6QModernWindowsStylePluginTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginTargets-relwithdebinfo.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsDependencies.cmake:
-
-C:\opencv\build\include\opencv2\core\bufferpool.hpp:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsTargets-debug.cmake:
 
@@ -1549,8 +1667,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QICOPluginTargets-relwithdebinfo.cm
 
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QICOPluginTargetsPrecheck.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QInsightTrackerPluginConfig.cmake:
 
 C:\opencv\build\include\opencv2\photo\segmentation.hpp:
@@ -1583,19 +1699,13 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginConfig.c
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginTargets-debug.cmake:
-
-C:\opencv\build\include\opencv2\core.hpp:
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Internal\CheckFlagCommonConfig.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginTargets.cmake:
-
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Internal\CheckFlagCommonConfig.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QTuioTouchPluginConfig.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginTargetsPrecheck.cmake:
-
-C:\opencv\build\include\opencv2\core\mat.hpp:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgIconPluginConfig.cmake:
 
@@ -1613,13 +1723,9 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginTargetsPrecheck.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QTuioTouchPluginAdditionalTargetInfo.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QWindowsDirect2DIntegrationPluginConfig.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QWindowsDirect2DIntegrationPluginTargets-debug.cmake:
-
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CheckIncludeFileCXX.cmake:
 
 C:\opencv\build\include\opencv2\flann\dynamic_bitset.h:
 
@@ -1651,8 +1757,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsConfigVersio
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsMacros.cmake:
 
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\GNUInstallDirs.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsVersionlessTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsTargets.cmake:
@@ -1673,8 +1777,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsTargets-relwithdebinfo.c
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsTargetsPrecheck.cmake:
 
-C:\opencv\build\include\opencv2\core\cuda.hpp:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsVersionlessTargets.cmake:
 
 C:\Qt\Tools\CMake_64\bin\cmake.exe:
@@ -1683,9 +1785,13 @@ C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CMakeParseArguments.cmake:
 
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CheckCXXSourceCompiles.cmake:
 
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CheckIncludeFileCXX.cmake:
+
 C:\opencv\build\include\opencv2\core\persistence.hpp:
 
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CheckLibraryExists.cmake:
+
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake:
 
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Compiler\MSVC.cmake:
 
@@ -1693,11 +1799,19 @@ C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmak
 
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\FindVulkan.cmake:
 
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\GNUInstallDirs.cmake:
+
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Internal\CheckCompilerFlag.cmake:
+
+C:\opencv\build\include\opencv2\core\cvstd.hpp:
+
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Internal\CheckSourceCompiles.cmake:
 
 C:\opencv\build\include\opencv2\flann\general.h:
 
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake:
+
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake:
 
 C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Platform\Windows.cmake:
 
@@ -1707,17 +1821,29 @@ C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake:
 
 C:\opencv\build\OpenCVConfig.cmake:
 
+C:\opencv\build\include\opencv2\calib.hpp:
+
+C:\opencv\build\include\opencv2\core.hpp:
+
 C:\opencv\build\include\opencv2\core\async.hpp:
 
 C:\opencv\build\include\opencv2\core\base.hpp:
+
+C:\opencv\build\include\opencv2\core\bufferpool.hpp:
+
+C:\opencv\build\include\opencv2\core\cuda.hpp:
 
 C:\opencv\build\include\opencv2\core\cuda.inl.hpp:
 
 C:\opencv\build\include\opencv2\core\cuda_types.hpp:
 
+C:\opencv\build\include\opencv2\core\fwddecl.hpp:
+
 C:\opencv\build\include\opencv2\core\cvstd.inl.hpp:
 
-C:\opencv\build\include\opencv2\core\fwddecl.hpp:
+C:\opencv\build\include\opencv2\core\hal\interface.h:
+
+C:\opencv\build\include\opencv2\core\mat.hpp:
 
 C:\opencv\build\include\opencv2\core\mat.inl.hpp:
 
