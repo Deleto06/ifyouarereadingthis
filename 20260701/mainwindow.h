@@ -9,6 +9,7 @@
 #include <QListWidgetItem>
 #include <opencv2/opencv.hpp>
 #include <QResizeEvent>
+#include <QPoint>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -45,11 +46,14 @@ private:
     cv::Mat cvImage;
     QStringList m_imagePaths;
     // 核心功能函数
-
+    QListWidgetItem *m_leftPressedItem = nullptr;
+    QPoint m_leftPressedPos;
     bool m_isLeftButtonPressed = false;
     void loadSettings();    // 软件启动时加载配置
     void saveSettings();    // 软件关闭时保存配置
-    void displayImage(const QString &filePath); // 自适应显示图像  
+    void displayImage(const QString &filePath); // 自适应显示图像
+    void refreshListWidget(int rowToSelect = -1);
+    void deleteSelectedImages();
 };
 
 #endif // MAINWINDOW_H

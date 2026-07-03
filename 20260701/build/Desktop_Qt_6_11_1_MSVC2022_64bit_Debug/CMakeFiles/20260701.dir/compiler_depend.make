@@ -79,6 +79,7 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QEvent \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QList \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QObject \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\QPoint \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QRect \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSize \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSizeF \
@@ -770,11 +771,11 @@ C:\opencv\build\include\opencv2\flann\random.h:
 
 "C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\stddef.h":
 
+C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CheckCXXCompilerFlag.cmake:
+
 "C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\ucrt\stdio.h":
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qrefcount.h:
-
-C:\Qt\Tools\CMake_64\share\cmake-3.30\Modules\CheckCXXCompilerFlag.cmake:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\new":
 
@@ -983,6 +984,8 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\QObject:
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qsize.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qglobalstatic.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\QPoint:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QOffscreenIntegrationPluginTargets-debug.cmake:
 

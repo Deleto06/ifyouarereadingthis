@@ -77,6 +77,7 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QEvent \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QList \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QObject \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/QPoint \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QRect \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QSize \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QSizeF \
