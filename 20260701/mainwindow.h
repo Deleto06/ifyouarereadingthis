@@ -38,17 +38,18 @@ private slots:
     void onBtnAddDirClicked();
     void onSaveCurrentImageToDir();
     void onAddImageFiles();  // 从任意目录选择图片文件添加到列表
-
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     QGraphicsPixmapItem *pixmapItem = nullptr;
     cv::Mat cvImage;
-
+    QStringList m_imagePaths;
     // 核心功能函数
+
+    bool m_isLeftButtonPressed = false;
     void loadSettings();    // 软件启动时加载配置
     void saveSettings();    // 软件关闭时保存配置
-    void displayImage(const QString &filePath); // 自适应显示图像
+    void displayImage(const QString &filePath); // 自适应显示图像  
 };
 
 #endif // MAINWINDOW_H

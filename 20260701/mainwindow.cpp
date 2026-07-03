@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->graphicsView->installEventFilter(this);
     ui->graphicsView->viewport()->installEventFilter(this);
+    ui->listWidget->viewport()->installEventFilter(this);
 
     // connect连接信号和槽。 连接列表切换信号 (鼠标点击和上下键都会触发这个信号)
     connect(ui->listWidget, &QListWidget::currentItemChanged,
@@ -131,46 +132,38 @@ void MainWindow::loadSettings()
         QJsonDocument doc = QJsonDocument::fromJson(jsonFile.readAll());
         QJsonArray arr = doc.array();
         for (int i = 0; i < arr.size(); ++i) {
-            ui->listWidget->addItem(arr[i].toString());
+            m_imagePaths.append(arr[i].toString());
         }
         jsonFile.close();
     } else {
-        // ================= 【修改这里】 =================
-        // 如果是第一次启动没有 JSON，自动扫描你准备好的图片文件夹
+        // 如果是第一次启动没有 JSON，自动扫描默认图片文件夹
         QDir dir("C:/qtdevelop/20260701/20260701/pictures");
-
         if (dir.exists()) {
-            // 设置过滤器，只读取图片文件
             QStringList filters;
             filters << "*.jpg" << "*.bmp" << "*.png";
             dir.setNameFilters(filters);
-
             QFileInfoList fileList = dir.entryInfoList(QDir::Files | QDir::NoSymLinks);
             for (const QFileInfo &fileInfo : fileList) {
-                // 将扫描到的绝对路径添加到列表控件中
-                ui->listWidget->addItem(fileInfo.absoluteFilePath());
+                m_imagePaths.append(fileInfo.absoluteFilePath());
             }
         } else {
             qDebug() << "图片目录不存在，请检查路径！";
         }
-        // ===============================================
     }
+
+    // 【关键步骤】用数据源一次性填充界面
+    ui->listWidget->addItems(m_imagePaths);
 
     // 2. 读取 INI 恢复上次选中的项
     QSettings settings(iniPath, QSettings::IniFormat);
     QString lastSelected = settings.value("LastSelectedImage", "").toString();
 
-    // 遍历寻找并选中
-    if (!lastSelected.isEmpty()) {
-        for (int i = 0; i < ui->listWidget->count(); ++i) {
-            if (ui->listWidget->item(i)->text() == lastSelected) {
-                ui->listWidget->setCurrentRow(i); // 选中，并自动触发图像加载
-                 ui->listWidget->setFocus();
-                break;
-            }
-        }
+    // 在数据源 m_imagePaths 中查找上次选中的图片索引
+    int lastIndex = m_imagePaths.indexOf(lastSelected);
+    if (lastIndex != -1) {
+        ui->listWidget->setCurrentRow(lastIndex);
+        ui->listWidget->setFocus();
     } else if (ui->listWidget->count() > 0) {
-        // 如果没有历史记录（第一次启动），默认选中第一张图
         ui->listWidget->setCurrentRow(0);
         ui->listWidget->setFocus();
     }
@@ -183,8 +176,9 @@ void MainWindow::saveSettings()
 
     // 1. 保存列表到 JSON
     QJsonArray arr;
-    for (int i = 0; i < ui->listWidget->count(); ++i) {
-        arr.append(ui->listWidget->item(i)->text());
+    // 【关键步骤】遍历数据源
+    for (const QString &path : m_imagePaths) {
+        arr.append(path);
     }
     QJsonDocument doc(arr);
     QFile jsonFile(configPath + "/imagelist.json");
@@ -216,105 +210,122 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     QMainWindow::resizeEvent(event);
 }
 
+// mainwindow.cpp
+
+// --- 新增：事件过滤器的实现 ---
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
-    if ((watched == ui->graphicsView || watched == ui->graphicsView->viewport())
-        && event->type() == QEvent::Wheel)
-    {
-        QWheelEvent *wheelEvent = static_cast<QWheelEvent*>(event);
-        double scaleFactor = 1.15;
-        // 增加放大缩小限制，防止无限缩放导致崩溃
-        qreal currentScale = ui->graphicsView->transform().m11();
-
-        if (wheelEvent->angleDelta().y() > 0) {
-            if (currentScale < 50.0) ui->graphicsView->scale(scaleFactor, scaleFactor);
-        } else {
-            if (currentScale > 0.02) ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+    // --- 原有逻辑：处理 ListWidget 右键 ---
+    if (watched == ui->listWidget->viewport()) {
+        if (event->type() == QEvent::MouseButtonPress) {
+            QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+            if (mouseEvent->button() == Qt::RightButton) {
+                // ... 你的右键菜单代码 ...
+                return true;
+            }
         }
-        return true;
     }
+
+    // --- 新增逻辑：处理 GraphicsView 滚轮缩放 ---
+    if (watched == ui->graphicsView->viewport()) { // 注意：通常是 viewport
+        if (event->type() == QEvent::Wheel) {
+            QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(event);
+
+            // 获取当前的缩放比例
+            double scaleFactor = 1.15; // 每次滚动的缩放系数
+
+            // 判断滚轮方向：向上滚放大，向下滚缩小
+            if (wheelEvent->angleDelta().y() > 0) {
+                ui->graphicsView->scale(scaleFactor, scaleFactor);
+            } else {
+                ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+            }
+
+            return true; // 事件已处理，不再传递
+        }
+    }
+
+    // 其他事件全部放行
     return QMainWindow::eventFilter(watched, event);
 }
+// --------------------------------
 // ==================== 槽函数：右键菜单 ====================
 // ==================== 槽函数：右键菜单 ====================
 void MainWindow::onListWidgetCustomContextMenuRequested(const QPoint &pos)
 {
-    // 获取鼠标位置对应的列表项
+    // 1. 获取被右键点击的项
     QListWidgetItem *item = ui->listWidget->itemAt(pos);
 
-    if (item) {
-        // ============ 点在某个列表项上 ============
-        QMenu menu(this);
-        QAction *removeAction = menu.addAction("移除图片");
-
-        QAction *selected = menu.exec(ui->listWidget->viewport()->mapToGlobal(pos));
-        if (selected == removeAction) {
-            int currentRow = ui->listWidget->currentRow();
-            delete item;
-
-            if (ui->listWidget->count() > 0) {
-                if (currentRow >= ui->listWidget->count()) {
-                    ui->listWidget->setCurrentRow(ui->listWidget->count() - 1);
-                } else {
-                    ui->listWidget->setCurrentRow(currentRow);
-                }
-            } else {
-                scene->clear();
-                pixmapItem = nullptr;
-            }
-        }
-    } else {
-        // ============ 点在空白处 ============
+    // 2. 如果点在空白处，执行原有逻辑
+    if (!item) {
         QMenu menu(this);
         QAction *saveAction = menu.addAction("保存当前图片到目录...");
-        QAction *addFilesAction = menu.addAction("添加图片文件...");  // 【新增】
-
+        QAction *addFilesAction = menu.addAction("添加图片文件...");
         QAction *selected = menu.exec(ui->listWidget->viewport()->mapToGlobal(pos));
+
         if (selected == saveAction) {
             onSaveCurrentImageToDir();
-        } else if (selected == addFilesAction) {  // 【新增】
+        } else if (selected == addFilesAction) {
             onAddImageFiles();
+        }
+        return; // 处理完空白处逻辑后直接返回
+    }
+
+    // 3. 如果点在某个列表项上
+    // 【关键步骤】获取该项在数据源中的索引
+    int itemRow = ui->listWidget->row(item);
+
+    QMenu menu(this);
+    QAction *removeAction = menu.addAction("移除图片");
+    QAction *selected = menu.exec(ui->listWidget->viewport()->mapToGlobal(pos));
+
+    if (selected == removeAction) {
+        // 【关键步骤】操作数据源
+        m_imagePaths.removeAt(itemRow);
+
+        // 【关键步骤】清空并重新填充界面
+        ui->listWidget->clear();
+        ui->listWidget->addItems(m_imagePaths);
+
+        // 【关键步骤】根据新数据源恢复选中状态
+        // 逻辑：尽量保持删除前的视觉位置不变
+        if (!m_imagePaths.isEmpty()) {
+            int newRow = qMin(itemRow, m_imagePaths.count() - 1);
+            ui->listWidget->setCurrentRow(newRow);
+        } else {
+            scene->clear();
+            pixmapItem = nullptr;
         }
     }
 }
 // ==================== 槽函数：选择目录添加图片 ====================
 void MainWindow::onBtnAddDirClicked()
 {
-    // 弹出目录选择对话框
     QString dirPath = QFileDialog::getExistingDirectory(
-        this,
-        "选择图片目录",
-        QCoreApplication::applicationDirPath()  // 默认打开程序所在目录
+        this, "选择图片目录", QCoreApplication::applicationDirPath()
         );
-
-    if (dirPath.isEmpty()) return;  // 用户点了取消
+    if (dirPath.isEmpty()) return;
 
     QDir dir(dirPath);
     QStringList filters;
     filters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif";
     dir.setNameFilters(filters);
-
     QFileInfoList fileList = dir.entryInfoList(QDir::Files | QDir::NoSymLinks);
 
     int addedCount = 0;
     for (const QFileInfo &fileInfo : fileList) {
         QString filePath = fileInfo.absoluteFilePath();
-        // 避免重复添加：先检查列表中是否已存在该路径
-        bool exists = false;
-        for (int i = 0; i < ui->listWidget->count(); ++i) {
-            if (ui->listWidget->item(i)->text() == filePath) {
-                exists = true;
-                break;
-            }
-        }
-        if (!exists) {
-            ui->listWidget->addItem(filePath);
+        // 【关键步骤】检查数据源中是否已存在
+        if (!m_imagePaths.contains(filePath)) {
+            m_imagePaths.append(filePath);
             addedCount++;
         }
     }
 
-    // 可选：提示用户添加了多少张
     if (addedCount > 0) {
+        // 【关键步骤】清空并重新填充界面
+        ui->listWidget->clear();
+        ui->listWidget->addItems(m_imagePaths);
         qDebug() << "成功添加" << addedCount << "张图片";
     } else {
         qDebug() << "该目录下的图片已全部在列表中";
@@ -357,33 +368,25 @@ void MainWindow::onSaveCurrentImageToDir()
 // ==================== 槽函数：从任意目录选择图片文件添加 ====================
 void MainWindow::onAddImageFiles()
 {
-    // 弹出文件选择对话框，支持多选
     QStringList filePaths = QFileDialog::getOpenFileNames(
-        this,
-        "选择图片文件",
-        QCoreApplication::applicationDirPath(),
+        this, "选择图片文件", QCoreApplication::applicationDirPath(),
         "图片文件 (*.jpg *.jpeg *.png *.bmp *.gif)"
         );
-
-    if (filePaths.isEmpty()) return;  // 用户点了取消
+    if (filePaths.isEmpty()) return;
 
     int addedCount = 0;
     for (const QString &filePath : filePaths) {
-        // 检查是否已存在
-        bool exists = false;
-        for (int i = 0; i < ui->listWidget->count(); ++i) {
-            if (ui->listWidget->item(i)->text() == filePath) {
-                exists = true;
-                break;
-            }
-        }
-        if (!exists) {
-            ui->listWidget->addItem(filePath);
+        // 【关键步骤】检查数据源中是否已存在
+        if (!m_imagePaths.contains(filePath)) {
+            m_imagePaths.append(filePath);
             addedCount++;
         }
     }
 
     if (addedCount > 0) {
+        // 【关键步骤】清空并重新填充界面
+        ui->listWidget->clear();
+        ui->listWidget->addItems(m_imagePaths);
         qDebug() << "成功添加" << addedCount << "张图片";
     } else {
         qDebug() << "所选图片已全部在列表中";

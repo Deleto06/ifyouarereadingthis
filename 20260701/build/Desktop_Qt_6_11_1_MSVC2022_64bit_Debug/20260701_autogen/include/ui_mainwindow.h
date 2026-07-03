@@ -75,7 +75,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        btnAddDir->setText(QCoreApplication::translate("MainWindow", "\346\211\223\345\274\200\347\233\256\345\275\225", nullptr));
+        btnAddDir->setText(QCoreApplication::translate("MainWindow", "\351\200\211\346\213\251\346\226\207\344\273\266\345\244\271", nullptr));
     } // retranslateUi
 
 };

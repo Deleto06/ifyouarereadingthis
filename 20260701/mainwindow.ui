@@ -28,7 +28,7 @@
     <item>
      <widget class="QPushButton" name="btnAddDir">
       <property name="text">
-       <string>打开目录</string>
+       <string>选择文件夹</string>
       </property>
      </widget>
     </item>
