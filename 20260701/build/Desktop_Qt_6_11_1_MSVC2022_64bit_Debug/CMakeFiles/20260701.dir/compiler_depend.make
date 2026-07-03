@@ -225,6 +225,7 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qxptype_traits.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qyieldcpu.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\QCloseEvent \
+  C:\Qt\6.11.1\msvc2022_64\include\QtGui\QResizeEvent \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\QTransform \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qaction.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtGui\qbitmap.h \
@@ -1373,6 +1374,10 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsTargets-debug.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\QCloseEvent:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\QResizeEvent:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtGui\qinputdevice.h:
+
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\Qt6ConfigVersion.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qcursor.h:
@@ -1400,8 +1405,6 @@ C:\Qt\6.11.1\msvc2022_64\include\QtGui\qguiapplication.h:
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QICOPluginTargetsPrecheck.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qicon.h:
-
-C:\Qt\6.11.1\msvc2022_64\include\QtGui\qinputdevice.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qinputmethod.h:
 

@@ -223,6 +223,7 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtGui/QCloseEvent \
+  C:/Qt/6.11.1/msvc2022_64/include/QtGui/QResizeEvent \
   C:/Qt/6.11.1/msvc2022_64/include/QtGui/QTransform \
   C:/Qt/6.11.1/msvc2022_64/include/QtGui/qaction.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtGui/qbitmap.h \

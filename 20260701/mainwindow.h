@@ -8,6 +8,7 @@
 #include <QCloseEvent>
 #include <QListWidgetItem>
 #include <opencv2/opencv.hpp>
+#include <QResizeEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,6 +32,12 @@ protected:
 private slots:
     // 统一处理鼠标点击和键盘上下键切换图像
     void onListWidgetCurrentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    // 右键菜单：移除图片
+    void onListWidgetCustomContextMenuRequested(const QPoint &pos);
+    // 按钮：选择目录添加图片
+    void onBtnAddDirClicked();
+    void onSaveCurrentImageToDir();
+    void onAddImageFiles();  // 从任意目录选择图片文件添加到列表
 
 private:
     Ui::MainWindow *ui;

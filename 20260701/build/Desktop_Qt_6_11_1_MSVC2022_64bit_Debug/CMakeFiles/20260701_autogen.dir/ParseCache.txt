@@ -225,6 +225,7 @@ C:/qtdevelop/20260701/20260701/mainwindow.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qxptype_traits.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qyieldcpu.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtGui/QCloseEvent
+ mdp:C:/Qt/6.11.1/msvc2022_64/include/QtGui/QResizeEvent
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtGui/QTransform
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtGui/qaction.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtGui/qbitmap.h

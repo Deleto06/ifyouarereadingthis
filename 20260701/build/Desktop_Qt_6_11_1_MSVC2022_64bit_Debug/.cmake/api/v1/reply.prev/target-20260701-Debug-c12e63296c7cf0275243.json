@@ -85,13 +85,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 70,
+				"line" : 73,
 				"parent" : 0
 			},
 			{
 				"command" : 9,
 				"file" : 1,
-				"line" : 77,
+				"line" : 80,
 				"parent" : 0
 			},
 			{
@@ -432,6 +432,11 @@
 					"backtrace" : 11,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.11.1/msvc2022_64/include/QtGui"
+				},
+				{
+					"backtrace" : 11,
+					"isSystem" : true,
+					"path" : "C:/opencv/build/include"
 				}
 			],
 			"language" : "CXX",
@@ -440,7 +445,8 @@
 				"backtraces" : 
 				[
 					18,
-					18
+					18,
+					11
 				],
 				"standard" : "17"
 			},
@@ -497,6 +503,91 @@
 			{
 				"backtrace" : 11,
 				"fragment" : "C:\\Qt\\6.11.1\\msvc2022_64\\lib\\Qt6Widgetsd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "C:\\opencv\\build\\x64\\vc16\\lib\\opencv_world500d.lib",
 				"role" : "libraries"
 			},
 			{
