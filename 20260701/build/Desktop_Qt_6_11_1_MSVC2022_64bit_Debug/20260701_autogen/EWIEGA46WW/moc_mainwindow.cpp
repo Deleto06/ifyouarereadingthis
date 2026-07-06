@@ -49,7 +49,16 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "pos",
         "onBtnAddDirClicked",
         "onSaveCurrentImageToDir",
-        "onAddImageFiles"
+        "onAddImageFiles",
+        "on_btnTcpServerStart_clicked",
+        "on_btnTcpServerStop_clicked",
+        "on_btnTcpServerSend_clicked",
+        "on_btnUdpBind_clicked",
+        "on_btnUdpClose_clicked",
+        "on_btnUdpSend_clicked",
+        "on_btnModbusServerStart_clicked",
+        "on_btnModbusServerStop_clicked",
+        "on_btnModbusSetReg_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -67,6 +76,24 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onAddImageFiles'
         QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnTcpServerStart_clicked'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnTcpServerStop_clicked'
+        QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnTcpServerSend_clicked'
+        QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnUdpBind_clicked'
+        QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnUdpClose_clicked'
+        QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnUdpSend_clicked'
+        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusServerStart_clicked'
+        QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusServerStop_clicked'
+        QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusSetReg_clicked'
+        QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -95,6 +122,15 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->onBtnAddDirClicked(); break;
         case 3: _t->onSaveCurrentImageToDir(); break;
         case 4: _t->onAddImageFiles(); break;
+        case 5: _t->on_btnTcpServerStart_clicked(); break;
+        case 6: _t->on_btnTcpServerStop_clicked(); break;
+        case 7: _t->on_btnTcpServerSend_clicked(); break;
+        case 8: _t->on_btnUdpBind_clicked(); break;
+        case 9: _t->on_btnUdpClose_clicked(); break;
+        case 10: _t->on_btnUdpSend_clicked(); break;
+        case 11: _t->on_btnModbusServerStart_clicked(); break;
+        case 12: _t->on_btnModbusServerStop_clicked(); break;
+        case 13: _t->on_btnModbusSetReg_clicked(); break;
         default: ;
         }
     }
@@ -119,14 +155,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 14;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 14)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 14;
     }
     return _id;
 }

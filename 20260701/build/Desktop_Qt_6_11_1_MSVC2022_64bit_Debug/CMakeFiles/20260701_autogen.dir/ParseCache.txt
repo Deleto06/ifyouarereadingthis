@@ -1587,4 +1587,4 @@ C:/qtdevelop/20260701/20260701/comm/serialcomm.cpp
 C:/qtdevelop/20260701/20260701/comm/tcpclient.cpp
 C:/qtdevelop/20260701/20260701/comm/udpcomm.cpp
 C:/qtdevelop/20260701/20260701/mainwindow.cpp
- uic:./ui_mainwindow.h
+ uic:ui_mainwindow.h

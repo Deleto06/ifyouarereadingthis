@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QWheelEvent>
 #include <QDebug>
 #include <QScrollBar>
@@ -53,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 3. 加载上次保存的状态
     loadSettings();
     // 4. 初始化通讯模块
+    initUiState();
     initCommunication();
 }
 
@@ -85,6 +86,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::initUiState()
+{
+    // TCP Server
+    ui->btnTcpServerStart->setEnabled(true);
+    ui->btnTcpServerStop->setEnabled(false);
+    ui->lineEditTcpServerPort->setEnabled(true);
+
+    // UDP
+    ui->btnUdpBind->setEnabled(true);
+    ui->btnUdpClose->setEnabled(false);
+    ui->lineEditUdpLocalPort->setEnabled(true);
+
+    // Modbus TCP Server
+    ui->btnModbusServerStart->setEnabled(true);
+    ui->btnModbusServerStop->setEnabled(false);
+    ui->lineEditModbusServerPort->setEnabled(true);
+    ui->lineEditModbusServerId->setEnabled(true);
+}
 
 void MainWindow::displayImage(const QString &filePath)
 {
@@ -492,9 +511,9 @@ void MainWindow::onAddImageFiles()
     if (addedCount > 0) {
         int firstNewRow = m_imagePaths.count() - addedCount;
         refreshListWidget(firstNewRow);
-        qDebug() << "成功添加" << addedCount << "张图片";
+        appendLog(QString("[Image] 成功添加 %1 张图片").arg(addedCount));
     } else {
-        qDebug() << "所选图片已全部在列表中";
+        appendLog("[Image] 该目录下的图片已全部在列表中");
     }
 }
 void MainWindow::refreshListWidget(int rowToSelect)
@@ -623,144 +642,368 @@ void MainWindow::initCommunication()
 
     initCommunicationSignals();
 
-    qDebug() << "通讯模块初始化完成";
-
-    // 临时测试：先自动启动 TCP Server 和 UDP
-    // 注意：确认端口没有被占用
-    testStartTcpServer();
-    testStartUdp();
-
-    // 临时测试：启动 Modbus TCP Server，方便 Modbus Poll 连接
-    testStartModbusTcpServer();
+    appendLog("通讯模块初始化完成");
 }
 void MainWindow::initCommunicationSignals()
 {
-    // ==================== TCP Client ====================
-    connect(m_tcpClient, &TcpClient::connected, this, []() {
-        qDebug() << "[TCP Client] connected";
-    });
-
-    connect(m_tcpClient, &TcpClient::disconnected, this, []() {
-        qDebug() << "[TCP Client] disconnected";
-    });
-
-    connect(m_tcpClient, &TcpClient::dataReceived,
-            this,
-            [](const QByteArray &data) {
-                qDebug() << "[TCP Client Recv HEX]" << data.toHex(' ').toUpper();
-                qDebug() << "[TCP Client Recv TEXT]" << QString::fromLocal8Bit(data);
-            });
-
-    connect(m_tcpClient, &TcpClient::errorOccurred,
-            this,
-            [](const QString &error) {
-                qDebug() << "[TCP Client Error]" << error;
-            });
-
-    // ==================== TCP Server ====================
     connect(m_tcpServer, &TcpServer::clientConnected,
             this,
-            [](const QString &peer) {
-                qDebug() << "[TCP Server] client connected:" << peer;
+            [=](const QString &peer) {
+                appendLog(QString("[TCP Server] client connected: %1").arg(peer));
             });
 
     connect(m_tcpServer, &TcpServer::clientDisconnected,
             this,
-            [](const QString &peer) {
-                qDebug() << "[TCP Server] client disconnected:" << peer;
+            [=](const QString &peer) {
+                appendLog(QString("[TCP Server] client disconnected: %1").arg(peer));
             });
 
     connect(m_tcpServer, &TcpServer::dataReceived,
             this,
             [=](const QString &peer, const QByteArray &data) {
-                qDebug() << "[TCP Server Recv From]" << peer;
-                qDebug() << "[TCP Server Recv HEX]" << data.toHex(' ').toUpper();
-                qDebug() << "[TCP Server Recv TEXT]" << QString::fromLocal8Bit(data);
+                appendLog(QString("[TCP Server Recv From] %1").arg(peer));
 
-                // 收到什么回复什么，方便测试
-                m_tcpServer->sendDataToAll(data);
+                appendLog(QString("[TCP Server Recv HEX] %1")
+                              .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+
+                appendLog(QString("[TCP Server Recv ASCII] %1")
+                              .arg(byteArrayToPrintableText(data)));
             });
 
     connect(m_tcpServer, &TcpServer::errorOccurred,
             this,
-            [](const QString &error) {
-                qDebug() << "[TCP Server Error]" << error;
+            [=](const QString &error) {
+                appendLog(QString("[TCP Server Error] %1").arg(error));
             });
 
-    // ==================== UDP ====================
     connect(m_udpComm, &UdpComm::dataReceived,
             this,
-            [](const QString &ip, quint16 port, const QByteArray &data) {
-                qDebug() << "[UDP Recv From]" << ip << port;
-                qDebug() << "[UDP Recv HEX]" << data.toHex(' ').toUpper();
-                qDebug() << "[UDP Recv TEXT]" << QString::fromLocal8Bit(data);
+            [=](const QString &ip, quint16 port, const QByteArray &data) {
+                appendLog(QString("[UDP Recv From] %1:%2").arg(ip).arg(port));
+
+                appendLog(QString("[UDP Recv HEX] %1")
+                              .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+
+                appendLog(QString("[UDP Recv ASCII] %1")
+                              .arg(byteArrayToPrintableText(data)));
             });
 
     connect(m_udpComm, &UdpComm::errorOccurred,
             this,
-            [](const QString &error) {
-                qDebug() << "[UDP Error]" << error;
+            [=](const QString &error) {
+                appendLog(QString("[UDP Error] %1").arg(error));
             });
 
-    // ==================== Serial ====================
-    connect(m_serialComm, &SerialComm::dataReceived,
+    connect(m_modbusServer, &ModbusServer::errorOccurred,
             this,
-            [](const QByteArray &data) {
-                qDebug() << "[Serial Recv HEX]" << data.toHex(' ').toUpper();
-                qDebug() << "[Serial Recv TEXT]" << QString::fromLocal8Bit(data);
-            });
-
-    connect(m_serialComm, &SerialComm::errorOccurred,
-            this,
-            [](const QString &error) {
-                qDebug() << "[Serial Error]" << error;
-            });
-
-    connect(m_serialComm, &SerialComm::stateChanged,
-            this,
-            [](bool opened) {
-                qDebug() << "[Serial State]" << opened;
+            [=](const QString &error) {
+                appendLog(QString("[Modbus TCP Server Error] %1").arg(error));
             });
 }
-void MainWindow::testStartTcpServer()
+
+void MainWindow::appendLog(const QString &text)
 {
-    quint16 port = 6000;
+    QString msg = QDateTime::currentDateTime().toString("hh:mm:ss.zzz ")
+    + text;
+
+    qDebug().noquote() << msg;
+
+    if (ui->textEditLog) {
+        ui->textEditLog->append(msg);
+    }
+}
+void MainWindow::on_btnTcpServerStart_clicked()
+{
+    bool okPort = false;
+    quint16 port = ui->lineEditTcpServerPort->text().trimmed().toUShort(&okPort);
+
+    if (!okPort || port == 0) {
+        appendLog("[TCP Server] 端口无效");
+        return;
+    }
 
     bool ok = m_tcpServer->start(port);
 
     if (ok) {
-        qDebug() << "[TCP Server] started at port" << port;
+        appendLog(QString("[TCP Server] started at port %1").arg(port));
+
+        ui->btnTcpServerStart->setEnabled(false);
+        ui->btnTcpServerStop->setEnabled(true);
+        ui->lineEditTcpServerPort->setEnabled(false);
     } else {
-        qDebug() << "[TCP Server] start failed";
+        appendLog(QString("[TCP Server] start failed at port %1").arg(port));
+
+        ui->btnTcpServerStart->setEnabled(true);
+        ui->btnTcpServerStop->setEnabled(false);
+        ui->lineEditTcpServerPort->setEnabled(true);
     }
 }
-void MainWindow::testStartUdp()
+void MainWindow::on_btnTcpServerStop_clicked()
 {
-    quint16 localPort = 7000;
+    m_tcpServer->stop();
+    appendLog("[TCP Server] stopped");
 
-    bool ok = m_udpComm->bindPort(localPort);
+    ui->btnTcpServerStart->setEnabled(true);
+    ui->btnTcpServerStop->setEnabled(false);
+    ui->lineEditTcpServerPort->setEnabled(true);
+}
+void MainWindow::on_btnTcpServerSend_clicked()
+{
+    QString text = ui->textEditTcpServerSend->toPlainText().trimmed();
+
+    if (text.isEmpty()) {
+        appendLog("[TCP Server] 发送内容为空");
+        return;
+    }
+
+    QByteArray data;
+
+    if (ui->checkBoxTcpServerSendHex->isChecked()) {
+        bool ok = false;
+        data = hexStringToByteArray(text, &ok);
+
+        if (!ok) {
+            appendLog("[TCP Server] HEX 格式错误");
+            appendLog("[TCP Server] 示例：01 03 00 00 00 02");
+            return;
+        }
+
+        appendLog(QString("[TCP Server Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+    } else {
+        data = text.toLocal8Bit();
+
+        appendLog(QString("[TCP Server Send TEXT] %1").arg(text));
+    }
+
+    qint64 len = m_tcpServer->sendDataToAll(data);
+
+    appendLog(QString("[TCP Server Send] bytes = %1").arg(len));
+}
+void MainWindow::on_btnUdpBind_clicked()
+{
+    bool okPort = false;
+    quint16 port = ui->lineEditUdpLocalPort->text().trimmed().toUShort(&okPort);
+
+    if (!okPort || port == 0) {
+        appendLog("[UDP] 本地端口无效");
+        return;
+    }
+
+    bool ok = m_udpComm->bindPort(port);
 
     if (ok) {
-        qDebug() << "[UDP] bind port success:" << localPort;
+        appendLog(QString("[UDP] bind local port success: %1").arg(port));
+
+        ui->btnUdpBind->setEnabled(false);
+        ui->btnUdpClose->setEnabled(true);
+        ui->lineEditUdpLocalPort->setEnabled(false);
     } else {
-        qDebug() << "[UDP] bind port failed";
+        appendLog(QString("[UDP] bind local port failed: %1").arg(port));
+
+        ui->btnUdpBind->setEnabled(true);
+        ui->btnUdpClose->setEnabled(false);
+        ui->lineEditUdpLocalPort->setEnabled(true);
     }
 }
-void MainWindow::testStartModbusTcpServer()
+void MainWindow::on_btnUdpClose_clicked()
 {
-    int port = 1502;
-    int serverAddress = 1;
+    m_udpComm->close();
+    appendLog("[UDP] closed");
+
+    ui->btnUdpBind->setEnabled(true);
+    ui->btnUdpClose->setEnabled(false);
+    ui->lineEditUdpLocalPort->setEnabled(true);
+}
+void MainWindow::on_btnUdpSend_clicked()
+{
+    QString ip = ui->lineEditUdpTargetIp->text().trimmed();
+
+    bool okPort = false;
+    quint16 port = ui->lineEditUdpTargetPort->text().trimmed().toUShort(&okPort);
+
+    QString text = ui->textEditUdpSend->toPlainText().trimmed();
+
+    if (ip.isEmpty()) {
+        appendLog("[UDP] 目标 IP 为空");
+        return;
+    }
+
+    if (!okPort || port == 0) {
+        appendLog("[UDP] 目标端口无效");
+        return;
+    }
+
+    if (text.isEmpty()) {
+        appendLog("[UDP] 发送内容为空");
+        return;
+    }
+
+    QByteArray data;
+
+    if (ui->checkBoxUdpSendHex->isChecked()) {
+        bool ok = false;
+        data = hexStringToByteArray(text, &ok);
+
+        if (!ok) {
+            appendLog("[UDP] HEX 格式错误");
+            appendLog("[UDP] 示例：01 03 00 00 00 02");
+            return;
+        }
+
+        appendLog(QString("[UDP Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+    } else {
+        data = text.toLocal8Bit();
+
+        appendLog(QString("[UDP Send TEXT] %1").arg(text));
+    }
+
+    qint64 len = m_udpComm->sendData(ip, port, data);
+
+    appendLog(QString("[UDP Send] to %1:%2, bytes = %3")
+                  .arg(ip)
+                  .arg(port)
+                  .arg(len));
+}
+void MainWindow::on_btnModbusServerStart_clicked()
+{
+    int port = ui->lineEditModbusServerPort->text().trimmed().toInt();
+    int serverAddress = ui->lineEditModbusServerId->text().trimmed().toInt();
+
+    if (port <= 0) {
+        appendLog("[Modbus TCP Server] 端口无效");
+        return;
+    }
+
+    if (serverAddress <= 0) {
+        appendLog("[Modbus TCP Server] 站号无效");
+        return;
+    }
 
     bool ok = m_modbusServer->startTcp(port, serverAddress);
 
     if (ok) {
-        qDebug() << "[Modbus TCP Server] started. port =" << port
-                 << "serverAddress =" << serverAddress;
+        appendLog(QString("[Modbus TCP Server] started. port = %1 serverAddress = %2")
+                      .arg(port)
+                      .arg(serverAddress));
 
         m_modbusServer->setHoldingRegister(0, 100);
         m_modbusServer->setHoldingRegister(1, 200);
         m_modbusServer->setHoldingRegister(2, 300);
+
+        appendLog("[Modbus TCP Server] init HR[0]=100, HR[1]=200, HR[2]=300");
+
+        ui->btnModbusServerStart->setEnabled(false);
+        ui->btnModbusServerStop->setEnabled(true);
+        ui->lineEditModbusServerPort->setEnabled(false);
+        ui->lineEditModbusServerId->setEnabled(false);
     } else {
-        qDebug() << "[Modbus TCP Server] start failed";
+        appendLog("[Modbus TCP Server] start failed");
+
+        ui->btnModbusServerStart->setEnabled(true);
+        ui->btnModbusServerStop->setEnabled(false);
+        ui->lineEditModbusServerPort->setEnabled(true);
+        ui->lineEditModbusServerId->setEnabled(true);
     }
+}
+void MainWindow::on_btnModbusServerStop_clicked()
+{
+    m_modbusServer->stop();
+    appendLog("[Modbus TCP Server] stopped");
+
+    ui->btnModbusServerStart->setEnabled(true);
+    ui->btnModbusServerStop->setEnabled(false);
+    ui->lineEditModbusServerPort->setEnabled(true);
+    ui->lineEditModbusServerId->setEnabled(true);
+}
+void MainWindow::on_btnModbusSetReg_clicked()
+{
+    int addr = ui->lineEditModbusRegAddr->text().trimmed().toInt();
+    int value = ui->lineEditModbusRegValue->text().trimmed().toInt();
+
+    if (addr < 0) {
+        appendLog("[Modbus] 寄存器地址无效");
+        return;
+    }
+
+    bool ok = m_modbusServer->setHoldingRegister(addr, value);
+
+    if (ok) {
+        appendLog(QString("[Modbus] set HR[%1] = %2").arg(addr).arg(value));
+    } else {
+        appendLog(QString("[Modbus] set HR[%1] failed").arg(addr));
+    }
+}
+QByteArray MainWindow::hexStringToByteArray(const QString &hexText, bool *ok)
+{
+    if (ok) {
+        *ok = false;
+    }
+
+    QString text = hexText.trimmed();
+
+    if (text.isEmpty()) {
+        return QByteArray();
+    }
+
+    // 去掉常见分隔符
+    text.remove(' ');
+    text.remove('\n');
+    text.remove('\r');
+    text.remove('\t');
+    text.remove(',');
+    text.remove(';');
+
+    // 支持 0x01 0x03 这种写法
+    text.replace("0x", "", Qt::CaseInsensitive);
+
+    // HEX 字符串长度必须是偶数
+    if (text.length() % 2 != 0) {
+        return QByteArray();
+    }
+
+    // 检查是否都是合法 HEX 字符
+    for (const QChar &ch : text) {
+        if (!ch.isDigit() &&
+            !(ch >= 'a' && ch <= 'f') &&
+            !(ch >= 'A' && ch <= 'F')) {
+            return QByteArray();
+        }
+    }
+
+    QByteArray data;
+
+    for (int i = 0; i < text.length(); i += 2) {
+        QString byteString = text.mid(i, 2);
+
+        bool convertOk = false;
+        char byte = static_cast<char>(byteString.toUInt(&convertOk, 16));
+
+        if (!convertOk) {
+            return QByteArray();
+        }
+
+        data.append(byte);
+    }
+
+    if (ok) {
+        *ok = true;
+    }
+
+    return data;
+}
+QString MainWindow::byteArrayToPrintableText(const QByteArray &data)
+{
+    QString result;
+
+    for (unsigned char ch : data) {
+        if (ch >= 0x20 && ch <= 0x7E) {
+            result.append(QChar(ch));
+        } else {
+            result.append('.');
+        }
+    }
+
+    return result;
 }

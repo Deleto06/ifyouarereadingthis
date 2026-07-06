@@ -46,6 +46,15 @@ private slots:
     void onBtnAddDirClicked();
     void onSaveCurrentImageToDir();
     void onAddImageFiles();  // 从任意目录选择图片文件添加到列表
+    void on_btnTcpServerStart_clicked();
+    void on_btnTcpServerStop_clicked();
+    void on_btnTcpServerSend_clicked();
+    void on_btnUdpBind_clicked();
+    void on_btnUdpClose_clicked();
+    void on_btnUdpSend_clicked();
+    void on_btnModbusServerStart_clicked();
+    void on_btnModbusServerStop_clicked();
+    void on_btnModbusSetReg_clicked();
 private:
     Ui::MainWindow *ui;
     // ==================== 图像显示相关 ====================
@@ -62,10 +71,12 @@ private:
     ModbusServer *m_modbusServer = nullptr;
     // 核心功能函数
 
+    QString byteArrayToPrintableText(const QByteArray &data);
 
     QListWidgetItem *m_leftPressedItem = nullptr;
     QPoint m_leftPressedPos;
     QString m_currentImagePath;
+    QByteArray hexStringToByteArray(const QString &hexText, bool *ok = nullptr);
 
 
     bool m_isLeftButtonPressed = false;
@@ -74,13 +85,15 @@ private:
     void displayImage(const QString &filePath); // 自适应显示图像
     void refreshListWidget(int rowToSelect = -1);
     void deleteSelectedImages();
-
+    void initUiState();
 
     void initCommunication();
     void initCommunicationSignals();
     void testStartTcpServer();
     void testStartUdp();
     void testStartModbusTcpServer();
+    void appendLog(const QString &text);
+
 };
 
 #endif // MAINWINDOW_H
