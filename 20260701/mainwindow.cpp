@@ -52,10 +52,36 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::onBtnAddDirClicked);
     // 3. 加载上次保存的状态
     loadSettings();
+    // 4. 初始化通讯模块
+    initCommunication();
 }
 
 MainWindow::~MainWindow()
 {
+    if (m_tcpClient) {
+        m_tcpClient->disconnectFromServer();
+    }
+
+    if (m_tcpServer) {
+        m_tcpServer->stop();
+    }
+
+    if (m_udpComm) {
+        m_udpComm->close();
+    }
+
+    if (m_serialComm) {
+        m_serialComm->close();
+    }
+
+    if (m_modbusClient) {
+        m_modbusClient->disconnectDevice();
+    }
+
+    if (m_modbusServer) {
+        m_modbusServer->stop();
+    }
+
     delete ui;
 }
 
@@ -68,9 +94,9 @@ void MainWindow::displayImage(const QString &filePath)
         return;
     }
 
-
     QByteArray fileData = file.readAll();
     file.close();
+
     std::vector<uchar> buffer(fileData.constData(), fileData.constData() + fileData.size());
     cvImage = cv::imdecode(buffer, cv::IMREAD_UNCHANGED);
 
@@ -78,6 +104,9 @@ void MainWindow::displayImage(const QString &filePath)
         qDebug() << "Failed to decode image!";
         return;
     }
+
+    // 记录当前正在显示的图片路径
+    m_currentImagePath = filePath;
 
     scene->clear();
     pixmapItem = nullptr;
@@ -87,30 +116,44 @@ void MainWindow::displayImage(const QString &filePath)
     cv::Mat rgbImg;
     cv::Mat rgbaImg;
 
-
     if (cvImage.channels() == 1) {
-        qImg = QImage((const unsigned char*)(cvImage.data), cvImage.cols, cvImage.rows, cvImage.step, QImage::Format_Grayscale8);
+        qImg = QImage(
+            (const unsigned char *)(cvImage.data),
+            cvImage.cols,
+            cvImage.rows,
+            cvImage.step,
+            QImage::Format_Grayscale8
+            );
     }
     else if (cvImage.channels() == 3) {
         cv::cvtColor(cvImage, rgbImg, cv::COLOR_BGR2RGB);
-        qImg = QImage((const unsigned char*)(rgbImg.data), rgbImg.cols, rgbImg.rows, rgbImg.step, QImage::Format_RGB888);
+        qImg = QImage(
+            (const unsigned char *)(rgbImg.data),
+            rgbImg.cols,
+            rgbImg.rows,
+            rgbImg.step,
+            QImage::Format_RGB888
+            );
     }
     else if (cvImage.channels() == 4) {
         cv::cvtColor(cvImage, rgbaImg, cv::COLOR_BGRA2RGBA);
-        qImg = QImage((const unsigned char*)(rgbaImg.data), rgbaImg.cols, rgbaImg.rows, rgbaImg.step, QImage::Format_RGBA8888);
+        qImg = QImage(
+            (const unsigned char *)(rgbaImg.data),
+            rgbaImg.cols,
+            rgbaImg.rows,
+            rgbaImg.step,
+            QImage::Format_RGBA8888
+            );
     }
-
 
     pixmapItem = scene->addPixmap(QPixmap::fromImage(qImg.copy()));
     ui->graphicsView->setSceneRect(pixmapItem->boundingRect());
-
 
     QTimer::singleShot(10, this, [=]() {
         if (pixmapItem) {
             ui->graphicsView->fitInView(pixmapItem, Qt::KeepAspectRatio);
         }
     });
-
 }
 
 
@@ -227,7 +270,6 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     QMainWindow::resizeEvent(event);
 }
 
-// mainwindow.cpp
 
 // --- 新增：事件过滤器的实现 ---
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
@@ -491,8 +533,22 @@ void MainWindow::deleteSelectedImages()
         return;
     }
 
+    // 记录删除前正在 graphicsView 中显示的图片
+    QString displayedPathBeforeDelete = m_currentImagePath;
+
+    // 记录被删除项中最靠前的行号，用于当前显示图片也被删除时选择附近图片
     int firstSelectedRow = ui->listWidget->row(selectedItems.first());
 
+    for (QListWidgetItem *item : selectedItems) {
+        if (!item) continue;
+
+        int row = ui->listWidget->row(item);
+        if (row >= 0 && row < firstSelectedRow) {
+            firstSelectedRow = row;
+        }
+    }
+
+    // 收集需要删除的路径
     QStringList pathsToRemove;
 
     for (QListWidgetItem *item : selectedItems) {
@@ -505,9 +561,206 @@ void MainWindow::deleteSelectedImages()
         return;
     }
 
+    // 从数据源中删除
     for (const QString &path : pathsToRemove) {
         m_imagePaths.removeAll(path);
     }
 
-    refreshListWidget(firstSelectedRow);
+    // 重新刷新列表，但先不要调用 displayImage
+    ui->listWidget->clear();
+    ui->listWidget->addItems(m_imagePaths);
+
+    // 如果列表已经空了，清空显示
+    if (m_imagePaths.isEmpty()) {
+        scene->clear();
+        pixmapItem = nullptr;
+        cvImage.release();
+        m_currentImagePath.clear();
+        return;
+    }
+
+    // 情况 1：删除的不是当前正在显示的图片
+    // 那么继续显示原来的图片，并且在列表中重新选中它
+    int displayedIndex = m_imagePaths.indexOf(displayedPathBeforeDelete);
+
+    if (displayedIndex != -1) {
+        ui->listWidget->setCurrentRow(displayedIndex);
+        ui->listWidget->item(displayedIndex)->setSelected(true);
+
+        // 注意：这里不需要重新 displayImage
+        // 因为 graphicsView 里面本来就已经显示着这张图
+        // 如果你希望重新加载一次，也可以打开下面这句：
+        // displayImage(displayedPathBeforeDelete);
+
+        return;
+    }
+
+    // 情况 2：当前正在显示的图片也被删除了
+    // 那么选择删除位置附近的一张图片显示
+    int newRow = firstSelectedRow;
+
+    if (newRow >= m_imagePaths.count()) {
+        newRow = m_imagePaths.count() - 1;
+    }
+
+    if (newRow < 0) {
+        newRow = 0;
+    }
+
+    ui->listWidget->setCurrentRow(newRow);
+    ui->listWidget->item(newRow)->setSelected(true);
+
+    displayImage(m_imagePaths[newRow]);
+}
+void MainWindow::initCommunication()
+{
+    m_tcpClient = new TcpClient(this);
+    m_tcpServer = new TcpServer(this);
+    m_udpComm = new UdpComm(this);
+    m_serialComm = new SerialComm(this);
+    m_modbusClient = new ModbusClient(this);
+    m_modbusServer = new ModbusServer(this);
+
+    initCommunicationSignals();
+
+    qDebug() << "通讯模块初始化完成";
+
+    // 临时测试：先自动启动 TCP Server 和 UDP
+    // 注意：确认端口没有被占用
+    testStartTcpServer();
+    testStartUdp();
+
+    // 临时测试：启动 Modbus TCP Server，方便 Modbus Poll 连接
+    testStartModbusTcpServer();
+}
+void MainWindow::initCommunicationSignals()
+{
+    // ==================== TCP Client ====================
+    connect(m_tcpClient, &TcpClient::connected, this, []() {
+        qDebug() << "[TCP Client] connected";
+    });
+
+    connect(m_tcpClient, &TcpClient::disconnected, this, []() {
+        qDebug() << "[TCP Client] disconnected";
+    });
+
+    connect(m_tcpClient, &TcpClient::dataReceived,
+            this,
+            [](const QByteArray &data) {
+                qDebug() << "[TCP Client Recv HEX]" << data.toHex(' ').toUpper();
+                qDebug() << "[TCP Client Recv TEXT]" << QString::fromLocal8Bit(data);
+            });
+
+    connect(m_tcpClient, &TcpClient::errorOccurred,
+            this,
+            [](const QString &error) {
+                qDebug() << "[TCP Client Error]" << error;
+            });
+
+    // ==================== TCP Server ====================
+    connect(m_tcpServer, &TcpServer::clientConnected,
+            this,
+            [](const QString &peer) {
+                qDebug() << "[TCP Server] client connected:" << peer;
+            });
+
+    connect(m_tcpServer, &TcpServer::clientDisconnected,
+            this,
+            [](const QString &peer) {
+                qDebug() << "[TCP Server] client disconnected:" << peer;
+            });
+
+    connect(m_tcpServer, &TcpServer::dataReceived,
+            this,
+            [=](const QString &peer, const QByteArray &data) {
+                qDebug() << "[TCP Server Recv From]" << peer;
+                qDebug() << "[TCP Server Recv HEX]" << data.toHex(' ').toUpper();
+                qDebug() << "[TCP Server Recv TEXT]" << QString::fromLocal8Bit(data);
+
+                // 收到什么回复什么，方便测试
+                m_tcpServer->sendDataToAll(data);
+            });
+
+    connect(m_tcpServer, &TcpServer::errorOccurred,
+            this,
+            [](const QString &error) {
+                qDebug() << "[TCP Server Error]" << error;
+            });
+
+    // ==================== UDP ====================
+    connect(m_udpComm, &UdpComm::dataReceived,
+            this,
+            [](const QString &ip, quint16 port, const QByteArray &data) {
+                qDebug() << "[UDP Recv From]" << ip << port;
+                qDebug() << "[UDP Recv HEX]" << data.toHex(' ').toUpper();
+                qDebug() << "[UDP Recv TEXT]" << QString::fromLocal8Bit(data);
+            });
+
+    connect(m_udpComm, &UdpComm::errorOccurred,
+            this,
+            [](const QString &error) {
+                qDebug() << "[UDP Error]" << error;
+            });
+
+    // ==================== Serial ====================
+    connect(m_serialComm, &SerialComm::dataReceived,
+            this,
+            [](const QByteArray &data) {
+                qDebug() << "[Serial Recv HEX]" << data.toHex(' ').toUpper();
+                qDebug() << "[Serial Recv TEXT]" << QString::fromLocal8Bit(data);
+            });
+
+    connect(m_serialComm, &SerialComm::errorOccurred,
+            this,
+            [](const QString &error) {
+                qDebug() << "[Serial Error]" << error;
+            });
+
+    connect(m_serialComm, &SerialComm::stateChanged,
+            this,
+            [](bool opened) {
+                qDebug() << "[Serial State]" << opened;
+            });
+}
+void MainWindow::testStartTcpServer()
+{
+    quint16 port = 6000;
+
+    bool ok = m_tcpServer->start(port);
+
+    if (ok) {
+        qDebug() << "[TCP Server] started at port" << port;
+    } else {
+        qDebug() << "[TCP Server] start failed";
+    }
+}
+void MainWindow::testStartUdp()
+{
+    quint16 localPort = 7000;
+
+    bool ok = m_udpComm->bindPort(localPort);
+
+    if (ok) {
+        qDebug() << "[UDP] bind port success:" << localPort;
+    } else {
+        qDebug() << "[UDP] bind port failed";
+    }
+}
+void MainWindow::testStartModbusTcpServer()
+{
+    int port = 1502;
+    int serverAddress = 1;
+
+    bool ok = m_modbusServer->startTcp(port, serverAddress);
+
+    if (ok) {
+        qDebug() << "[Modbus TCP Server] started. port =" << port
+                 << "serverAddress =" << serverAddress;
+
+        m_modbusServer->setHoldingRegister(0, 100);
+        m_modbusServer->setHoldingRegister(1, 200);
+        m_modbusServer->setHoldingRegister(2, 300);
+    } else {
+        qDebug() << "[Modbus TCP Server] start failed";
+    }
 }

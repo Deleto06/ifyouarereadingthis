@@ -28,7 +28,22 @@
 			"expression" : "C:/qtdevelop/20260701/20260701/*.cpp",
 			"paths" : 
 			[
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/EWIEGA46WW/moc_mainwindow.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_modbusclient.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_modbusserver.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_serialcomm.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_tcpclient.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_tcpserver.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_udpcomm.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/mocs_compilation.cpp",
 				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+				"C:/qtdevelop/20260701/20260701/comm/commutils.cpp",
+				"C:/qtdevelop/20260701/20260701/comm/modbusclient.cpp",
+				"C:/qtdevelop/20260701/20260701/comm/modbusserver.cpp",
+				"C:/qtdevelop/20260701/20260701/comm/serialcomm.cpp",
+				"C:/qtdevelop/20260701/20260701/comm/tcpclient.cpp",
+				"C:/qtdevelop/20260701/20260701/comm/tcpserver.cpp",
+				"C:/qtdevelop/20260701/20260701/comm/udpcomm.cpp",
 				"C:/qtdevelop/20260701/20260701/main.cpp",
 				"C:/qtdevelop/20260701/20260701/mainwindow.cpp"
 			],
@@ -43,7 +58,15 @@
 			"expression" : "C:/qtdevelop/20260701/20260701/*.h",
 			"paths" : 
 			[
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/include/ui_mainwindow.h",
 				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/CMakeFiles/ShowIncludes/foo.h",
+				"C:/qtdevelop/20260701/20260701/comm/commutils.h",
+				"C:/qtdevelop/20260701/20260701/comm/modbusclient.h",
+				"C:/qtdevelop/20260701/20260701/comm/modbusserver.h",
+				"C:/qtdevelop/20260701/20260701/comm/serialcomm.h",
+				"C:/qtdevelop/20260701/20260701/comm/tcpclient.h",
+				"C:/qtdevelop/20260701/20260701/comm/tcpserver.h",
+				"C:/qtdevelop/20260701/20260701/comm/udpcomm.h",
 				"C:/qtdevelop/20260701/20260701/mainwindow.h"
 			],
 			"recurse" : true
@@ -1372,6 +1395,439 @@
 		{
 			"isExternal" : true,
 			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6WidgetsVersionlessAliasTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersionImpl.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkDependencies.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkPlugins.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessAliasTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfigVersionImpl.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortDependencies.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort/Qt6SerialPortVersionlessAliasTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusConfigVersionImpl.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusDependencies.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusPlugins.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PassThruCanBusPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PassThruCanBusPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PassThruCanBusPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PassThruCanBusPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PassThruCanBusPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PassThruCanBusPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PeakCanBusPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PeakCanBusPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PeakCanBusPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PeakCanBusPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PeakCanBusPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6PeakCanBusPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SystecCanBusPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SystecCanBusPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SystecCanBusPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SystecCanBusPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SystecCanBusPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SystecCanBusPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6TinyCanBusPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6TinyCanBusPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6TinyCanBusPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6TinyCanBusPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6TinyCanBusPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6TinyCanBusPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VectorCanBusPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VectorCanBusPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VectorCanBusPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VectorCanBusPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VectorCanBusPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VectorCanBusPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VirtualCanBusPluginConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VirtualCanBusPluginTargetsPrecheck.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VirtualCanBusPluginTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VirtualCanBusPluginTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VirtualCanBusPluginTargets-relwithdebinfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6VirtualCanBusPluginAdditionalTargetInfo.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus/Qt6SerialBusVersionlessAliasTargets.cmake"
 		},
 		{
 			"isExternal" : true,

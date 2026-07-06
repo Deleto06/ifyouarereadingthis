@@ -42,7 +42,22 @@ endif()
 # _directory_contents at C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/qtdevelop/20260701/20260701/*.cpp")
 set(OLD_GLOB
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/EWIEGA46WW/moc_mainwindow.cpp"
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_modbusclient.cpp"
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_modbusserver.cpp"
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_serialcomm.cpp"
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_tcpclient.cpp"
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_tcpserver.cpp"
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_udpcomm.cpp"
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/mocs_compilation.cpp"
   "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  "C:/qtdevelop/20260701/20260701/comm/commutils.cpp"
+  "C:/qtdevelop/20260701/20260701/comm/modbusclient.cpp"
+  "C:/qtdevelop/20260701/20260701/comm/modbusserver.cpp"
+  "C:/qtdevelop/20260701/20260701/comm/serialcomm.cpp"
+  "C:/qtdevelop/20260701/20260701/comm/tcpclient.cpp"
+  "C:/qtdevelop/20260701/20260701/comm/tcpserver.cpp"
+  "C:/qtdevelop/20260701/20260701/comm/udpcomm.cpp"
   "C:/qtdevelop/20260701/20260701/main.cpp"
   "C:/qtdevelop/20260701/20260701/mainwindow.cpp"
   )
@@ -63,7 +78,15 @@ endif()
 # _directory_contents at C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/qtdevelop/20260701/20260701/*.h")
 set(OLD_GLOB
+  "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/include/ui_mainwindow.h"
   "C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/CMakeFiles/ShowIncludes/foo.h"
+  "C:/qtdevelop/20260701/20260701/comm/commutils.h"
+  "C:/qtdevelop/20260701/20260701/comm/modbusclient.h"
+  "C:/qtdevelop/20260701/20260701/comm/modbusserver.h"
+  "C:/qtdevelop/20260701/20260701/comm/serialcomm.h"
+  "C:/qtdevelop/20260701/20260701/comm/tcpclient.h"
+  "C:/qtdevelop/20260701/20260701/comm/tcpserver.h"
+  "C:/qtdevelop/20260701/20260701/comm/udpcomm.h"
   "C:/qtdevelop/20260701/20260701/mainwindow.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

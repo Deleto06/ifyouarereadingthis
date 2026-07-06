@@ -74,6 +74,7 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/version \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/yvals.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/yvals_core.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/QByteArray \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QEvent \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QList \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QObject \
@@ -81,6 +82,9 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QRect \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QSize \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QSizeF \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/QString \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/QVariant \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/QVector \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q17memory.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20bit.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20functional.h \
@@ -168,6 +172,8 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qpair.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qpoint.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qprocessordetection.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qproperty.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qpropertyprivate.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qrect.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qrefcount.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qregularexpression.h \
@@ -220,6 +226,7 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qutf8stringview.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvariant.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvarlengtharray.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvector.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qyieldcpu.h \
@@ -266,6 +273,43 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtGui/qvectornd.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/QTcpServer \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/QTcpSocket \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/QUdpSocket \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qabstractsocket.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qhostaddress.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtcpserver.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtcpsocket.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtnetwork-config.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtnetworkexports.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtnetworkglobal.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qudpsocket.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusClient \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDataUnit \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDevice \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusReply \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialClient \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialServer \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusServer \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusTcpClient \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusTcpServer \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusclient.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdataunit.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdevice.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbuspdu.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusreply.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialclient.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialserver.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusserver.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbustcpclient.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbustcpserver.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbus-config.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbusexports.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbusglobal.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/QSerialPort \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qserialport.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qserialportglobal.h \
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qtserialportexports.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtWidgets/QGraphicsPixmapItem \
   C:/Qt/6.11.1/msvc2022_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.11.1/msvc2022_64/include/QtWidgets/QListWidgetItem \
@@ -398,4 +442,11 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/opencv/build/include/opencv2/video.hpp \
   C:/opencv/build/include/opencv2/video/background_segm.hpp \
   C:/opencv/build/include/opencv2/video/tracking.hpp \
-  C:/opencv/build/include/opencv2/videoio.hpp
+  C:/opencv/build/include/opencv2/videoio.hpp \
+  C:/qtdevelop/20260701/20260701/comm/commutils.h \
+  C:/qtdevelop/20260701/20260701/comm/modbusclient.h \
+  C:/qtdevelop/20260701/20260701/comm/modbusserver.h \
+  C:/qtdevelop/20260701/20260701/comm/serialcomm.h \
+  C:/qtdevelop/20260701/20260701/comm/tcpclient.h \
+  C:/qtdevelop/20260701/20260701/comm/tcpserver.h \
+  C:/qtdevelop/20260701/20260701/comm/udpcomm.h

@@ -10,6 +10,13 @@
 #include <opencv2/opencv.hpp>
 #include <QResizeEvent>
 #include <QPoint>
+#include "comm/tcpclient.h"
+#include "comm/tcpserver.h"
+#include "comm/udpcomm.h"
+#include "comm/serialcomm.h"
+#include "comm/modbusclient.h"
+#include "comm/modbusserver.h"
+#include "comm/commutils.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,19 +48,39 @@ private slots:
     void onAddImageFiles();  // 从任意目录选择图片文件添加到列表
 private:
     Ui::MainWindow *ui;
+    // ==================== 图像显示相关 ====================
     QGraphicsScene *scene;
     QGraphicsPixmapItem *pixmapItem = nullptr;
     cv::Mat cvImage;
     QStringList m_imagePaths;
+    // ==================== 通讯模块相关 ====================
+    TcpClient *m_tcpClient = nullptr;
+    TcpServer *m_tcpServer = nullptr;
+    UdpComm *m_udpComm = nullptr;
+    SerialComm *m_serialComm = nullptr;
+    ModbusClient *m_modbusClient = nullptr;
+    ModbusServer *m_modbusServer = nullptr;
     // 核心功能函数
+
+
     QListWidgetItem *m_leftPressedItem = nullptr;
     QPoint m_leftPressedPos;
+    QString m_currentImagePath;
+
+
     bool m_isLeftButtonPressed = false;
     void loadSettings();    // 软件启动时加载配置
     void saveSettings();    // 软件关闭时保存配置
     void displayImage(const QString &filePath); // 自适应显示图像
     void refreshListWidget(int rowToSelect = -1);
     void deleteSelectedImages();
+
+
+    void initCommunication();
+    void initCommunicationSignals();
+    void testStartTcpServer();
+    void testStartUdp();
+    void testStartModbusTcpServer();
 };
 
 #endif // MAINWINDOW_H

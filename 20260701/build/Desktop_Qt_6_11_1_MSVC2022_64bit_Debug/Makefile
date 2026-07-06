@@ -202,6 +202,174 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\20260701_autogen\mocs_compilation.cpp.s
 .PHONY : 20260701_autogen\mocs_compilation.cpp.s
 
+comm\commutils.obj: comm\commutils.cpp.obj
+.PHONY : comm\commutils.obj
+
+# target to build an object file
+comm\commutils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\commutils.cpp.obj
+.PHONY : comm\commutils.cpp.obj
+
+comm\commutils.i: comm\commutils.cpp.i
+.PHONY : comm\commutils.i
+
+# target to preprocess a source file
+comm\commutils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\commutils.cpp.i
+.PHONY : comm\commutils.cpp.i
+
+comm\commutils.s: comm\commutils.cpp.s
+.PHONY : comm\commutils.s
+
+# target to generate assembly for a file
+comm\commutils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\commutils.cpp.s
+.PHONY : comm\commutils.cpp.s
+
+comm\modbusclient.obj: comm\modbusclient.cpp.obj
+.PHONY : comm\modbusclient.obj
+
+# target to build an object file
+comm\modbusclient.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\modbusclient.cpp.obj
+.PHONY : comm\modbusclient.cpp.obj
+
+comm\modbusclient.i: comm\modbusclient.cpp.i
+.PHONY : comm\modbusclient.i
+
+# target to preprocess a source file
+comm\modbusclient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\modbusclient.cpp.i
+.PHONY : comm\modbusclient.cpp.i
+
+comm\modbusclient.s: comm\modbusclient.cpp.s
+.PHONY : comm\modbusclient.s
+
+# target to generate assembly for a file
+comm\modbusclient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\modbusclient.cpp.s
+.PHONY : comm\modbusclient.cpp.s
+
+comm\modbusserver.obj: comm\modbusserver.cpp.obj
+.PHONY : comm\modbusserver.obj
+
+# target to build an object file
+comm\modbusserver.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\modbusserver.cpp.obj
+.PHONY : comm\modbusserver.cpp.obj
+
+comm\modbusserver.i: comm\modbusserver.cpp.i
+.PHONY : comm\modbusserver.i
+
+# target to preprocess a source file
+comm\modbusserver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\modbusserver.cpp.i
+.PHONY : comm\modbusserver.cpp.i
+
+comm\modbusserver.s: comm\modbusserver.cpp.s
+.PHONY : comm\modbusserver.s
+
+# target to generate assembly for a file
+comm\modbusserver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\modbusserver.cpp.s
+.PHONY : comm\modbusserver.cpp.s
+
+comm\serialcomm.obj: comm\serialcomm.cpp.obj
+.PHONY : comm\serialcomm.obj
+
+# target to build an object file
+comm\serialcomm.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\serialcomm.cpp.obj
+.PHONY : comm\serialcomm.cpp.obj
+
+comm\serialcomm.i: comm\serialcomm.cpp.i
+.PHONY : comm\serialcomm.i
+
+# target to preprocess a source file
+comm\serialcomm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\serialcomm.cpp.i
+.PHONY : comm\serialcomm.cpp.i
+
+comm\serialcomm.s: comm\serialcomm.cpp.s
+.PHONY : comm\serialcomm.s
+
+# target to generate assembly for a file
+comm\serialcomm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\serialcomm.cpp.s
+.PHONY : comm\serialcomm.cpp.s
+
+comm\tcpclient.obj: comm\tcpclient.cpp.obj
+.PHONY : comm\tcpclient.obj
+
+# target to build an object file
+comm\tcpclient.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\tcpclient.cpp.obj
+.PHONY : comm\tcpclient.cpp.obj
+
+comm\tcpclient.i: comm\tcpclient.cpp.i
+.PHONY : comm\tcpclient.i
+
+# target to preprocess a source file
+comm\tcpclient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\tcpclient.cpp.i
+.PHONY : comm\tcpclient.cpp.i
+
+comm\tcpclient.s: comm\tcpclient.cpp.s
+.PHONY : comm\tcpclient.s
+
+# target to generate assembly for a file
+comm\tcpclient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\tcpclient.cpp.s
+.PHONY : comm\tcpclient.cpp.s
+
+comm\tcpserver.obj: comm\tcpserver.cpp.obj
+.PHONY : comm\tcpserver.obj
+
+# target to build an object file
+comm\tcpserver.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\tcpserver.cpp.obj
+.PHONY : comm\tcpserver.cpp.obj
+
+comm\tcpserver.i: comm\tcpserver.cpp.i
+.PHONY : comm\tcpserver.i
+
+# target to preprocess a source file
+comm\tcpserver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\tcpserver.cpp.i
+.PHONY : comm\tcpserver.cpp.i
+
+comm\tcpserver.s: comm\tcpserver.cpp.s
+.PHONY : comm\tcpserver.s
+
+# target to generate assembly for a file
+comm\tcpserver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\tcpserver.cpp.s
+.PHONY : comm\tcpserver.cpp.s
+
+comm\udpcomm.obj: comm\udpcomm.cpp.obj
+.PHONY : comm\udpcomm.obj
+
+# target to build an object file
+comm\udpcomm.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\udpcomm.cpp.obj
+.PHONY : comm\udpcomm.cpp.obj
+
+comm\udpcomm.i: comm\udpcomm.cpp.i
+.PHONY : comm\udpcomm.i
+
+# target to preprocess a source file
+comm\udpcomm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\udpcomm.cpp.i
+.PHONY : comm\udpcomm.cpp.i
+
+comm\udpcomm.s: comm\udpcomm.cpp.s
+.PHONY : comm\udpcomm.s
+
+# target to generate assembly for a file
+comm\udpcomm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\20260701.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\20260701.dir\comm\udpcomm.cpp.s
+.PHONY : comm\udpcomm.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -267,6 +435,27 @@ help:
 	@echo ... 20260701_autogen/mocs_compilation.obj
 	@echo ... 20260701_autogen/mocs_compilation.i
 	@echo ... 20260701_autogen/mocs_compilation.s
+	@echo ... comm/commutils.obj
+	@echo ... comm/commutils.i
+	@echo ... comm/commutils.s
+	@echo ... comm/modbusclient.obj
+	@echo ... comm/modbusclient.i
+	@echo ... comm/modbusclient.s
+	@echo ... comm/modbusserver.obj
+	@echo ... comm/modbusserver.i
+	@echo ... comm/modbusserver.s
+	@echo ... comm/serialcomm.obj
+	@echo ... comm/serialcomm.i
+	@echo ... comm/serialcomm.s
+	@echo ... comm/tcpclient.obj
+	@echo ... comm/tcpclient.i
+	@echo ... comm/tcpclient.s
+	@echo ... comm/tcpserver.obj
+	@echo ... comm/tcpserver.i
+	@echo ... comm/tcpserver.s
+	@echo ... comm/udpcomm.obj
+	@echo ... comm/udpcomm.i
+	@echo ... comm/udpcomm.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
