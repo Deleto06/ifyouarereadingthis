@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/qtdevelop/20260701/20260701/comm/commutils.cpp" "CMakeFiles/20260701.dir/comm/commutils.cpp.obj" "msvc" "CMakeFiles/20260701.dir/comm/commutils.cpp.obj.d"
   "C:/qtdevelop/20260701/20260701/comm/modbusclient.cpp" "CMakeFiles/20260701.dir/comm/modbusclient.cpp.obj" "msvc" "CMakeFiles/20260701.dir/comm/modbusclient.cpp.obj.d"
   "C:/qtdevelop/20260701/20260701/comm/modbusserver.cpp" "CMakeFiles/20260701.dir/comm/modbusserver.cpp.obj" "msvc" "CMakeFiles/20260701.dir/comm/modbusserver.cpp.obj.d"
+  "C:/qtdevelop/20260701/20260701/comm/modbustcpclientcomm.cpp" "CMakeFiles/20260701.dir/comm/modbustcpclientcomm.cpp.obj" "msvc" "CMakeFiles/20260701.dir/comm/modbustcpclientcomm.cpp.obj.d"
   "C:/qtdevelop/20260701/20260701/comm/serialcomm.cpp" "CMakeFiles/20260701.dir/comm/serialcomm.cpp.obj" "msvc" "CMakeFiles/20260701.dir/comm/serialcomm.cpp.obj.d"
   "C:/qtdevelop/20260701/20260701/comm/tcpclient.cpp" "CMakeFiles/20260701.dir/comm/tcpclient.cpp.obj" "msvc" "CMakeFiles/20260701.dir/comm/tcpclient.cpp.obj.d"
   "C:/qtdevelop/20260701/20260701/comm/tcpserver.cpp" "CMakeFiles/20260701.dir/comm/tcpserver.cpp.obj" "msvc" "CMakeFiles/20260701.dir/comm/tcpserver.cpp.obj.d"

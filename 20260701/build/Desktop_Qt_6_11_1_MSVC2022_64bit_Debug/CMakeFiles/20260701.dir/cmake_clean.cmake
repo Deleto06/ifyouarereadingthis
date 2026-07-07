@@ -16,6 +16,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/20260701.dir/comm/modbusclient.cpp.obj.d"
   "CMakeFiles/20260701.dir/comm/modbusserver.cpp.obj"
   "CMakeFiles/20260701.dir/comm/modbusserver.cpp.obj.d"
+  "CMakeFiles/20260701.dir/comm/modbustcpclientcomm.cpp.obj"
+  "CMakeFiles/20260701.dir/comm/modbustcpclientcomm.cpp.obj.d"
   "CMakeFiles/20260701.dir/comm/serialcomm.cpp.obj"
   "CMakeFiles/20260701.dir/comm/serialcomm.cpp.obj.d"
   "CMakeFiles/20260701.dir/comm/tcpclient.cpp.obj"

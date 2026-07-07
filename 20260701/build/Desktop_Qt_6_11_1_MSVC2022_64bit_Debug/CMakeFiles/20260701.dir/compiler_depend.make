@@ -795,6 +795,8 @@
   C:\qtdevelop\20260701\20260701\comm\modbusclient.h \
   C:\qtdevelop\20260701\20260701\comm\modbusserver.cpp \
   C:\qtdevelop\20260701\20260701\comm\modbusserver.h \
+  C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.cpp \
+  C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.h \
   C:\qtdevelop\20260701\20260701\comm\serialcomm.cpp \
   C:\qtdevelop\20260701\20260701\comm\serialcomm.h \
   C:\qtdevelop\20260701\20260701\comm\tcpclient.cpp \
@@ -2406,6 +2408,10 @@ CMakeFiles\3.30.5\CMakeCXXCompiler.cmake:
 CMakeFiles\3.30.5\CMakeRCCompiler.cmake:
 
 C:\qtdevelop\20260701\20260701\comm\modbusclient.h:
+
+C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.cpp:
+
+C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.h:
 
 C:\qtdevelop\20260701\20260701\comm\tcpclient.cpp:
 

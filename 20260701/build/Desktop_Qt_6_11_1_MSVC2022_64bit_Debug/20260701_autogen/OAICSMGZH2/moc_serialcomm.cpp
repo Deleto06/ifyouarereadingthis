@@ -39,27 +39,36 @@ template <> constexpr inline auto SerialComm::qt_create_metaobjectdata<qt_meta_t
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "SerialComm",
-        "dataReceived",
+        "opened",
         "",
+        "closed",
+        "dataReceived",
         "data",
         "errorOccurred",
         "error",
-        "stateChanged",
-        "opened"
+        "onReadyRead",
+        "onErrorOccurred",
+        "QSerialPort::SerialPortError"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'opened'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'closed'
+        QtMocHelpers::SignalData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'dataReceived'
-        QtMocHelpers::SignalData<void(const QByteArray &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QByteArray, 3 },
+        QtMocHelpers::SignalData<void(const QByteArray &)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QByteArray, 5 },
         }}),
         // Signal 'errorOccurred'
-        QtMocHelpers::SignalData<void(const QString &)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 5 },
+        QtMocHelpers::SignalData<void(const QString &)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 7 },
         }}),
-        // Signal 'stateChanged'
-        QtMocHelpers::SignalData<void(bool)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 7 },
+        // Slot 'onReadyRead'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onErrorOccurred'
+        QtMocHelpers::SlotData<void(QSerialPort::SerialPortError)>(9, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 10, 7 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -84,18 +93,23 @@ void SerialComm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<SerialComm *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->dataReceived((*reinterpret_cast<std::add_pointer_t<QByteArray>>(_a[1]))); break;
-        case 1: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
-        case 2: _t->stateChanged((*reinterpret_cast<std::add_pointer_t<bool>>(_a[1]))); break;
+        case 0: _t->opened(); break;
+        case 1: _t->closed(); break;
+        case 2: _t->dataReceived((*reinterpret_cast<std::add_pointer_t<QByteArray>>(_a[1]))); break;
+        case 3: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 4: _t->onReadyRead(); break;
+        case 5: _t->onErrorOccurred((*reinterpret_cast<std::add_pointer_t<QSerialPort::SerialPortError>>(_a[1]))); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
-        if (QtMocHelpers::indexOfMethod<void (SerialComm::*)(const QByteArray & )>(_a, &SerialComm::dataReceived, 0))
+        if (QtMocHelpers::indexOfMethod<void (SerialComm::*)()>(_a, &SerialComm::opened, 0))
             return;
-        if (QtMocHelpers::indexOfMethod<void (SerialComm::*)(const QString & )>(_a, &SerialComm::errorOccurred, 1))
+        if (QtMocHelpers::indexOfMethod<void (SerialComm::*)()>(_a, &SerialComm::closed, 1))
             return;
-        if (QtMocHelpers::indexOfMethod<void (SerialComm::*)(bool )>(_a, &SerialComm::stateChanged, 2))
+        if (QtMocHelpers::indexOfMethod<void (SerialComm::*)(const QByteArray & )>(_a, &SerialComm::dataReceived, 2))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (SerialComm::*)(const QString & )>(_a, &SerialComm::errorOccurred, 3))
             return;
     }
 }
@@ -119,33 +133,39 @@ int SerialComm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 6;
     }
     return _id;
 }
 
 // SIGNAL 0
-void SerialComm::dataReceived(const QByteArray & _t1)
+void SerialComm::opened()
 {
-    QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1);
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void SerialComm::errorOccurred(const QString & _t1)
+void SerialComm::closed()
 {
-    QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 
 // SIGNAL 2
-void SerialComm::stateChanged(bool _t1)
+void SerialComm::dataReceived(const QByteArray & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
+}
+
+// SIGNAL 3
+void SerialComm::errorOccurred(const QString & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1);
 }
 QT_WARNING_POP

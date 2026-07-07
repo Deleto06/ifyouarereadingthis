@@ -53,12 +53,21 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_btnTcpServerStart_clicked",
         "on_btnTcpServerStop_clicked",
         "on_btnTcpServerSend_clicked",
+        "on_btnTcpClientConnect_clicked",
+        "on_btnTcpClientDisconnect_clicked",
+        "on_btnTcpClientSend_clicked",
         "on_btnUdpBind_clicked",
         "on_btnUdpClose_clicked",
         "on_btnUdpSend_clicked",
         "on_btnModbusServerStart_clicked",
         "on_btnModbusServerStop_clicked",
-        "on_btnModbusSetReg_clicked"
+        "on_btnModbusSetReg_clicked",
+        "on_btnSerialRefresh_clicked",
+        "on_btnSerialOpen_clicked",
+        "on_btnSerialClose_clicked",
+        "on_btnSerialSend_clicked",
+        "on_btnClearLog_clicked",
+        "on_btnSaveLog_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -82,18 +91,36 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_btnTcpServerSend_clicked'
         QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnUdpBind_clicked'
+        // Slot 'on_btnTcpClientConnect_clicked'
         QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnUdpClose_clicked'
+        // Slot 'on_btnTcpClientDisconnect_clicked'
         QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnUdpSend_clicked'
+        // Slot 'on_btnTcpClientSend_clicked'
         QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnModbusServerStart_clicked'
+        // Slot 'on_btnUdpBind_clicked'
         QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnModbusServerStop_clicked'
+        // Slot 'on_btnUdpClose_clicked'
         QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnModbusSetReg_clicked'
+        // Slot 'on_btnUdpSend_clicked'
         QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusServerStart_clicked'
+        QtMocHelpers::SlotData<void()>(21, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusServerStop_clicked'
+        QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusSetReg_clicked'
+        QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnSerialRefresh_clicked'
+        QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnSerialOpen_clicked'
+        QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnSerialClose_clicked'
+        QtMocHelpers::SlotData<void()>(26, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnSerialSend_clicked'
+        QtMocHelpers::SlotData<void()>(27, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnClearLog_clicked'
+        QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnSaveLog_clicked'
+        QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -125,12 +152,21 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->on_btnTcpServerStart_clicked(); break;
         case 6: _t->on_btnTcpServerStop_clicked(); break;
         case 7: _t->on_btnTcpServerSend_clicked(); break;
-        case 8: _t->on_btnUdpBind_clicked(); break;
-        case 9: _t->on_btnUdpClose_clicked(); break;
-        case 10: _t->on_btnUdpSend_clicked(); break;
-        case 11: _t->on_btnModbusServerStart_clicked(); break;
-        case 12: _t->on_btnModbusServerStop_clicked(); break;
-        case 13: _t->on_btnModbusSetReg_clicked(); break;
+        case 8: _t->on_btnTcpClientConnect_clicked(); break;
+        case 9: _t->on_btnTcpClientDisconnect_clicked(); break;
+        case 10: _t->on_btnTcpClientSend_clicked(); break;
+        case 11: _t->on_btnUdpBind_clicked(); break;
+        case 12: _t->on_btnUdpClose_clicked(); break;
+        case 13: _t->on_btnUdpSend_clicked(); break;
+        case 14: _t->on_btnModbusServerStart_clicked(); break;
+        case 15: _t->on_btnModbusServerStop_clicked(); break;
+        case 16: _t->on_btnModbusSetReg_clicked(); break;
+        case 17: _t->on_btnSerialRefresh_clicked(); break;
+        case 18: _t->on_btnSerialOpen_clicked(); break;
+        case 19: _t->on_btnSerialClose_clicked(); break;
+        case 20: _t->on_btnSerialSend_clicked(); break;
+        case 21: _t->on_btnClearLog_clicked(); break;
+        case 22: _t->on_btnSaveLog_clicked(); break;
         default: ;
         }
     }
@@ -155,14 +191,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 23;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 23)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 14;
+        _id -= 23;
     }
     return _id;
 }

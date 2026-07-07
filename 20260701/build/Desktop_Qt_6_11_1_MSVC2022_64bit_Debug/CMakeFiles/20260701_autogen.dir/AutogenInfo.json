@@ -508,6 +508,12 @@
 			null
 		],
 		[
+			"C:/qtdevelop/20260701/20260701/comm/modbustcpclientcomm.h",
+			"MU",
+			"OAICSMGZH2/moc_modbustcpclientcomm.cpp",
+			null
+		],
+		[
 			"C:/qtdevelop/20260701/20260701/comm/serialcomm.h",
 			"MU",
 			"OAICSMGZH2/moc_serialcomm.cpp",
@@ -604,6 +610,11 @@
 		[ "C:/qtdevelop/20260701/20260701/comm/commutils.cpp", "MU", null ],
 		[ "C:/qtdevelop/20260701/20260701/comm/modbusclient.cpp", "MU", null ],
 		[ "C:/qtdevelop/20260701/20260701/comm/modbusserver.cpp", "MU", null ],
+		[
+			"C:/qtdevelop/20260701/20260701/comm/modbustcpclientcomm.cpp",
+			"MU",
+			null
+		],
 		[ "C:/qtdevelop/20260701/20260701/comm/serialcomm.cpp", "MU", null ],
 		[ "C:/qtdevelop/20260701/20260701/comm/tcpclient.cpp", "MU", null ],
 		[ "C:/qtdevelop/20260701/20260701/comm/tcpserver.cpp", "MU", null ],

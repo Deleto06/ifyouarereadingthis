@@ -20,6 +20,9 @@
 #include <QDateTime>
 #include <QMouseEvent>
 #include <QApplication>
+#include <QTextStream>
+#include <QSerialPortInfo>
+#include <QSerialPort>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -50,11 +53,27 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->btnAddDir, &QPushButton::clicked,
             this, &MainWindow::onBtnAddDirClicked);
+    connect(ui->btnClearLog, &QPushButton::clicked,
+            this, &MainWindow::on_btnClearLog_clicked);
+    connect(ui->btnSaveLog, &QPushButton::clicked,
+            this, &MainWindow::on_btnSaveLog_clicked);
+   // connect(ui->btnSerialRefresh, &QPushButton::clicked,
+   //         this, &MainWindow::on_btnSerialRefresh_clicked);
+
+   // connect(ui->btnSerialOpen, &QPushButton::clicked,
+   //         this, &MainWindow::on_btnSerialOpen_clicked);
+
+   // connect(ui->btnSerialClose, &QPushButton::clicked,
+    //        this, &MainWindow::on_btnSerialClose_clicked);
+
+   // connect(ui->btnSerialSend, &QPushButton::clicked,
+   //         this, &MainWindow::on_btnSerialSend_clicked);
     // 3. 加载上次保存的状态
     loadSettings();
     // 4. 初始化通讯模块
     initUiState();
     initCommunication();
+    initSerialUi();
 }
 
 MainWindow::~MainWindow()
@@ -88,6 +107,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUiState()
 {
+    // TCP Client
+    ui->btnTcpClientConnect->setEnabled(true);
+    ui->btnTcpClientDisconnect->setEnabled(false);
+    ui->btnTcpClientSend->setEnabled(false);
+    ui->lineEditTcpClientIp->setEnabled(true);
+    ui->lineEditTcpClientPort->setEnabled(true);
+
     // TCP Server
     ui->btnTcpServerStart->setEnabled(true);
     ui->btnTcpServerStop->setEnabled(false);
@@ -103,6 +129,16 @@ void MainWindow::initUiState()
     ui->btnModbusServerStop->setEnabled(false);
     ui->lineEditModbusServerPort->setEnabled(true);
     ui->lineEditModbusServerId->setEnabled(true);
+
+    // Serial
+    ui->btnSerialOpen->setEnabled(true);
+    ui->btnSerialClose->setEnabled(false);
+    ui->btnSerialSend->setEnabled(false);
+    ui->comboBoxSerialPort->setEnabled(true);
+    ui->comboBoxSerialBaudRate->setEnabled(true);
+    ui->comboBoxSerialDataBits->setEnabled(true);
+    ui->comboBoxSerialStopBits->setEnabled(true);
+    ui->comboBoxSerialParity->setEnabled(true);
 }
 
 void MainWindow::displayImage(const QString &filePath)
@@ -646,6 +682,89 @@ void MainWindow::initCommunication()
 }
 void MainWindow::initCommunicationSignals()
 {
+    // ==================== Serial COM ====================
+    connect(m_serialComm, &SerialComm::opened,
+            this,
+            [=]() {
+                appendLog("[Serial] opened");
+
+                ui->btnSerialOpen->setEnabled(false);
+                ui->btnSerialClose->setEnabled(true);
+                ui->btnSerialSend->setEnabled(true);
+
+                ui->comboBoxSerialPort->setEnabled(false);
+                ui->comboBoxSerialBaudRate->setEnabled(false);
+                ui->comboBoxSerialDataBits->setEnabled(false);
+                ui->comboBoxSerialStopBits->setEnabled(false);
+                ui->comboBoxSerialParity->setEnabled(false);
+            });
+
+    connect(m_serialComm, &SerialComm::closed,
+            this,
+            [=]() {
+                appendLog("[Serial] closed");
+
+                ui->btnSerialOpen->setEnabled(true);
+                ui->btnSerialClose->setEnabled(false);
+                ui->btnSerialSend->setEnabled(false);
+
+                ui->comboBoxSerialPort->setEnabled(true);
+                ui->comboBoxSerialBaudRate->setEnabled(true);
+                ui->comboBoxSerialDataBits->setEnabled(true);
+                ui->comboBoxSerialStopBits->setEnabled(true);
+                ui->comboBoxSerialParity->setEnabled(true);
+            });
+
+    connect(m_serialComm, &SerialComm::dataReceived,
+            this,
+            [=](const QByteArray &data) {
+                appendLog(QString("[Serial Recv HEX] %1")
+                              .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+
+                appendLog(QString("[Serial Recv ASCII] %1")
+                              .arg(byteArrayToPrintableText(data)));
+            });
+
+    connect(m_serialComm, &SerialComm::errorOccurred,
+            this,
+            [=](const QString &error) {
+                appendLog(QString("[Serial Error] %1").arg(error));
+            });
+    // ==================== TCP Client ====================
+    connect(m_tcpClient, &TcpClient::connected,
+            this,
+            [=]() {
+                appendLog("[TCP Client] connected");
+                ui->btnTcpClientConnect->setEnabled(false);
+                ui->btnTcpClientDisconnect->setEnabled(true);
+                ui->btnTcpClientSend->setEnabled(true);
+                ui->lineEditTcpClientIp->setEnabled(false);
+                ui->lineEditTcpClientPort->setEnabled(false);
+            });
+    connect(m_tcpClient, &TcpClient::disconnected,
+            this,
+            [=]() {
+                appendLog("[TCP Client] disconnected");
+                ui->btnTcpClientConnect->setEnabled(true);
+                ui->btnTcpClientDisconnect->setEnabled(false);
+                ui->btnTcpClientSend->setEnabled(false);
+                ui->lineEditTcpClientIp->setEnabled(true);
+                ui->lineEditTcpClientPort->setEnabled(true);
+            });
+    connect(m_tcpClient, &TcpClient::dataReceived,
+            this,
+            [=](const QByteArray &data) {
+                appendLog(QString("[TCP Client Recv HEX] %1")
+                              .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+                appendLog(QString("[TCP Client Recv ASCII] %1")
+                              .arg(byteArrayToPrintableText(data)));
+            });
+    connect(m_tcpClient, &TcpClient::errorOccurred,
+            this,
+            [=](const QString &error) {
+                appendLog(QString("[TCP Client Error] %1").arg(error));
+            });
+
     connect(m_tcpServer, &TcpServer::clientConnected,
             this,
             [=](const QString &peer) {
@@ -1006,4 +1125,298 @@ QString MainWindow::byteArrayToPrintableText(const QByteArray &data)
     }
 
     return result;
+}
+void MainWindow::on_btnClearLog_clicked()
+{
+    if (!ui->textEditLog) {
+        return;
+    }
+
+    ui->textEditLog->clear();
+
+    qDebug() << "当前日志已清空";
+}
+void MainWindow::on_btnSaveLog_clicked()
+{
+    if (!ui->textEditLog) {
+        return;
+    }
+
+    QString logText = ui->textEditLog->toPlainText();
+
+    if (logText.trimmed().isEmpty()) {
+        QMessageBox::information(this, "提示", "当前日志为空，无需保存。");
+        return;
+    }
+
+    QString defaultFileName = "log_" +
+                              QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") +
+                              ".txt";
+
+    QString filePath = QFileDialog::getSaveFileName(
+        this,
+        "保存日志到文件",
+        QCoreApplication::applicationDirPath() + "/" + defaultFileName,
+        "文本文件 (*.txt);;所有文件 (*.*)"
+        );
+
+    if (filePath.isEmpty()) {
+        return;
+    }
+
+    QFile file(filePath);
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, "保存失败", "日志文件打开失败，请检查路径或权限。");
+        return;
+    }
+
+    QTextStream out(&file);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    out.setCodec("UTF-8");
+#endif
+
+    out << logText;
+
+    file.close();
+
+    QMessageBox::information(this, "保存成功", "日志已保存到：\n" + filePath);
+
+    appendLog(QString("[Log] 日志已保存到文件：%1").arg(filePath));
+}
+void MainWindow::on_btnTcpClientConnect_clicked()
+{
+    QString ip = ui->lineEditTcpClientIp->text().trimmed();
+
+    bool okPort = false;
+    quint16 port = ui->lineEditTcpClientPort->text().trimmed().toUShort(&okPort);
+
+    if (ip.isEmpty()) {
+        appendLog("[TCP Client] 服务器 IP 为空");
+        return;
+    }
+
+    if (!okPort || port == 0) {
+        appendLog("[TCP Client] 服务器端口无效");
+        return;
+    }
+
+    appendLog(QString("[TCP Client] connecting to %1:%2 ...")
+                  .arg(ip)
+                  .arg(port));
+
+    m_tcpClient->connectToServer(ip, port);
+}
+void MainWindow::on_btnTcpClientDisconnect_clicked()
+{
+    m_tcpClient->disconnectFromServer();
+
+    appendLog("[TCP Client] disconnect request");
+}
+void MainWindow::on_btnTcpClientSend_clicked()
+{
+    QString text = ui->textEditTcpClientSend->toPlainText().trimmed();
+
+    if (text.isEmpty()) {
+        appendLog("[TCP Client] 发送内容为空");
+        return;
+    }
+
+    QByteArray data;
+
+    if (ui->checkBoxTcpClientSendHex->isChecked()) {
+        bool ok = false;
+        data = hexStringToByteArray(text, &ok);
+
+        if (!ok) {
+            appendLog("[TCP Client] HEX 格式错误");
+            appendLog("[TCP Client] 示例：01 03 00 00 00 02");
+            return;
+        }
+
+        appendLog(QString("[TCP Client Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+    } else {
+        data = text.toLocal8Bit();
+
+        appendLog(QString("[TCP Client Send TEXT] %1").arg(text));
+    }
+
+    qint64 len = m_tcpClient->sendData(data);
+
+    appendLog(QString("[TCP Client Send] bytes = %1").arg(len));
+}
+void MainWindow::initSerialUi()
+{
+    // 波特率
+    ui->comboBoxSerialBaudRate->clear();
+    ui->comboBoxSerialBaudRate->addItem("9600");
+    ui->comboBoxSerialBaudRate->addItem("19200");
+    ui->comboBoxSerialBaudRate->addItem("38400");
+    ui->comboBoxSerialBaudRate->addItem("57600");
+    ui->comboBoxSerialBaudRate->addItem("115200");
+    ui->comboBoxSerialBaudRate->setCurrentText("9600");
+
+    // 数据位
+    ui->comboBoxSerialDataBits->clear();
+    ui->comboBoxSerialDataBits->addItem("5");
+    ui->comboBoxSerialDataBits->addItem("6");
+    ui->comboBoxSerialDataBits->addItem("7");
+    ui->comboBoxSerialDataBits->addItem("8");
+    ui->comboBoxSerialDataBits->setCurrentText("8");
+
+    // 停止位
+    ui->comboBoxSerialStopBits->clear();
+    ui->comboBoxSerialStopBits->addItem("1");
+    ui->comboBoxSerialStopBits->addItem("1.5");
+    ui->comboBoxSerialStopBits->addItem("2");
+    ui->comboBoxSerialStopBits->setCurrentText("1");
+
+    // 校验位
+    ui->comboBoxSerialParity->clear();
+    ui->comboBoxSerialParity->addItem("None");
+    ui->comboBoxSerialParity->addItem("Even");
+    ui->comboBoxSerialParity->addItem("Odd");
+    ui->comboBoxSerialParity->addItem("Mark");
+    ui->comboBoxSerialParity->addItem("Space");
+    ui->comboBoxSerialParity->setCurrentText("None");
+
+    refreshSerialPorts();
+
+    ui->btnSerialOpen->setEnabled(true);
+    ui->btnSerialClose->setEnabled(false);
+    ui->btnSerialSend->setEnabled(false);
+}
+void MainWindow::refreshSerialPorts()
+{
+    QString current = ui->comboBoxSerialPort->currentText();
+
+    ui->comboBoxSerialPort->clear();
+
+    const auto ports = QSerialPortInfo::availablePorts();
+
+    for (const QSerialPortInfo &info : ports) {
+        ui->comboBoxSerialPort->addItem(info.portName());
+    }
+
+    int index = ui->comboBoxSerialPort->findText(current);
+    if (index >= 0) {
+        ui->comboBoxSerialPort->setCurrentIndex(index);
+    }
+
+    appendLog(QString("[Serial] found %1 port(s)").arg(ports.size()));
+}
+void MainWindow::on_btnSerialRefresh_clicked()
+{
+    refreshSerialPorts();
+}
+void MainWindow::on_btnSerialOpen_clicked()
+{
+    QString portName = ui->comboBoxSerialPort->currentText().trimmed();
+
+    if (portName.isEmpty()) {
+        appendLog("[Serial] 串口号为空");
+        return;
+    }
+
+    bool okBaud = false;
+    qint32 baudRate = ui->comboBoxSerialBaudRate->currentText().toInt(&okBaud);
+
+    if (!okBaud || baudRate <= 0) {
+        appendLog("[Serial] 波特率无效");
+        return;
+    }
+
+    QSerialPort::DataBits dataBits = QSerialPort::Data8;
+    QString dataBitsText = ui->comboBoxSerialDataBits->currentText();
+
+    if (dataBitsText == "5") {
+        dataBits = QSerialPort::Data5;
+    } else if (dataBitsText == "6") {
+        dataBits = QSerialPort::Data6;
+    } else if (dataBitsText == "7") {
+        dataBits = QSerialPort::Data7;
+    } else {
+        dataBits = QSerialPort::Data8;
+    }
+
+    QSerialPort::StopBits stopBits = QSerialPort::OneStop;
+    QString stopBitsText = ui->comboBoxSerialStopBits->currentText();
+
+    if (stopBitsText == "1") {
+        stopBits = QSerialPort::OneStop;
+    } else if (stopBitsText == "1.5") {
+        stopBits = QSerialPort::OneAndHalfStop;
+    } else if (stopBitsText == "2") {
+        stopBits = QSerialPort::TwoStop;
+    }
+
+    QSerialPort::Parity parity = QSerialPort::NoParity;
+    QString parityText = ui->comboBoxSerialParity->currentText();
+
+    if (parityText == "None") {
+        parity = QSerialPort::NoParity;
+    } else if (parityText == "Even") {
+        parity = QSerialPort::EvenParity;
+    } else if (parityText == "Odd") {
+        parity = QSerialPort::OddParity;
+    } else if (parityText == "Mark") {
+        parity = QSerialPort::MarkParity;
+    } else if (parityText == "Space") {
+        parity = QSerialPort::SpaceParity;
+    }
+
+    appendLog(QString("[Serial] opening %1, baud=%2, data=%3, stop=%4, parity=%5")
+                  .arg(portName)
+                  .arg(baudRate)
+                  .arg(dataBitsText)
+                  .arg(stopBitsText)
+                  .arg(parityText));
+
+    bool ret = m_serialComm->open(portName,
+                                  baudRate,
+                                  dataBits,
+                                  parity,
+                                  stopBits);
+
+    if (!ret) {
+        appendLog("[Serial] open failed");
+    }
+}
+void MainWindow::on_btnSerialClose_clicked()
+{
+    m_serialComm->close();
+}
+void MainWindow::on_btnSerialSend_clicked()
+{
+    QString text = ui->textEditSerialSend->toPlainText().trimmed();
+
+    if (text.isEmpty()) {
+        appendLog("[Serial] 发送内容为空");
+        return;
+    }
+
+    QByteArray data;
+
+    if (ui->checkBoxSerialSendHex->isChecked()) {
+        bool ok = false;
+        data = hexStringToByteArray(text, &ok);
+
+        if (!ok) {
+            appendLog("[Serial] HEX 格式错误");
+            appendLog("[Serial] 示例：01 03 00 00 00 02");
+            return;
+        }
+
+        appendLog(QString("[Serial Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
+    } else {
+        data = text.toLocal8Bit();
+
+        appendLog(QString("[Serial Send TEXT] %1").arg(text));
+    }
+
+    qint64 len = m_serialComm->sendData(data);
+
+    appendLog(QString("[Serial Send] bytes = %1").arg(len));
 }

@@ -312,10 +312,10 @@ Qt6LinguistTools_DIR:PATH=C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6LinguistTools
 Qt6Network_DIR:PATH=C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6Network
 
 //The directory containing a CMake configuration file for Qt6SerialBus.
-Qt6SerialBus_DIR:PATH=Qt6SerialBus_DIR-NOTFOUND
+Qt6SerialBus_DIR:PATH=C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialBus
 
 //The directory containing a CMake configuration file for Qt6SerialPort.
-Qt6SerialPort_DIR:PATH=Qt6SerialPort_DIR-NOTFOUND
+Qt6SerialPort_DIR:PATH=C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6SerialPort
 
 //The directory containing a CMake configuration file for Qt6WidgetsTools.
 Qt6WidgetsTools_DIR:PATH=C:/Qt/6.11.1/msvc2022_64/lib/cmake/Qt6WidgetsTools
@@ -941,6 +941,8 @@ QT_FEATURE_mimetype_database:INTERNAL=ON
 QT_FEATURE_mips_dsp:INTERNAL=OFF
 //Qt feature: mips_dspr2 (from target Qt6::Core)
 QT_FEATURE_mips_dspr2:INTERNAL=OFF
+//Qt feature: modbus_serialport (from target Qt6::SerialBus)
+QT_FEATURE_modbus_serialport:INTERNAL=ON
 //Qt feature: movie (from target Qt6::Gui)
 QT_FEATURE_movie:INTERNAL=ON
 //Qt feature: msvc_obj_debug_info (from target Qt6::Core)
@@ -965,6 +967,8 @@ QT_FEATURE_networkproxy:INTERNAL=ON
 QT_FEATURE_no_direct_extern_access:INTERNAL=OFF
 //Qt feature: no_pkg_config (from target Qt6::Core)
 QT_FEATURE_no_pkg_config:INTERNAL=ON
+//Qt feature: ntddmodm (from target Qt6::SerialPort)
+QT_FEATURE_ntddmodm:INTERNAL=ON
 //Qt feature: ocsp (from target Qt6::Network)
 QT_FEATURE_ocsp:INTERNAL=ON
 //Qt feature: opengl (from target Qt6::Gui)
@@ -1121,6 +1125,10 @@ QT_FEATURE_sizegrip:INTERNAL=ON
 QT_FEATURE_slider:INTERNAL=ON
 //Qt feature: slog2 (from target Qt6::Core)
 QT_FEATURE_slog2:INTERNAL=OFF
+//Qt feature: socketcan (from target Qt6::SerialBus)
+QT_FEATURE_socketcan:INTERNAL=OFF
+//Qt feature: socketcan_fd (from target Qt6::SerialBus)
+QT_FEATURE_socketcan_fd:INTERNAL=OFF
 //Qt feature: socks5 (from target Qt6::Network)
 QT_FEATURE_socks5:INTERNAL=ON
 //Qt feature: sortfilterproxymodel (from target Qt6::Core)

@@ -45,7 +45,11 @@ template <> constexpr inline auto TcpClient::qt_create_metaobjectdata<qt_meta_ta
         "dataReceived",
         "data",
         "errorOccurred",
-        "error"
+        "error",
+        "onReadyRead",
+        "onErrorOccurred",
+        "QAbstractSocket::SocketError",
+        "socketError"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -60,6 +64,12 @@ template <> constexpr inline auto TcpClient::qt_create_metaobjectdata<qt_meta_ta
         // Signal 'errorOccurred'
         QtMocHelpers::SignalData<void(const QString &)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 7 },
+        }}),
+        // Slot 'onReadyRead'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onErrorOccurred'
+        QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(9, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 10, 11 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -88,7 +98,21 @@ void TcpClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1: _t->disconnected(); break;
         case 2: _t->dataReceived((*reinterpret_cast<std::add_pointer_t<QByteArray>>(_a[1]))); break;
         case 3: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 4: _t->onReadyRead(); break;
+        case 5: _t->onErrorOccurred((*reinterpret_cast<std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 5:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QAbstractSocket::SocketError >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
@@ -122,14 +146,14 @@ int TcpClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        if (_id < 6)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 6;
     }
     return _id;
 }

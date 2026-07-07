@@ -17,7 +17,6 @@
 #include "comm/modbusclient.h"
 #include "comm/modbusserver.h"
 #include "comm/commutils.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -49,12 +48,25 @@ private slots:
     void on_btnTcpServerStart_clicked();
     void on_btnTcpServerStop_clicked();
     void on_btnTcpServerSend_clicked();
+
+    void on_btnTcpClientConnect_clicked();
+    void on_btnTcpClientDisconnect_clicked();
+    void on_btnTcpClientSend_clicked();
+
     void on_btnUdpBind_clicked();
     void on_btnUdpClose_clicked();
     void on_btnUdpSend_clicked();
     void on_btnModbusServerStart_clicked();
     void on_btnModbusServerStop_clicked();
     void on_btnModbusSetReg_clicked();
+
+    void on_btnSerialRefresh_clicked();
+    void on_btnSerialOpen_clicked();
+    void on_btnSerialClose_clicked();
+    void on_btnSerialSend_clicked();
+
+    void on_btnClearLog_clicked();
+    void on_btnSaveLog_clicked();
 private:
     Ui::MainWindow *ui;
     // ==================== 图像显示相关 ====================
@@ -72,7 +84,6 @@ private:
     // 核心功能函数
 
     QString byteArrayToPrintableText(const QByteArray &data);
-
     QListWidgetItem *m_leftPressedItem = nullptr;
     QPoint m_leftPressedPos;
     QString m_currentImagePath;
@@ -93,6 +104,8 @@ private:
     void testStartUdp();
     void testStartModbusTcpServer();
     void appendLog(const QString &text);
+    void initSerialUi();
+    void refreshSerialPorts();
 
 };
 

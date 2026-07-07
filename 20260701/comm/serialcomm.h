@@ -10,23 +10,28 @@ class SerialComm : public QObject
 
 public:
     explicit SerialComm(QObject *parent = nullptr);
-    ~SerialComm();
 
     bool open(const QString &portName,
-              int baudRate,
+              qint32 baudRate,
               QSerialPort::DataBits dataBits,
               QSerialPort::Parity parity,
               QSerialPort::StopBits stopBits);
 
     void close();
-    bool isOpen() const;
 
     qint64 sendData(const QByteArray &data);
 
+    bool isOpen() const;
+
 signals:
+    void opened();
+    void closed();
     void dataReceived(const QByteArray &data);
     void errorOccurred(const QString &error);
-    void stateChanged(bool opened);
+
+private slots:
+    void onReadyRead();
+    void onErrorOccurred(QSerialPort::SerialPortError error);
 
 private:
     QSerialPort *m_serial = nullptr;
