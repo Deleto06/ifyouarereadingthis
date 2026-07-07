@@ -94,25 +94,35 @@ public:
     QLineEdit *lineEditModbusRegValue;
     QPushButton *btnModbusSetReg;
     QWidget *tab_2;
+    QVBoxLayout *verticalLayout_11;
+    QHBoxLayout *horizontalLayout_10;
     QLabel *label_20;
+    QLineEdit *lineEditModbusClientIp;
+    QHBoxLayout *horizontalLayout_11;
     QLabel *label_21;
+    QLineEdit *lineEditModbusClientPort;
+    QHBoxLayout *horizontalLayout_12;
     QLabel *label_22;
-    QPushButton *btnSerialRefresh_2;
-    QPushButton *btnSerialRefresh_3;
-    QSpinBox *spinBox;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
-    QSpinBox *spinBox_2;
+    QSpinBox *spinBoxModbusClientUnitId;
+    QHBoxLayout *horizontalLayout_17;
+    QPushButton *btnModbusClientConnect;
+    QPushButton *btnModbusClientDisconnect;
+    QHBoxLayout *horizontalLayout_13;
     QLabel *label_23;
+    QSpinBox *spinBoxModbusClientStartAddr;
+    QHBoxLayout *horizontalLayout_14;
     QLabel *label_24;
-    QSpinBox *spinBox_3;
+    QSpinBox *spinBoxModbusClientCount;
+    QPushButton *btnModbusClientReadHolding;
+    QHBoxLayout *horizontalLayout_15;
     QLabel *label_32;
+    QSpinBox *spinBoxModbusClientWriteAddr;
+    QVBoxLayout *verticalLayout_10;
     QLabel *label_34;
-    QPushButton *btnSerialRefresh_4;
-    QPushButton *btnSerialRefresh_5;
-    QPushButton *btnSerialRefresh_6;
-    QSpinBox *spinBox_4;
-    QLineEdit *lineEdit_3;
+    QLineEdit *lineEditModbusClientWriteValue;
+    QLabel *label_25;
+    QPushButton *btnModbusClientWriteSingle;
+    QPushButton *btnModbusClientWriteMultiple;
     QWidget *tab_6;
     QVBoxLayout *verticalLayout_9;
     QHBoxLayout *horizontalLayout_8;
@@ -417,63 +427,150 @@ public:
         tabWidgetComm->addTab(tab_5, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
+        verticalLayout_11 = new QVBoxLayout(tab_2);
+        verticalLayout_11->setObjectName("verticalLayout_11");
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName("horizontalLayout_10");
         label_20 = new QLabel(tab_2);
         label_20->setObjectName("label_20");
-        label_20->setGeometry(QRect(30, 30, 53, 15));
+
+        horizontalLayout_10->addWidget(label_20);
+
+        lineEditModbusClientIp = new QLineEdit(tab_2);
+        lineEditModbusClientIp->setObjectName("lineEditModbusClientIp");
+
+        horizontalLayout_10->addWidget(lineEditModbusClientIp);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_10);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName("horizontalLayout_11");
         label_21 = new QLabel(tab_2);
         label_21->setObjectName("label_21");
-        label_21->setGeometry(QRect(12, 50, 61, 20));
+
+        horizontalLayout_11->addWidget(label_21);
+
+        lineEditModbusClientPort = new QLineEdit(tab_2);
+        lineEditModbusClientPort->setObjectName("lineEditModbusClientPort");
+
+        horizontalLayout_11->addWidget(lineEditModbusClientPort);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_11);
+
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName("horizontalLayout_12");
         label_22 = new QLabel(tab_2);
         label_22->setObjectName("label_22");
-        label_22->setGeometry(QRect(30, 80, 53, 15));
-        btnSerialRefresh_2 = new QPushButton(tab_2);
-        btnSerialRefresh_2->setObjectName("btnSerialRefresh_2");
-        btnSerialRefresh_2->setGeometry(QRect(10, 110, 227, 23));
-        btnSerialRefresh_3 = new QPushButton(tab_2);
-        btnSerialRefresh_3->setObjectName("btnSerialRefresh_3");
-        btnSerialRefresh_3->setGeometry(QRect(10, 130, 227, 23));
-        spinBox = new QSpinBox(tab_2);
-        spinBox->setObjectName("spinBox");
-        spinBox->setGeometry(QRect(80, 80, 42, 24));
-        lineEdit = new QLineEdit(tab_2);
-        lineEdit->setObjectName("lineEdit");
-        lineEdit->setGeometry(QRect(80, 20, 113, 23));
-        lineEdit_2 = new QLineEdit(tab_2);
-        lineEdit_2->setObjectName("lineEdit_2");
-        lineEdit_2->setGeometry(QRect(80, 50, 113, 23));
-        spinBox_2 = new QSpinBox(tab_2);
-        spinBox_2->setObjectName("spinBox_2");
-        spinBox_2->setGeometry(QRect(100, 180, 42, 24));
+
+        horizontalLayout_12->addWidget(label_22);
+
+        spinBoxModbusClientUnitId = new QSpinBox(tab_2);
+        spinBoxModbusClientUnitId->setObjectName("spinBoxModbusClientUnitId");
+        spinBoxModbusClientUnitId->setValue(1);
+
+        horizontalLayout_12->addWidget(spinBoxModbusClientUnitId);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_12);
+
+        horizontalLayout_17 = new QHBoxLayout();
+        horizontalLayout_17->setObjectName("horizontalLayout_17");
+        btnModbusClientConnect = new QPushButton(tab_2);
+        btnModbusClientConnect->setObjectName("btnModbusClientConnect");
+
+        horizontalLayout_17->addWidget(btnModbusClientConnect);
+
+        btnModbusClientDisconnect = new QPushButton(tab_2);
+        btnModbusClientDisconnect->setObjectName("btnModbusClientDisconnect");
+
+        horizontalLayout_17->addWidget(btnModbusClientDisconnect);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_17);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName("horizontalLayout_13");
         label_23 = new QLabel(tab_2);
         label_23->setObjectName("label_23");
-        label_23->setGeometry(QRect(40, 180, 53, 15));
+
+        horizontalLayout_13->addWidget(label_23);
+
+        spinBoxModbusClientStartAddr = new QSpinBox(tab_2);
+        spinBoxModbusClientStartAddr->setObjectName("spinBoxModbusClientStartAddr");
+
+        horizontalLayout_13->addWidget(spinBoxModbusClientStartAddr);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_13);
+
+        horizontalLayout_14 = new QHBoxLayout();
+        horizontalLayout_14->setObjectName("horizontalLayout_14");
         label_24 = new QLabel(tab_2);
         label_24->setObjectName("label_24");
-        label_24->setGeometry(QRect(60, 220, 53, 15));
-        spinBox_3 = new QSpinBox(tab_2);
-        spinBox_3->setObjectName("spinBox_3");
-        spinBox_3->setGeometry(QRect(90, 220, 42, 24));
+
+        horizontalLayout_14->addWidget(label_24);
+
+        spinBoxModbusClientCount = new QSpinBox(tab_2);
+        spinBoxModbusClientCount->setObjectName("spinBoxModbusClientCount");
+        spinBoxModbusClientCount->setValue(10);
+
+        horizontalLayout_14->addWidget(spinBoxModbusClientCount);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_14);
+
+        btnModbusClientReadHolding = new QPushButton(tab_2);
+        btnModbusClientReadHolding->setObjectName("btnModbusClientReadHolding");
+
+        verticalLayout_11->addWidget(btnModbusClientReadHolding);
+
+        horizontalLayout_15 = new QHBoxLayout();
+        horizontalLayout_15->setObjectName("horizontalLayout_15");
         label_32 = new QLabel(tab_2);
         label_32->setObjectName("label_32");
-        label_32->setGeometry(QRect(40, 260, 53, 15));
+
+        horizontalLayout_15->addWidget(label_32);
+
+        spinBoxModbusClientWriteAddr = new QSpinBox(tab_2);
+        spinBoxModbusClientWriteAddr->setObjectName("spinBoxModbusClientWriteAddr");
+
+        horizontalLayout_15->addWidget(spinBoxModbusClientWriteAddr);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_15);
+
+        verticalLayout_10 = new QVBoxLayout();
+        verticalLayout_10->setObjectName("verticalLayout_10");
         label_34 = new QLabel(tab_2);
         label_34->setObjectName("label_34");
-        label_34->setGeometry(QRect(80, 340, 53, 15));
-        btnSerialRefresh_4 = new QPushButton(tab_2);
-        btnSerialRefresh_4->setObjectName("btnSerialRefresh_4");
-        btnSerialRefresh_4->setGeometry(QRect(120, 430, 121, 23));
-        btnSerialRefresh_5 = new QPushButton(tab_2);
-        btnSerialRefresh_5->setObjectName("btnSerialRefresh_5");
-        btnSerialRefresh_5->setGeometry(QRect(0, 430, 121, 23));
-        btnSerialRefresh_6 = new QPushButton(tab_2);
-        btnSerialRefresh_6->setObjectName("btnSerialRefresh_6");
-        btnSerialRefresh_6->setGeometry(QRect(60, 380, 121, 23));
-        spinBox_4 = new QSpinBox(tab_2);
-        spinBox_4->setObjectName("spinBox_4");
-        spinBox_4->setGeometry(QRect(100, 260, 42, 24));
-        lineEdit_3 = new QLineEdit(tab_2);
-        lineEdit_3->setObjectName("lineEdit_3");
-        lineEdit_3->setGeometry(QRect(110, 340, 113, 23));
+
+        verticalLayout_10->addWidget(label_34);
+
+        lineEditModbusClientWriteValue = new QLineEdit(tab_2);
+        lineEditModbusClientWriteValue->setObjectName("lineEditModbusClientWriteValue");
+
+        verticalLayout_10->addWidget(lineEditModbusClientWriteValue);
+
+        label_25 = new QLabel(tab_2);
+        label_25->setObjectName("label_25");
+
+        verticalLayout_10->addWidget(label_25);
+
+
+        verticalLayout_11->addLayout(verticalLayout_10);
+
+        btnModbusClientWriteSingle = new QPushButton(tab_2);
+        btnModbusClientWriteSingle->setObjectName("btnModbusClientWriteSingle");
+
+        verticalLayout_11->addWidget(btnModbusClientWriteSingle);
+
+        btnModbusClientWriteMultiple = new QPushButton(tab_2);
+        btnModbusClientWriteMultiple->setObjectName("btnModbusClientWriteMultiple");
+
+        verticalLayout_11->addWidget(btnModbusClientWriteMultiple);
+
         tabWidgetComm->addTab(tab_2, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName("tab_6");
@@ -633,7 +730,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidgetComm->setCurrentIndex(4);
+        tabWidgetComm->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -685,17 +782,21 @@ public:
         btnModbusSetReg->setText(QCoreApplication::translate("MainWindow", "\350\256\276\347\275\256\345\257\204\345\255\230\345\231\250", nullptr));
         tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Modbus Server", nullptr));
         label_20->setText(QCoreApplication::translate("MainWindow", "\347\233\256\346\240\207IP\357\274\232 ", nullptr));
+        lineEditModbusClientIp->setText(QCoreApplication::translate("MainWindow", "127.0.0.1", nullptr));
         label_21->setText(QCoreApplication::translate("MainWindow", "\347\233\256\346\240\207\347\253\257\345\217\243\357\274\232", nullptr));
-        label_22->setText(QCoreApplication::translate("MainWindow", "Unit ID", nullptr));
-        btnSerialRefresh_2->setText(QCoreApplication::translate("MainWindow", "\350\277\236\346\216\245", nullptr));
-        btnSerialRefresh_3->setText(QCoreApplication::translate("MainWindow", "\346\226\255\345\274\200", nullptr));
-        label_23->setText(QCoreApplication::translate("MainWindow", "\350\265\267\345\247\213\345\234\260\345\235\200", nullptr));
-        label_24->setText(QCoreApplication::translate("MainWindow", "\346\225\260\351\207\217", nullptr));
-        label_32->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\234\260\345\235\200", nullptr));
-        label_34->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\200\274", nullptr));
-        btnSerialRefresh_4->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\244\232\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
-        btnSerialRefresh_5->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\215\225\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
-        btnSerialRefresh_6->setText(QCoreApplication::translate("MainWindow", "\350\257\273\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250", nullptr));
+        lineEditModbusClientPort->setText(QCoreApplication::translate("MainWindow", "1502", nullptr));
+        label_22->setText(QCoreApplication::translate("MainWindow", "Unit ID(Slave ID\357\274\214\347\253\231\345\217\267):", nullptr));
+        btnModbusClientConnect->setText(QCoreApplication::translate("MainWindow", "\350\277\236\346\216\245", nullptr));
+        btnModbusClientDisconnect->setText(QCoreApplication::translate("MainWindow", "\346\226\255\345\274\200", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "\350\265\267\345\247\213\345\234\260\345\235\200:", nullptr));
+        label_24->setText(QCoreApplication::translate("MainWindow", "\350\257\273\345\217\226\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250\346\225\260\351\207\217:", nullptr));
+        btnModbusClientReadHolding->setText(QCoreApplication::translate("MainWindow", "\350\257\273\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250", nullptr));
+        label_32->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\205\245\350\265\267\345\247\213\345\234\260\345\235\200:", nullptr));
+        label_34->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\205\245\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250\347\232\204\345\200\274:", nullptr));
+        lineEditModbusClientWriteValue->setText(QCoreApplication::translate("MainWindow", "123", nullptr));
+        label_25->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\205\245\345\244\232\344\270\252\347\244\272\344\276\213\357\274\23210,20,30 \346\210\22610 20 30", nullptr));
+        btnModbusClientWriteSingle->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\215\225\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
+        btnModbusClientWriteMultiple->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\244\232\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
         tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Modbus Client", nullptr));
         label_14->setText(QCoreApplication::translate("MainWindow", "\344\270\262\345\217\243\345\217\267", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "\346\263\242\347\211\271\347\216\207", nullptr));

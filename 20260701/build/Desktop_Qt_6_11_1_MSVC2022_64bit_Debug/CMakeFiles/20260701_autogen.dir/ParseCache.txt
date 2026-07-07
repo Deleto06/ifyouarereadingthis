@@ -177,13 +177,10 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/corecrt_memcpy_s.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/corecrt_memory.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/corecrt_search.h
- mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/corecrt_stdio_config.h
- mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/corecrt_wstdio.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/corecrt_wstdlib.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/corecrt_wstring.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/errno.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/stddef.h
- mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/stdio.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/stdlib.h
  mdp:C:/Program Files (x86)/Windows Kits/10/Include/10.0.28000.0/ucrt/string.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/algorithm
@@ -191,12 +188,10 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/atomic
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cassert
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/chrono
- mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/climits
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cmath
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/concurrencysal.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstddef
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstdint
- mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstdlib
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstring
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/functional
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/initializer_list
@@ -210,15 +205,12 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/numeric
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/optional
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/sal.h
- mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/set
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/stdarg.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/stdbool.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/string
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/string_view
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/tuple
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/type_traits
- mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/unordered_map
- mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/unordered_set
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/utility
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/vadefs.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/variant
@@ -229,7 +221,6 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/yvals.h
  mdp:C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/yvals_core.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/QObject
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/QVariant
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/QVector
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20bit.h
@@ -237,11 +228,8 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20iterator.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20memory.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20type_traits.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20utility.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q23type_traits.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/q23utility.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qalgorithms.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qalloc.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qanystringview.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qarraydata.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qarraydataops.h
@@ -265,10 +253,8 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontainerfwd.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontainerinfo.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontainertools_impl.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontiguouscache.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qdarwinhelpers.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qdatastream.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qdebug.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qexceptionhandling.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qflags.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qfloat16.h
@@ -278,7 +264,6 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qgenericatomic.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qglobal.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qglobalstatic.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qhash.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qhashfunctions.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qiodevice.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qiodevicebase.h
@@ -302,16 +287,11 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qoverload.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qpair.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qprocessordetection.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qproperty.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qpropertyprivate.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qrefcount.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qscopedpointer.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qscopeguard.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qset.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qshareddata.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qshareddata_impl.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qsharedpointer.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qsharedpointer_impl.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qspan.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qstdlibdetection.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qstring.h
@@ -337,7 +317,6 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtdeprecationdefinitions.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtdeprecationmarkers.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtenvironmentvariables.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtextstream.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtformat_impl.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtmetamacros.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtnoop.h
@@ -350,32 +329,22 @@ C:/qtdevelop/20260701/20260701/comm/modbusclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtypeinfo.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtypes.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qutf8stringview.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvariant.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvarlengtharray.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvector.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qversiontagging.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qxptype_traits.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtCore/qyieldcpu.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusClient
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDataUnit
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDevice
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusReply
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialClient
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusTcpClient
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdataunit.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdevice.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbuspdu.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusreply.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbustcpclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbus-config.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbusexports.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbusglobal.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/QSerialPort
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qserialport.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qserialportglobal.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qtserialportexports.h
  mdp:C:/qtdevelop/20260701/20260701/comm/modbusclient.h
 C:/qtdevelop/20260701/20260701/comm/modbusserver.h
  mmc:Q_OBJECT
@@ -1413,11 +1382,8 @@ C:/qtdevelop/20260701/20260701/mainwindow.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtnetworkexports.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtnetworkglobal.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qudpsocket.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusClient
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDataUnit
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDevice
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusReply
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialClient
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialServer
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusServer
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusTcpClient
@@ -1427,7 +1393,6 @@ C:/qtdevelop/20260701/20260701/mainwindow.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdevice.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbuspdu.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusreply.h
- mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialclient.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialserver.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusserver.h
  mdp:C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbustcpclient.h

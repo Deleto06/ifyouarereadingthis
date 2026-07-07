@@ -46,7 +46,11 @@ template <> constexpr inline auto ModbusServer::qt_create_metaobjectdata<qt_meta
         "QModbusDataUnit::RegisterType",
         "table",
         "address",
-        "size"
+        "size",
+        "logMessage",
+        "msg",
+        "holdingRegisterChanged",
+        "value"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -57,6 +61,14 @@ template <> constexpr inline auto ModbusServer::qt_create_metaobjectdata<qt_meta
         // Signal 'dataWritten'
         QtMocHelpers::SignalData<void(QModbusDataUnit::RegisterType, int, int)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 5, 6 }, { QMetaType::Int, 7 }, { QMetaType::Int, 8 },
+        }}),
+        // Signal 'logMessage'
+        QtMocHelpers::SignalData<void(const QString &)>(9, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 10 },
+        }}),
+        // Signal 'holdingRegisterChanged'
+        QtMocHelpers::SignalData<void(int, quint16)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 7 }, { QMetaType::UShort, 12 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -83,6 +95,8 @@ void ModbusServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         switch (_id) {
         case 0: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
         case 1: _t->dataWritten((*reinterpret_cast<std::add_pointer_t<QModbusDataUnit::RegisterType>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[3]))); break;
+        case 2: _t->logMessage((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->holdingRegisterChanged((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<quint16>>(_a[2]))); break;
         default: ;
         }
     }
@@ -102,6 +116,10 @@ void ModbusServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         if (QtMocHelpers::indexOfMethod<void (ModbusServer::*)(QString )>(_a, &ModbusServer::errorOccurred, 0))
             return;
         if (QtMocHelpers::indexOfMethod<void (ModbusServer::*)(QModbusDataUnit::RegisterType , int , int )>(_a, &ModbusServer::dataWritten, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (ModbusServer::*)(const QString & )>(_a, &ModbusServer::logMessage, 2))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (ModbusServer::*)(int , quint16 )>(_a, &ModbusServer::holdingRegisterChanged, 3))
             return;
     }
 }
@@ -125,14 +143,14 @@ int ModbusServer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 4;
     }
     return _id;
 }
@@ -147,5 +165,17 @@ void ModbusServer::errorOccurred(QString _t1)
 void ModbusServer::dataWritten(QModbusDataUnit::RegisterType _t1, int _t2, int _t3)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1, _t2, _t3);
+}
+
+// SIGNAL 2
+void ModbusServer::logMessage(const QString & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
+}
+
+// SIGNAL 3
+void ModbusServer::holdingRegisterChanged(int _t1, quint16 _t2)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1, _t2);
 }
 QT_WARNING_POP

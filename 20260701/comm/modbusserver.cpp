@@ -38,6 +38,31 @@ bool ModbusServer::startTcp(int port, int serverAddress)
 
     server->setMap(map);
 
+    connect(m_server, &QModbusServer::dataWritten,
+            this,
+            [this](QModbusDataUnit::RegisterType table, int address, int size)
+            {
+                if (table != QModbusDataUnit::HoldingRegisters) {
+                    return;
+                }
+
+                for (int i = 0; i < size; ++i) {
+                    quint16 value = 0;
+
+                    bool ok = m_server->data(QModbusDataUnit::HoldingRegisters,
+                                             address + i,
+                                             &value);
+
+                    if (ok) {
+                        emit logMessage(QString("[Modbus TCP Server] client wrote HR[%1] = %2")
+                                            .arg(address + i)
+                                            .arg(value));
+
+                        emit holdingRegisterChanged(address + i, value);
+                    }
+                }
+            });
+
     connect(server, &QModbusServer::dataWritten,
             this, &ModbusServer::dataWritten);
 

@@ -286,11 +286,8 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtNetwork\qtnetworkexports.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtNetwork\qtnetworkglobal.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtNetwork\qudpsocket.h \
-  C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusClient \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusDataUnit \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusDevice \
-  C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusReply \
-  C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusRtuSerialClient \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusRtuSerialServer \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusServer \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusTcpClient \
@@ -300,7 +297,6 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbusdevice.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbuspdu.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbusreply.h \
-  C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbusrtuserialclient.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbusrtuserialserver.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbusserver.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbustcpclient.h \
@@ -875,8 +871,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsConfigVersion.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtdeprecationmarkers.h:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qmodbusrtuserialclient.h:
-
 .qtcreator\cmake-helper\qtcreator-project.cmake:
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\map":
@@ -1271,8 +1265,6 @@ C:\qtdevelop\20260701\20260701\comm\modbusserver.cpp:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qbytearrayalgorithms.h:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusReply:
-
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qbytearrayview.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QTuioTouchPluginTargets-relwithdebinfo.cmake:
@@ -1297,11 +1289,11 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcompare.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qbitmap.h:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QMinimalIntegrationPluginTargets-debug.cmake:
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcompare_impl.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargets.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcompare_impl.h:
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QMinimalIntegrationPluginTargets-debug.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcomparehelpers.h:
 
@@ -1367,8 +1359,6 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qstring.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qeventloop.h:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusClient:
-
 C:\opencv\build\include\opencv2\flann\flann_base.hpp:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qflags.h:
@@ -1409,9 +1399,9 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlocale.h:
 
 C:\opencv\build\include\opencv2\video\background_segm.hpp:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargets-relwithdebinfo.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlogging.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargets-relwithdebinfo.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6GuiTargets.cmake:
 
@@ -1564,6 +1554,10 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qversiontagging.h:
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qttranslation.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtversion.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6SerialPort\Qt6SerialPortVersionlessAliasTargets.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargetsPrecheck.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtversionchecks.h:
 
@@ -1724,10 +1718,6 @@ C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusDevice:
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicCMakeVersionHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginConfig.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\QModbusRtuSerialClient:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginTargets-debug.cmake:
 
 C:\opencv\build\include\opencv2\flann\dynamic_bitset.h:
 
@@ -2055,6 +2045,8 @@ C:\opencv\build\include\opencv2\objdetect\mcc_checker_detector.hpp:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginAdditionalTargetInfo.cmake:
 
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginTargets-debug.cmake:
+
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QSvgPluginTargetsPrecheck.cmake:
@@ -2090,10 +2082,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsAdditionalTa
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsConfigVersionImpl.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsMacros.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6SerialPort\Qt6SerialPortVersionlessAliasTargets.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargetsPrecheck.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsVersionlessTargets.cmake:
 

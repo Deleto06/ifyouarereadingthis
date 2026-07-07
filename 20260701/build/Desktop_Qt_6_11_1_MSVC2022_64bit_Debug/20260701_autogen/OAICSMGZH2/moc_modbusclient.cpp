@@ -43,11 +43,21 @@ template <> constexpr inline auto ModbusClient::qt_create_metaobjectdata<qt_meta
         "connected",
         "",
         "disconnected",
-        "readResult",
+        "logMessage",
+        "msg",
+        "errorOccurred",
+        "error",
+        "holdingRegistersRead",
+        "startAddress",
         "QList<quint16>",
         "values",
-        "errorOccurred",
-        "error"
+        "writeFinished",
+        "message",
+        "onStateChanged",
+        "QModbusDevice::State",
+        "state",
+        "onErrorOccurred",
+        "QModbusDevice::Error"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -55,13 +65,29 @@ template <> constexpr inline auto ModbusClient::qt_create_metaobjectdata<qt_meta
         QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'disconnected'
         QtMocHelpers::SignalData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
-        // Signal 'readResult'
-        QtMocHelpers::SignalData<void(QVector<quint16>)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 5, 6 },
+        // Signal 'logMessage'
+        QtMocHelpers::SignalData<void(const QString &)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 5 },
         }}),
         // Signal 'errorOccurred'
-        QtMocHelpers::SignalData<void(QString)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 8 },
+        QtMocHelpers::SignalData<void(const QString &)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 7 },
+        }}),
+        // Signal 'holdingRegistersRead'
+        QtMocHelpers::SignalData<void(int, QVector<quint16>)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 9 }, { 0x80000000 | 10, 11 },
+        }}),
+        // Signal 'writeFinished'
+        QtMocHelpers::SignalData<void(const QString &)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 13 },
+        }}),
+        // Slot 'onStateChanged'
+        QtMocHelpers::SlotData<void(QModbusDevice::State)>(14, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 15, 16 },
+        }}),
+        // Slot 'onErrorOccurred'
+        QtMocHelpers::SlotData<void(QModbusDevice::Error)>(17, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 18, 7 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -88,18 +114,22 @@ void ModbusClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         switch (_id) {
         case 0: _t->connected(); break;
         case 1: _t->disconnected(); break;
-        case 2: _t->readResult((*reinterpret_cast<std::add_pointer_t<QList<quint16>>>(_a[1]))); break;
+        case 2: _t->logMessage((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
         case 3: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 4: _t->holdingRegistersRead((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QList<quint16>>>(_a[2]))); break;
+        case 5: _t->writeFinished((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 6: _t->onStateChanged((*reinterpret_cast<std::add_pointer_t<QModbusDevice::State>>(_a[1]))); break;
+        case 7: _t->onErrorOccurred((*reinterpret_cast<std::add_pointer_t<QModbusDevice::Error>>(_a[1]))); break;
         default: ;
         }
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 2:
+        case 4:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-            case 0:
+            case 1:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QList<quint16> >(); break;
             }
             break;
@@ -110,9 +140,13 @@ void ModbusClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             return;
         if (QtMocHelpers::indexOfMethod<void (ModbusClient::*)()>(_a, &ModbusClient::disconnected, 1))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ModbusClient::*)(QVector<quint16> )>(_a, &ModbusClient::readResult, 2))
+        if (QtMocHelpers::indexOfMethod<void (ModbusClient::*)(const QString & )>(_a, &ModbusClient::logMessage, 2))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ModbusClient::*)(QString )>(_a, &ModbusClient::errorOccurred, 3))
+        if (QtMocHelpers::indexOfMethod<void (ModbusClient::*)(const QString & )>(_a, &ModbusClient::errorOccurred, 3))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (ModbusClient::*)(int , QVector<quint16> )>(_a, &ModbusClient::holdingRegistersRead, 4))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (ModbusClient::*)(const QString & )>(_a, &ModbusClient::writeFinished, 5))
             return;
     }
 }
@@ -136,14 +170,14 @@ int ModbusClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 8;
     }
     return _id;
 }
@@ -161,14 +195,26 @@ void ModbusClient::disconnected()
 }
 
 // SIGNAL 2
-void ModbusClient::readResult(QVector<quint16> _t1)
+void ModbusClient::logMessage(const QString & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
 }
 
 // SIGNAL 3
-void ModbusClient::errorOccurred(QString _t1)
+void ModbusClient::errorOccurred(const QString & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1);
+}
+
+// SIGNAL 4
+void ModbusClient::holdingRegistersRead(int _t1, QVector<quint16> _t2)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1, _t2);
+}
+
+// SIGNAL 5
+void ModbusClient::writeFinished(const QString & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 5, nullptr, _t1);
 }
 QT_WARNING_POP

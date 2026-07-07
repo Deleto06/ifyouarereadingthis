@@ -56,9 +56,16 @@ private slots:
     void on_btnUdpBind_clicked();
     void on_btnUdpClose_clicked();
     void on_btnUdpSend_clicked();
+
     void on_btnModbusServerStart_clicked();
     void on_btnModbusServerStop_clicked();
     void on_btnModbusSetReg_clicked();
+
+    void on_btnModbusClientConnect_clicked();
+    void on_btnModbusClientDisconnect_clicked();
+    void on_btnModbusClientReadHolding_clicked();
+    void on_btnModbusClientWriteSingle_clicked();
+    void on_btnModbusClientWriteMultiple_clicked();
 
     void on_btnSerialRefresh_clicked();
     void on_btnSerialOpen_clicked();
@@ -88,7 +95,8 @@ private:
     QPoint m_leftPressedPos;
     QString m_currentImagePath;
     QByteArray hexStringToByteArray(const QString &hexText, bool *ok = nullptr);
-
+    QByteArray textToUtf8Bytes(const QString &text);
+    QString bytesToUtf8Text(const QByteArray &data);
 
     bool m_isLeftButtonPressed = false;
     void loadSettings();    // 软件启动时加载配置
@@ -100,9 +108,11 @@ private:
 
     void initCommunication();
     void initCommunicationSignals();
+
     void testStartTcpServer();
     void testStartUdp();
     void testStartModbusTcpServer();
+    void initModbusClientUi();
     void appendLog(const QString &text);
     void initSerialUi();
     void refreshSerialPorts();

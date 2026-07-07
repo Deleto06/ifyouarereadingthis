@@ -35,6 +35,8 @@ public:
 signals:
     void errorOccurred(QString error);
     void dataWritten(QModbusDataUnit::RegisterType table, int address, int size);
+    void logMessage(const QString &msg);
+    void holdingRegisterChanged(int address, quint16 value);
 
 private:
     QModbusServer *m_server = nullptr;

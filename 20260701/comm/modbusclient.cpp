@@ -1,110 +1,179 @@
 #include "modbusclient.h"
-
+#include <QDebug>
+#include <QTimer>
+#include <QModbusReply>
 #include <QVariant>
 
 ModbusClient::ModbusClient(QObject *parent)
     : QObject(parent)
 {
+    m_client = new QModbusTcpClient(this);
+
+    connect(m_client, &QModbusDevice::stateChanged,
+            this,
+            [this](QModbusDevice::State state)
+            {
+                QString stateText;
+
+                switch (state) {
+                case QModbusDevice::UnconnectedState:
+                    stateText = "Unconnected";
+                    emit disconnected();
+                    break;
+
+                case QModbusDevice::ConnectingState:
+                    stateText = "Connecting";
+                    break;
+
+                case QModbusDevice::ConnectedState:
+                    stateText = "Connected";
+                    emit connected();
+                    break;
+
+                case QModbusDevice::ClosingState:
+                    stateText = "Closing";
+                    break;
+                }
+
+                QString msg = "[Modbus TCP Client] state changed: " + stateText;
+
+                qDebug() << msg;
+                emit logMessage(msg);
+            });
+
+    connect(m_client, &QModbusDevice::errorOccurred,
+            this,
+            [this](QModbusDevice::Error error)
+            {
+                if (error == QModbusDevice::NoError) {
+                    return;
+                }
+
+                QString msg = "[Modbus TCP Client] error: " + m_client->errorString();
+
+                qDebug() << msg;
+                emit logMessage(msg);
+                emit errorOccurred(m_client->errorString());
+            });
+
+    emit logMessage("[Modbus TCP Client] object created");
 }
 
 ModbusClient::~ModbusClient()
 {
-    disconnectDevice();
-}
-
-bool ModbusClient::connectTcp(const QString &ip, int port)
-{
-    disconnectDevice();
-
-    auto *client = new QModbusTcpClient(this);
-    m_client = client;
-
-    client->setConnectionParameter(QModbusDevice::NetworkAddressParameter, QVariant(ip));
-    client->setConnectionParameter(QModbusDevice::NetworkPortParameter, QVariant(port));
-
-    client->setTimeout(1000);
-    client->setNumberOfRetries(3);
-
-    connect(client, &QModbusClient::stateChanged, this,
-            [=](QModbusDevice::State state) {
-                if (state == QModbusDevice::ConnectedState) {
-                    emit connected();
-                } else if (state == QModbusDevice::UnconnectedState) {
-                    emit disconnected();
-                }
-            });
-
-    connect(client, &QModbusClient::errorOccurred, this,
-            [=](QModbusDevice::Error) {
-                emit errorOccurred(client->errorString());
-            });
-
-    return client->connectDevice();
-}
-
-bool ModbusClient::connectRtu(const QString &portName,
-                              int baudRate,
-                              int parity,
-                              int dataBits,
-                              int stopBits)
-{
-    disconnectDevice();
-
-    auto *client = new QModbusRtuSerialClient(this);
-    m_client = client;
-
-    client->setConnectionParameter(QModbusDevice::SerialPortNameParameter, QVariant(portName));
-    client->setConnectionParameter(QModbusDevice::SerialBaudRateParameter, QVariant(baudRate));
-    client->setConnectionParameter(QModbusDevice::SerialParityParameter, QVariant(parity));
-    client->setConnectionParameter(QModbusDevice::SerialDataBitsParameter, QVariant(dataBits));
-    client->setConnectionParameter(QModbusDevice::SerialStopBitsParameter, QVariant(stopBits));
-
-    client->setTimeout(1000);
-    client->setNumberOfRetries(3);
-
-    connect(client, &QModbusClient::stateChanged, this,
-            [=](QModbusDevice::State state) {
-                if (state == QModbusDevice::ConnectedState) {
-                    emit connected();
-                } else if (state == QModbusDevice::UnconnectedState) {
-                    emit disconnected();
-                }
-            });
-
-    connect(client, &QModbusClient::errorOccurred, this,
-            [=](QModbusDevice::Error) {
-                emit errorOccurred(client->errorString());
-            });
-
-    return client->connectDevice();
-}
-
-void ModbusClient::disconnectDevice()
-{
     if (m_client) {
         m_client->disconnectDevice();
-        m_client->deleteLater();
-        m_client = nullptr;
     }
+}
+
+bool ModbusClient::connectToServer(const QString &ip, int port)
+{
+    if (!m_client) {
+        emit errorOccurred("Modbus client is null");
+        return false;
+    }
+
+    QModbusDevice::State state = m_client->state();
+
+    emit logMessage(QString("[Modbus TCP Client] current state before connect: %1")
+                        .arg(state));
+
+    if (state == QModbusDevice::ConnectedState) {
+        emit logMessage("[Modbus TCP Client] already connected");
+        return true;
+    }
+
+    if (state == QModbusDevice::ConnectingState) {
+        emit logMessage("[Modbus TCP Client] already connecting, please wait");
+        return false;
+    }
+
+    if (state == QModbusDevice::ClosingState) {
+        emit logMessage("[Modbus TCP Client] device is closing, please wait");
+        return false;
+    }
+
+    emit logMessage(QString("[Modbus TCP Client] connecting to %1:%2")
+                        .arg(ip)
+                        .arg(port));
+
+    m_client->setConnectionParameter(QModbusDevice::NetworkAddressParameter, ip);
+    m_client->setConnectionParameter(QModbusDevice::NetworkPortParameter, port);
+
+    m_client->setTimeout(3000);
+    m_client->setNumberOfRetries(3);
+
+    bool ok = m_client->connectDevice();
+
+    emit logMessage(QString("[Modbus TCP Client] connectDevice return: %1")
+                        .arg(ok ? "true" : "false"));
+
+    emit logMessage(QString("[Modbus TCP Client] state after connectDevice: %1")
+                        .arg(m_client->state()));
+
+    if (!ok) {
+        QString err = m_client->errorString();
+        emit logMessage("[Modbus TCP Client] connectDevice failed: " + err);
+        emit errorOccurred(err);
+        return false;
+    }
+
+    QTimer::singleShot(1000, this, [this]() {
+        if (!m_client) {
+            return;
+        }
+
+        emit logMessage(QString("[Modbus TCP Client] state after 1s: %1")
+                            .arg(m_client->state()));
+
+        if (m_client->state() == QModbusDevice::ConnectedState) {
+            emit logMessage("[Modbus TCP Client] check result: connected");
+        } else {
+            emit logMessage("[Modbus TCP Client] check result: not connected, error="
+                            + m_client->errorString());
+        }
+    });
+
+    return true;
+}
+
+void ModbusClient::disconnectFromServer()
+{
+    if (!m_client) {
+        return;
+    }
+
+    if (m_client->state() != QModbusDevice::UnconnectedState) {
+        m_client->disconnectDevice();
+    }
+}
+
+bool ModbusClient::isConnected() const
+{
+    if (!m_client) {
+        return false;
+    }
+
+    return m_client->state() == QModbusDevice::ConnectedState;
 }
 
 void ModbusClient::readHoldingRegisters(int serverAddress, int startAddress, quint16 count)
 {
-    if (!m_client) {
-        emit errorOccurred("Modbus client is null");
+    if (!isConnected()) {
+        emit errorOccurred("Modbus TCP Client is not connected");
         return;
     }
 
-    if (m_client->state() != QModbusDevice::ConnectedState) {
-        emit errorOccurred("Modbus client is not connected");
+    if (count == 0 || count > 125) {
+        emit errorOccurred("Read count invalid, range is 1~125");
         return;
     }
 
-    QModbusDataUnit unit(QModbusDataUnit::HoldingRegisters,
-                         startAddress,
-                         count);
+    QModbusDataUnit readUnit(QModbusDataUnit::HoldingRegisters,
+                             startAddress,
+                             count);
 
-    QModbusReply *reply = m_client->sendReadRequest(unit, serverAddress);
+    QModbusReply *reply = m_client->sendReadRequest(readUnit, serverAddress);
 
     if (!reply) {
         emit errorOccurred(m_client->errorString());
@@ -116,45 +185,51 @@ void ModbusClient::readHoldingRegisters(int serverAddress, int startAddress, qui
         return;
     }
 
-    connect(reply, &QModbusReply::finished, this, [=]() {
-        if (reply->error() == QModbusDevice::NoError) {
-            QModbusDataUnit result = reply->result();
+    connect(reply, &QModbusReply::finished,
+            this,
+            [=]() {
+                if (reply->error() == QModbusDevice::NoError) {
+                    const QModbusDataUnit unit = reply->result();
 
-            QVector<quint16> values;
-            values.reserve(int(result.valueCount()));
+                    QVector<quint16> values;
+                    values.reserve(static_cast<int>(unit.valueCount()));
 
-            for (uint i = 0; i < result.valueCount(); ++i) {
-                values.append(result.value(i));
-            }
+                    emit logMessage(QString("[Modbus TCP Client] read ok. start=%1, count=%2")
+                                        .arg(startAddress)
+                                        .arg(unit.valueCount()));
 
-            emit readResult(values);
-        } else {
-            emit errorOccurred(reply->errorString());
-        }
+                    for (uint i = 0; i < unit.valueCount(); ++i) {
+                        quint16 value = unit.value(i);
+                        values.append(value);
 
-        reply->deleteLater();
-    });
+                        emit logMessage(QString("[Modbus TCP Client] HR[%1] = %2")
+                                            .arg(startAddress + static_cast<int>(i))
+                                            .arg(value));
+                    }
+
+                    emit holdingRegistersRead(startAddress, values);
+                } else {
+                    emit errorOccurred(reply->errorString());
+                }
+
+                reply->deleteLater();
+            });
 }
 
-void ModbusClient::writeSingleRegister(int serverAddress, int address, quint16 value)
+void ModbusClient::writeSingleHoldingRegister(int serverAddress, int address, quint16 value)
 {
-    if (!m_client) {
-        emit errorOccurred("Modbus client is null");
+    if (!isConnected()) {
+        emit errorOccurred("Modbus TCP Client is not connected");
         return;
     }
 
-    if (m_client->state() != QModbusDevice::ConnectedState) {
-        emit errorOccurred("Modbus client is not connected");
-        return;
-    }
+    QModbusDataUnit writeUnit(QModbusDataUnit::HoldingRegisters,
+                              address,
+                              1);
 
-    QModbusDataUnit unit(QModbusDataUnit::HoldingRegisters,
-                         address,
-                         1);
+    writeUnit.setValue(0, value);
 
-    unit.setValue(0, value);
-
-    QModbusReply *reply = m_client->sendWriteRequest(unit, serverAddress);
+    QModbusReply *reply = m_client->sendWriteRequest(writeUnit, serverAddress);
 
     if (!reply) {
         emit errorOccurred(m_client->errorString());
@@ -163,14 +238,103 @@ void ModbusClient::writeSingleRegister(int serverAddress, int address, quint16 v
 
     if (reply->isFinished()) {
         reply->deleteLater();
+        emit writeFinished(QString("Write single register ok. addr=%1, value=%2")
+                               .arg(address)
+                               .arg(value));
         return;
     }
 
-    connect(reply, &QModbusReply::finished, this, [=]() {
-        if (reply->error() != QModbusDevice::NoError) {
-            emit errorOccurred(reply->errorString());
-        }
+    connect(reply, &QModbusReply::finished,
+            this,
+            [=]() {
+                if (reply->error() == QModbusDevice::NoError) {
+                    emit writeFinished(QString("Write single register ok. addr=%1, value=%2")
+                                           .arg(address)
+                                           .arg(value));
+                } else {
+                    emit errorOccurred(reply->errorString());
+                }
 
+                reply->deleteLater();
+            });
+}
+
+void ModbusClient::writeMultipleHoldingRegisters(int serverAddress,
+                                                 int startAddress,
+                                                 const QVector<quint16> &values)
+{
+    if (!isConnected()) {
+        emit errorOccurred("Modbus TCP Client is not connected");
+        return;
+    }
+
+    if (values.isEmpty()) {
+        emit errorOccurred("Write values is empty");
+        return;
+    }
+
+    if (values.size() > 123) {
+        emit errorOccurred("Write multiple count invalid, max is 123");
+        return;
+    }
+
+    QModbusDataUnit writeUnit(QModbusDataUnit::HoldingRegisters,
+                              startAddress,
+                              values.size());
+
+    for (int i = 0; i < values.size(); ++i) {
+        writeUnit.setValue(i, values[i]);
+    }
+
+    QModbusReply *reply = m_client->sendWriteRequest(writeUnit, serverAddress);
+
+    if (!reply) {
+        emit errorOccurred(m_client->errorString());
+        return;
+    }
+
+    if (reply->isFinished()) {
         reply->deleteLater();
-    });
+        emit writeFinished(QString("Write multiple registers ok. start=%1, count=%2")
+                               .arg(startAddress)
+                               .arg(values.size()));
+        return;
+    }
+
+    connect(reply, &QModbusReply::finished,
+            this,
+            [=]() {
+                if (reply->error() == QModbusDevice::NoError) {
+                    emit writeFinished(QString("Write multiple registers ok. start=%1, count=%2")
+                                           .arg(startAddress)
+                                           .arg(values.size()));
+                } else {
+                    emit errorOccurred(reply->errorString());
+                }
+
+                reply->deleteLater();
+            });
+}
+
+void ModbusClient::onStateChanged(QModbusDevice::State state)
+{
+    if (state == QModbusDevice::ConnectedState) {
+        emit connected();
+    } else if (state == QModbusDevice::UnconnectedState) {
+        emit disconnected();
+    }
+}
+
+void ModbusClient::onErrorOccurred(QModbusDevice::Error error)
+{
+    if (error == QModbusDevice::NoError) {
+        return;
+    }
+
+    if (!m_client) {
+        emit errorOccurred("Modbus client error");
+        return;
+    }
+
+    emit errorOccurred(m_client->errorString());
 }

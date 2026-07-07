@@ -3,16 +3,9 @@
 
 #include <QObject>
 #include <QVector>
-#include <QVariant>
-
-#include <QModbusClient>
 #include <QModbusTcpClient>
-#include <QModbusRtuSerialClient>
-#include <QModbusDataUnit>
-#include <QModbusReply>
 #include <QModbusDevice>
-
-#include <QSerialPort>
+#include <QModbusDataUnit>
 
 class ModbusClient : public QObject
 {
@@ -22,27 +15,31 @@ public:
     explicit ModbusClient(QObject *parent = nullptr);
     ~ModbusClient();
 
-    bool connectTcp(const QString &ip, int port);
+    bool connectToServer(const QString &ip, int port);
+    void disconnectFromServer();
 
-    bool connectRtu(const QString &portName,
-                    int baudRate,
-                    int parity,
-                    int dataBits,
-                    int stopBits);
-
-    void disconnectDevice();
+    bool isConnected() const;
 
     void readHoldingRegisters(int serverAddress, int startAddress, quint16 count);
-    void writeSingleRegister(int serverAddress, int address, quint16 value);
+    void writeSingleHoldingRegister(int serverAddress, int address, quint16 value);
+    void writeMultipleHoldingRegisters(int serverAddress, int startAddress, const QVector<quint16> &values);
 
 signals:
     void connected();
     void disconnected();
-    void readResult(QVector<quint16> values);
-    void errorOccurred(QString error);
+    void logMessage(const QString &msg);
+    void errorOccurred(const QString &error);
+
+    void holdingRegistersRead(int startAddress, QVector<quint16> values);
+    void writeFinished(const QString &message);
+
+
+private slots:
+    void onStateChanged(QModbusDevice::State state);
+    void onErrorOccurred(QModbusDevice::Error error);
 
 private:
-    QModbusClient *m_client = nullptr;
+    QModbusTcpClient *m_client = nullptr;
 };
 
 #endif // MODBUSCLIENT_H

@@ -43,37 +43,33 @@ MainWindow::MainWindow(QWidget *parent)
     ui->listWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
     ui->listWidget->viewport()->installEventFilter(this);
 
-
-    //connect(ui->listWidget, &QListWidget::currentItemChanged,
-     //       this, &MainWindow::onListWidgetCurrentItemChanged);
-
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested,
             this, &MainWindow::onListWidgetCustomContextMenuRequested);
 
     connect(ui->btnAddDir, &QPushButton::clicked,
             this, &MainWindow::onBtnAddDirClicked);
+
     connect(ui->btnClearLog, &QPushButton::clicked,
             this, &MainWindow::on_btnClearLog_clicked);
+
     connect(ui->btnSaveLog, &QPushButton::clicked,
             this, &MainWindow::on_btnSaveLog_clicked);
-   // connect(ui->btnSerialRefresh, &QPushButton::clicked,
-   //         this, &MainWindow::on_btnSerialRefresh_clicked);
 
-   // connect(ui->btnSerialOpen, &QPushButton::clicked,
-   //         this, &MainWindow::on_btnSerialOpen_clicked);
-
-   // connect(ui->btnSerialClose, &QPushButton::clicked,
-    //        this, &MainWindow::on_btnSerialClose_clicked);
-
-   // connect(ui->btnSerialSend, &QPushButton::clicked,
-   //         this, &MainWindow::on_btnSerialSend_clicked);
-    // 3. 加载上次保存的状态
+    // 加载图片列表
     loadSettings();
-    // 4. 初始化通讯模块
+
+    // 初始化 UI 状态
     initUiState();
+
+    // 初始化通讯对象 + 信号连接
     initCommunication();
+
+    // 初始化串口 UI
     initSerialUi();
+
+    // 初始化 Modbus Client UI
+    initModbusClientUi();
 }
 
 MainWindow::~MainWindow()
@@ -95,7 +91,7 @@ MainWindow::~MainWindow()
     }
 
     if (m_modbusClient) {
-        m_modbusClient->disconnectDevice();
+        m_modbusClient->disconnectFromServer();
     }
 
     if (m_modbusServer) {
@@ -682,6 +678,71 @@ void MainWindow::initCommunication()
 }
 void MainWindow::initCommunicationSignals()
 {
+    connect(m_modbusServer, &ModbusServer::holdingRegisterChanged,
+            this,
+            [=](int address, quint16 value) {
+                ui->lineEditModbusRegAddr->setText(QString::number(address));
+                ui->lineEditModbusRegValue->setText(QString::number(value));
+            });
+    // ==================== Modbus TCP Client ====================
+    connect(m_modbusClient, &ModbusClient::logMessage,
+            this,
+            [=](const QString &msg) {
+                appendLog(msg);
+            });
+    connect(m_modbusClient, &ModbusClient::connected,
+            this,
+            [=]() {
+                appendLog("[Modbus TCP Client] connected");
+                ui->btnModbusClientConnect->setEnabled(false);
+                ui->btnModbusClientDisconnect->setEnabled(true);
+                ui->btnModbusClientReadHolding->setEnabled(true);
+                ui->btnModbusClientWriteSingle->setEnabled(true);
+                ui->btnModbusClientWriteMultiple->setEnabled(true);
+                ui->lineEditModbusClientIp->setEnabled(false);
+                ui->lineEditModbusClientPort->setEnabled(false);
+            });
+
+    connect(m_modbusClient, &ModbusClient::disconnected,
+            this,
+            [=]() {
+                appendLog("[Modbus TCP Client] disconnected");
+
+                ui->btnModbusClientConnect->setEnabled(true);
+                ui->btnModbusClientDisconnect->setEnabled(false);
+                ui->btnModbusClientReadHolding->setEnabled(false);
+                ui->btnModbusClientWriteSingle->setEnabled(false);
+                ui->btnModbusClientWriteMultiple->setEnabled(false);
+
+                ui->lineEditModbusClientIp->setEnabled(true);
+                ui->lineEditModbusClientPort->setEnabled(true);
+            });
+
+    connect(m_modbusClient, &ModbusClient::errorOccurred,
+            this,
+            [=](const QString &error) {
+                appendLog(QString("[Modbus TCP Client Error] %1").arg(error));
+            });
+
+    connect(m_modbusClient, &ModbusClient::holdingRegistersRead,
+            this,
+            [=](int startAddress, QVector<quint16> values) {
+                appendLog(QString("[Modbus TCP Client] Read Holding Registers OK. start=%1, count=%2")
+                              .arg(startAddress)
+                              .arg(values.size()));
+
+                for (int i = 0; i < values.size(); ++i) {
+                    appendLog(QString("  HR[%1] = %2")
+                                  .arg(startAddress + i)
+                                  .arg(values[i]));
+                }
+            });
+
+    connect(m_modbusClient, &ModbusClient::writeFinished,
+            this,
+            [=](const QString &message) {
+                appendLog(QString("[Modbus TCP Client] %1").arg(message));
+            });
     // ==================== Serial COM ====================
     connect(m_serialComm, &SerialComm::opened,
             this,
@@ -721,8 +782,8 @@ void MainWindow::initCommunicationSignals()
                 appendLog(QString("[Serial Recv HEX] %1")
                               .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
 
-                appendLog(QString("[Serial Recv ASCII] %1")
-                              .arg(byteArrayToPrintableText(data)));
+                appendLog(QString("[Serial Recv UTF8] %1")
+                              .arg(QString::fromUtf8(data)));
             });
 
     connect(m_serialComm, &SerialComm::errorOccurred,
@@ -756,8 +817,9 @@ void MainWindow::initCommunicationSignals()
             [=](const QByteArray &data) {
                 appendLog(QString("[TCP Client Recv HEX] %1")
                               .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
-                appendLog(QString("[TCP Client Recv ASCII] %1")
-                              .arg(byteArrayToPrintableText(data)));
+
+                appendLog(QString("[TCP Client Recv UTF8] %1")
+                              .arg(QString::fromUtf8(data)));
             });
     connect(m_tcpClient, &TcpClient::errorOccurred,
             this,
@@ -785,8 +847,8 @@ void MainWindow::initCommunicationSignals()
                 appendLog(QString("[TCP Server Recv HEX] %1")
                               .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
 
-                appendLog(QString("[TCP Server Recv ASCII] %1")
-                              .arg(byteArrayToPrintableText(data)));
+                appendLog(QString("[TCP Server Recv UTF8] %1")
+                              .arg(QString::fromUtf8(data)));
             });
 
     connect(m_tcpServer, &TcpServer::errorOccurred,
@@ -803,8 +865,8 @@ void MainWindow::initCommunicationSignals()
                 appendLog(QString("[UDP Recv HEX] %1")
                               .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
 
-                appendLog(QString("[UDP Recv ASCII] %1")
-                              .arg(byteArrayToPrintableText(data)));
+                appendLog(QString("[UDP Recv UTF8] %1")
+                              .arg(QString::fromUtf8(data)));
             });
 
     connect(m_udpComm, &UdpComm::errorOccurred,
@@ -868,7 +930,7 @@ void MainWindow::on_btnTcpServerStop_clicked()
 }
 void MainWindow::on_btnTcpServerSend_clicked()
 {
-    QString text = ui->textEditTcpServerSend->toPlainText().trimmed();
+    QString text = ui->textEditTcpServerSend->toPlainText();
 
     if (text.isEmpty()) {
         appendLog("[TCP Server] 发送内容为空");
@@ -890,9 +952,11 @@ void MainWindow::on_btnTcpServerSend_clicked()
         appendLog(QString("[TCP Server Send HEX] %1")
                       .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     } else {
-        data = text.toLocal8Bit();
+        data = text.toUtf8();
 
-        appendLog(QString("[TCP Server Send TEXT] %1").arg(text));
+        appendLog(QString("[TCP Server Send UTF8] %1").arg(text));
+        appendLog(QString("[TCP Server Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     }
 
     qint64 len = m_tcpServer->sendDataToAll(data);
@@ -941,7 +1005,7 @@ void MainWindow::on_btnUdpSend_clicked()
     bool okPort = false;
     quint16 port = ui->lineEditUdpTargetPort->text().trimmed().toUShort(&okPort);
 
-    QString text = ui->textEditUdpSend->toPlainText().trimmed();
+    QString text = ui->textEditUdpSend->toPlainText();
 
     if (ip.isEmpty()) {
         appendLog("[UDP] 目标 IP 为空");
@@ -973,9 +1037,11 @@ void MainWindow::on_btnUdpSend_clicked()
         appendLog(QString("[UDP Send HEX] %1")
                       .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     } else {
-        data = text.toLocal8Bit();
+        data = text.toUtf8();
 
-        appendLog(QString("[UDP Send TEXT] %1").arg(text));
+        appendLog(QString("[UDP Send UTF8] %1").arg(text));
+        appendLog(QString("[UDP Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     }
 
     qint64 len = m_udpComm->sendData(ip, port, data);
@@ -1215,7 +1281,7 @@ void MainWindow::on_btnTcpClientDisconnect_clicked()
 }
 void MainWindow::on_btnTcpClientSend_clicked()
 {
-    QString text = ui->textEditTcpClientSend->toPlainText().trimmed();
+    QString text = ui->textEditTcpClientSend->toPlainText();
 
     if (text.isEmpty()) {
         appendLog("[TCP Client] 发送内容为空");
@@ -1237,9 +1303,11 @@ void MainWindow::on_btnTcpClientSend_clicked()
         appendLog(QString("[TCP Client Send HEX] %1")
                       .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     } else {
-        data = text.toLocal8Bit();
+        data = text.toUtf8();
 
-        appendLog(QString("[TCP Client Send TEXT] %1").arg(text));
+        appendLog(QString("[TCP Client Send UTF8] %1").arg(text));
+        appendLog(QString("[TCP Client Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     }
 
     qint64 len = m_tcpClient->sendData(data);
@@ -1389,7 +1457,7 @@ void MainWindow::on_btnSerialClose_clicked()
 }
 void MainWindow::on_btnSerialSend_clicked()
 {
-    QString text = ui->textEditSerialSend->toPlainText().trimmed();
+    QString text = ui->textEditSerialSend->toPlainText();
 
     if (text.isEmpty()) {
         appendLog("[Serial] 发送内容为空");
@@ -1411,12 +1479,166 @@ void MainWindow::on_btnSerialSend_clicked()
         appendLog(QString("[Serial Send HEX] %1")
                       .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     } else {
-        data = text.toLocal8Bit();
+        data = text.toUtf8();
 
-        appendLog(QString("[Serial Send TEXT] %1").arg(text));
+        appendLog(QString("[Serial Send UTF8] %1").arg(text));
+        appendLog(QString("[Serial Send HEX] %1")
+                      .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
     }
 
     qint64 len = m_serialComm->sendData(data);
 
     appendLog(QString("[Serial Send] bytes = %1").arg(len));
+}
+void MainWindow::initModbusClientUi()
+{
+    ui->lineEditModbusClientIp->setText("127.0.0.1");
+    ui->lineEditModbusClientPort->setText("1502");
+
+    ui->spinBoxModbusClientUnitId->setRange(1, 247);
+    ui->spinBoxModbusClientUnitId->setValue(1);
+
+    ui->spinBoxModbusClientStartAddr->setRange(0, 65535);
+    ui->spinBoxModbusClientStartAddr->setValue(0);
+
+    ui->spinBoxModbusClientCount->setRange(1, 125);
+    ui->spinBoxModbusClientCount->setValue(10);
+
+    ui->spinBoxModbusClientWriteAddr->setRange(0, 65535);
+    ui->spinBoxModbusClientWriteAddr->setValue(0);
+
+    ui->lineEditModbusClientWriteValue->setText("123");
+
+    ui->btnModbusClientConnect->setEnabled(true);
+    ui->btnModbusClientDisconnect->setEnabled(false);
+    ui->btnModbusClientReadHolding->setEnabled(false);
+    ui->btnModbusClientWriteSingle->setEnabled(false);
+    ui->btnModbusClientWriteMultiple->setEnabled(false);
+}
+void MainWindow::on_btnModbusClientConnect_clicked()
+{
+    if (!m_modbusClient) {
+        appendLog("[Modbus TCP Client] client object is null");
+        return;
+    }
+
+    if (m_modbusClient->isConnected()) {
+        appendLog("[Modbus TCP Client] already connected");
+        return;
+    }
+
+    QString ip = ui->lineEditModbusClientIp->text().trimmed();
+
+    bool okPort = false;
+    int port = ui->lineEditModbusClientPort->text().trimmed().toInt(&okPort);
+
+    if (ip.isEmpty()) {
+        appendLog("[Modbus TCP Client] IP为空");
+        return;
+    }
+
+    if (!okPort || port <= 0 || port > 65535) {
+        appendLog("[Modbus TCP Client] 端口无效");
+        return;
+    }
+
+    m_modbusClient->connectToServer(ip, port);
+}
+void MainWindow::on_btnModbusClientDisconnect_clicked()
+{
+    m_modbusClient->disconnectFromServer();
+}
+void MainWindow::on_btnModbusClientReadHolding_clicked()
+{
+    if (!m_modbusClient || !m_modbusClient->isConnected()) {
+        appendLog("[Modbus TCP Client] please connect first");
+        return;
+    }
+
+    int unitId = ui->spinBoxModbusClientUnitId->value();
+    int startAddr = ui->spinBoxModbusClientStartAddr->value();
+    int count = ui->spinBoxModbusClientCount->value();
+
+    appendLog(QString("[Modbus TCP Client] Read Holding. unit=%1, start=%2, count=%3")
+                  .arg(unitId)
+                  .arg(startAddr)
+                  .arg(count));
+
+    m_modbusClient->readHoldingRegisters(unitId, startAddr, static_cast<quint16>(count));
+}
+void MainWindow::on_btnModbusClientWriteSingle_clicked()
+{
+    int unitId = ui->spinBoxModbusClientUnitId->value();
+    int addr = ui->spinBoxModbusClientWriteAddr->value();
+
+    QString valueText = ui->lineEditModbusClientWriteValue->text().trimmed();
+
+    bool ok = false;
+    int value = valueText.toInt(&ok);
+
+    if (!ok || value < 0 || value > 65535) {
+        appendLog("[Modbus TCP Client] 写入值无效，范围应为 0~65535");
+        return;
+    }
+
+    appendLog(QString("[Modbus TCP Client] Write Single Holding. unit=%1, addr=%2, value=%3")
+                  .arg(unitId)
+                  .arg(addr)
+                  .arg(value));
+
+    m_modbusClient->writeSingleHoldingRegister(unitId,
+                                               addr,
+                                               static_cast<quint16>(value));
+}
+void MainWindow::on_btnModbusClientWriteMultiple_clicked()
+{
+    int unitId = ui->spinBoxModbusClientUnitId->value();
+    int startAddr = ui->spinBoxModbusClientWriteAddr->value();
+
+    QString text = ui->lineEditModbusClientWriteValue->text().trimmed();
+
+    if (text.isEmpty()) {
+        appendLog("[Modbus TCP Client] 写入内容为空");
+        return;
+    }
+
+    text.replace(",", " ");
+    QStringList parts = text.split(" ", Qt::SkipEmptyParts);
+
+    QVector<quint16> values;
+
+    for (const QString &part : parts) {
+        bool ok = false;
+        int value = part.toInt(&ok);
+
+        if (!ok || value < 0 || value > 65535) {
+            appendLog(QString("[Modbus TCP Client] 无效写入值：%1").arg(part));
+            return;
+        }
+
+        values.append(static_cast<quint16>(value));
+    }
+
+    if (values.isEmpty()) {
+        appendLog("[Modbus TCP Client] 没有有效写入值");
+        return;
+    }
+
+    appendLog(QString("[Modbus TCP Client] Write Multiple Holding. unit=%1, start=%2, count=%3")
+                  .arg(unitId)
+                  .arg(startAddr)
+                  .arg(values.size()));
+
+    m_modbusClient->writeMultipleHoldingRegisters(unitId,
+                                                  startAddr,
+                                                  values);
+}
+QByteArray MainWindow::textToUtf8Bytes(const QString &text)
+{
+    return text.toUtf8();
+}
+
+QString MainWindow::bytesToUtf8Text(const QByteArray &data)
+{
+    return QString::fromUtf8(data);
 }

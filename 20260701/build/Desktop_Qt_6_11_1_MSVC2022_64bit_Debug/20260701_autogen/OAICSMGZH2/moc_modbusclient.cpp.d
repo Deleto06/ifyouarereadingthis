@@ -5,13 +5,10 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/corecrt_memcpy_s.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/corecrt_memory.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/corecrt_search.h \
-  C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/corecrt_stdio_config.h \
-  C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/corecrt_wstdio.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/corecrt_wstdlib.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/corecrt_wstring.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/errno.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/stddef.h \
-  C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/stdio.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/stdlib.h \
   C:/Program\ Files\ (x86)/Windows\ Kits/10/include/10.0.28000.0/ucrt/string.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/algorithm \
@@ -19,12 +16,10 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/atomic \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cassert \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/chrono \
-  C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/climits \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cmath \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/concurrencysal.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstddef \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstdint \
-  C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstdlib \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/cstring \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/functional \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/initializer_list \
@@ -38,15 +33,12 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/numeric \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/optional \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/sal.h \
-  C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/set \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/stdarg.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/stdbool.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/string \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/string_view \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/tuple \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/type_traits \
-  C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/unordered_map \
-  C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/unordered_set \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/utility \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/vadefs.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/variant \
@@ -57,7 +49,6 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/yvals.h \
   C:/Program\ Files/Microsoft\ Visual\ Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/yvals_core.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QObject \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/QVariant \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/QVector \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q17memory.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20bit.h \
@@ -65,11 +56,8 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20iterator.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20memory.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20type_traits.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/q20utility.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/q23type_traits.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/q23utility.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qalgorithms.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qalloc.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qanystringview.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qarraydata.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qarraydataops.h \
@@ -93,10 +81,8 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontainerfwd.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontainerinfo.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontainertools_impl.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qcontiguouscache.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qdatastream.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qdebug.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qexceptionhandling.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qflags.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qfloat16.h \
@@ -106,7 +92,6 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qgenericatomic.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qglobal.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qglobalstatic.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qhash.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qhashfunctions.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qiodevice.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qiodevicebase.h \
@@ -130,16 +115,11 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qoverload.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qpair.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qprocessordetection.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qproperty.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qpropertyprivate.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qrefcount.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qscopedpointer.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qscopeguard.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qset.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qshareddata.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qshareddata_impl.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qsharedpointer.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qsharedpointer_impl.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qspan.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qstdlibdetection.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qstring.h \
@@ -165,7 +145,6 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtdeprecationdefinitions.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtdeprecationmarkers.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtenvironmentvariables.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtextstream.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtformat_impl.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtmetamacros.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtnoop.h \
@@ -178,29 +157,19 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtypeinfo.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qtypes.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qutf8stringview.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvariant.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvarlengtharray.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qvector.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtCore/qyieldcpu.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusClient \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDataUnit \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDevice \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusReply \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialClient \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusTcpClient \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusclient.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdataunit.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdevice.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbuspdu.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusreply.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialclient.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbustcpclient.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbus-config.h \
   C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbusexports.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbusglobal.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/QSerialPort \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qserialport.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qserialportglobal.h \
-  C:/Qt/6.11.1/msvc2022_64/include/QtSerialPort/qtserialportexports.h
+  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qtserialbusglobal.h

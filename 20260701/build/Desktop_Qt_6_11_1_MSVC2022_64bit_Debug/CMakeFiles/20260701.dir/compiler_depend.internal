@@ -287,11 +287,8 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtnetworkexports.h
  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qtnetworkglobal.h
  C:/Qt/6.11.1/msvc2022_64/include/QtNetwork/qudpsocket.h
- C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusClient
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDataUnit
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusDevice
- C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusReply
- C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialClient
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusRtuSerialServer
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusServer
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/QModbusTcpClient
@@ -301,7 +298,6 @@ C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/2026
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusdevice.h
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbuspdu.h
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusreply.h
- C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialclient.h
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusrtuserialserver.h
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbusserver.h
  C:/Qt/6.11.1/msvc2022_64/include/QtSerialBus/qmodbustcpclient.h
