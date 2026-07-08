@@ -72,7 +72,13 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_btnSerialClose_clicked",
         "on_btnSerialSend_clicked",
         "on_btnClearLog_clicked",
-        "on_btnSaveLog_clicked"
+        "on_btnSaveLog_clicked",
+        "on_btnModbusRtuOpen_clicked",
+        "on_btnModbusRtuClose_clicked",
+        "on_btnModbusRtuReadHolding_clicked",
+        "on_btnModbusRtuWriteSingle_clicked",
+        "on_btnModbusRtuWriteMultiple_clicked",
+        "on_btnModbusRtuRefresh_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -136,6 +142,18 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(33, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_btnSaveLog_clicked'
         QtMocHelpers::SlotData<void()>(34, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusRtuOpen_clicked'
+        QtMocHelpers::SlotData<void()>(35, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusRtuClose_clicked'
+        QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusRtuReadHolding_clicked'
+        QtMocHelpers::SlotData<void()>(37, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusRtuWriteSingle_clicked'
+        QtMocHelpers::SlotData<void()>(38, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusRtuWriteMultiple_clicked'
+        QtMocHelpers::SlotData<void()>(39, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_btnModbusRtuRefresh_clicked'
+        QtMocHelpers::SlotData<void()>(40, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -187,6 +205,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 25: _t->on_btnSerialSend_clicked(); break;
         case 26: _t->on_btnClearLog_clicked(); break;
         case 27: _t->on_btnSaveLog_clicked(); break;
+        case 28: _t->on_btnModbusRtuOpen_clicked(); break;
+        case 29: _t->on_btnModbusRtuClose_clicked(); break;
+        case 30: _t->on_btnModbusRtuReadHolding_clicked(); break;
+        case 31: _t->on_btnModbusRtuWriteSingle_clicked(); break;
+        case 32: _t->on_btnModbusRtuWriteMultiple_clicked(); break;
+        case 33: _t->on_btnModbusRtuRefresh_clicked(); break;
         default: ;
         }
     }
@@ -211,14 +235,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 28)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 28;
+        _id -= 34;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 28)
+        if (_id < 34)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 28;
+        _id -= 34;
     }
     return _id;
 }

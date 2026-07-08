@@ -56,6 +56,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnSaveLog, &QPushButton::clicked,
             this, &MainWindow::on_btnSaveLog_clicked);
 
+    connect(ui->btnClearUdpRxCount, &QPushButton::clicked, this, [=]() {
+        m_udpRxCount = 0;
+        ui->labelUdpRxCount->setText("UDP接收次数：0");
+    });
+
+    connect(ui->btnClearTcpClientRxCount, &QPushButton::clicked, this, [=]() {
+        m_tcpClientRxCount = 0;
+        ui->labelTcpClientRxCount->setText("TCP接收次数：0");
+    });
     // 加载图片列表
     loadSettings();
 
@@ -70,6 +79,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 初始化 Modbus Client UI
     initModbusClientUi();
+
+    initModbusRtuUi();
+
+    initModbusRtuSlaveUi();
 }
 
 MainWindow::~MainWindow()
@@ -98,12 +111,17 @@ MainWindow::~MainWindow()
         m_modbusServer->stop();
     }
 
+    if (m_modbusRtuClient) {
+        m_modbusRtuClient->close();
+    }
+
     delete ui;
 }
 
 void MainWindow::initUiState()
 {
     // TCP Client
+    ui->labelTcpClientRxCount->setText("TCP接收次数：0");
     ui->btnTcpClientConnect->setEnabled(true);
     ui->btnTcpClientDisconnect->setEnabled(false);
     ui->btnTcpClientSend->setEnabled(false);
@@ -116,6 +134,7 @@ void MainWindow::initUiState()
     ui->lineEditTcpServerPort->setEnabled(true);
 
     // UDP
+    ui->labelUdpRxCount->setText("UDP接收次数：0");
     ui->btnUdpBind->setEnabled(true);
     ui->btnUdpClose->setEnabled(false);
     ui->lineEditUdpLocalPort->setEnabled(true);
@@ -671,13 +690,88 @@ void MainWindow::initCommunication()
     m_serialComm = new SerialComm(this);
     m_modbusClient = new ModbusClient(this);
     m_modbusServer = new ModbusServer(this);
+    m_modbusRtuClient = new ModbusRtuClient(this);
 
     initCommunicationSignals();
 
     appendLog("通讯模块初始化完成");
 }
 void MainWindow::initCommunicationSignals()
-{
+{               //ModbusRtuClient
+    connect(m_modbusRtuClient, &ModbusRtuClient::opened,
+            this,
+            [=]() {
+                appendLog("[Modbus RTU Client] opened");
+
+                ui->btnModbusRtuOpen->setEnabled(false);
+                ui->btnModbusRtuClose->setEnabled(true);
+                ui->btnModbusRtuReadHolding->setEnabled(true);
+                ui->btnModbusRtuWriteSingle->setEnabled(true);
+                ui->btnModbusRtuWriteMultiple->setEnabled(true);
+
+                ui->comboBoxModbusRtuPort->setEnabled(false);
+                ui->comboBoxModbusRtuBaudRate->setEnabled(false);
+                ui->comboBoxModbusRtuDataBits->setEnabled(false);
+                ui->comboBoxModbusRtuStopBits->setEnabled(false);
+                ui->comboBoxModbusRtuParity->setEnabled(false);
+            });
+
+    connect(m_modbusRtuClient, &ModbusRtuClient::closed,
+            this,
+            [=]() {
+                appendLog("[Modbus RTU Client] closed");
+
+                ui->btnModbusRtuOpen->setEnabled(true);
+                ui->btnModbusRtuClose->setEnabled(false);
+                ui->btnModbusRtuReadHolding->setEnabled(false);
+                ui->btnModbusRtuWriteSingle->setEnabled(false);
+                ui->btnModbusRtuWriteMultiple->setEnabled(false);
+
+                ui->comboBoxModbusRtuPort->setEnabled(true);
+                ui->comboBoxModbusRtuBaudRate->setEnabled(true);
+                ui->comboBoxModbusRtuDataBits->setEnabled(true);
+                ui->comboBoxModbusRtuStopBits->setEnabled(true);
+                ui->comboBoxModbusRtuParity->setEnabled(true);
+            });
+
+    connect(m_modbusRtuClient, &ModbusRtuClient::logMessage,
+            this,
+            [=](const QString &msg) {
+                appendLog(msg);
+            });
+
+    connect(m_modbusRtuClient, &ModbusRtuClient::errorOccurred,
+            this,
+            [=](const QString &error) {
+                appendLog(QString("[Modbus RTU Client Error] %1").arg(error));
+            });
+
+    connect(m_modbusRtuClient, &ModbusRtuClient::holdingRegistersRead,
+            this,
+            [=](quint8 slaveId, quint16 startAddress, QVector<quint16> values) {
+                appendLog(QString("[Modbus RTU Client] Read Holding OK. slave=%1, start=%2, count=%3")
+                              .arg(slaveId)
+                              .arg(startAddress)
+                              .arg(values.size()));
+
+                for (int i = 0; i < values.size(); ++i) {
+                    appendLog(QString("  RTU HR[%1] = %2")
+                                  .arg(startAddress + i)
+                                  .arg(values[i]));
+                }
+            });
+
+    connect(m_modbusRtuClient, &ModbusRtuClient::writeFinished,
+            this,
+            [=](quint8 slaveId, quint8 functionCode, quint16 startAddress, quint16 count) {
+                appendLog(QString("[Modbus RTU Client] Write OK. slave=%1, func=0x%2, start=%3, count=%4")
+                              .arg(slaveId)
+                              .arg(functionCode, 2, 16, QChar('0'))
+                              .arg(startAddress)
+                              .arg(count)
+                              .toUpper());
+            });
+    //Modbus TCP Server
     connect(m_modbusServer, &ModbusServer::holdingRegisterChanged,
             this,
             [=](int address, quint16 value) {
@@ -806,6 +900,11 @@ void MainWindow::initCommunicationSignals()
             this,
             [=]() {
                 appendLog("[TCP Client] disconnected");
+
+                // 断开连接时清零接收次数
+                m_tcpClientRxCount = 0;
+                ui->labelTcpClientRxCount->setText("TCP接收次数：0");
+
                 ui->btnTcpClientConnect->setEnabled(true);
                 ui->btnTcpClientDisconnect->setEnabled(false);
                 ui->btnTcpClientSend->setEnabled(false);
@@ -815,6 +914,18 @@ void MainWindow::initCommunicationSignals()
     connect(m_tcpClient, &TcpClient::dataReceived,
             this,
             [=](const QByteArray &data) {
+                if (data.isEmpty()) {
+                    return;
+                }
+
+                // TCP 接收次数 +1
+                m_tcpClientRxCount++;
+
+                // 更新界面
+                ui->labelTcpClientRxCount->setText(
+                    QString("TCP接收次数：%1").arg(m_tcpClientRxCount)
+                    );
+
                 appendLog(QString("[TCP Client Recv HEX] %1")
                               .arg(QString::fromLatin1(data.toHex(' ').toUpper())));
 
@@ -860,6 +971,18 @@ void MainWindow::initCommunicationSignals()
     connect(m_udpComm, &UdpComm::dataReceived,
             this,
             [=](const QString &ip, quint16 port, const QByteArray &data) {
+                if (data.isEmpty()) {
+                    return;
+                }
+
+                // UDP 接收次数 +1
+                m_udpRxCount++;
+
+                // 更新界面
+                ui->labelUdpRxCount->setText(
+                    QString("UDP接收次数：%1").arg(m_udpRxCount)
+                    );
+
                 appendLog(QString("[UDP Recv From] %1:%2").arg(ip).arg(port));
 
                 appendLog(QString("[UDP Recv HEX] %1")
@@ -993,6 +1116,9 @@ void MainWindow::on_btnUdpClose_clicked()
 {
     m_udpComm->close();
     appendLog("[UDP] closed");
+
+    m_udpRxCount = 0;
+    ui->labelUdpRxCount->setText("UDP接收次数：0");
 
     ui->btnUdpBind->setEnabled(true);
     ui->btnUdpClose->setEnabled(false);
@@ -1641,4 +1767,794 @@ QByteArray MainWindow::textToUtf8Bytes(const QString &text)
 QString MainWindow::bytesToUtf8Text(const QByteArray &data)
 {
     return QString::fromUtf8(data);
+}
+void MainWindow::initModbusRtuUi()
+{
+    ui->comboBoxModbusRtuBaudRate->clear();
+    ui->comboBoxModbusRtuBaudRate->addItems({"9600", "19200", "38400", "57600", "115200"});
+    ui->comboBoxModbusRtuBaudRate->setCurrentText("9600");
+
+    ui->comboBoxModbusRtuDataBits->clear();
+    ui->comboBoxModbusRtuDataBits->addItems({"7", "8"});
+    ui->comboBoxModbusRtuDataBits->setCurrentText("8");
+
+    ui->comboBoxModbusRtuStopBits->clear();
+    ui->comboBoxModbusRtuStopBits->addItems({"1", "2"});
+    ui->comboBoxModbusRtuStopBits->setCurrentText("1");
+
+    ui->comboBoxModbusRtuParity->clear();
+    ui->comboBoxModbusRtuParity->addItems({"None", "Even", "Odd"});
+    ui->comboBoxModbusRtuParity->setCurrentText("None");
+
+    ui->spinBoxModbusRtuSlaveId->setRange(1, 247);
+    ui->spinBoxModbusRtuSlaveId->setValue(1);
+
+    ui->spinBoxModbusRtuStartAddr->setRange(0, 65535);
+    ui->spinBoxModbusRtuStartAddr->setValue(0);
+
+    ui->spinBoxModbusRtuCount->setRange(1, 125);
+    ui->spinBoxModbusRtuCount->setValue(2);
+
+    ui->spinBoxModbusRtuWriteAddr->setRange(0, 65535);
+    ui->spinBoxModbusRtuWriteAddr->setValue(0);
+
+    ui->lineEditModbusRtuWriteValue->setText("123");
+
+    refreshModbusRtuPorts();
+
+    ui->btnModbusRtuOpen->setEnabled(true);
+    ui->btnModbusRtuClose->setEnabled(false);
+    ui->btnModbusRtuReadHolding->setEnabled(false);
+    ui->btnModbusRtuWriteSingle->setEnabled(false);
+    ui->btnModbusRtuWriteMultiple->setEnabled(false);
+}
+void MainWindow::refreshModbusRtuPorts()
+{
+    QString current = ui->comboBoxModbusRtuPort->currentText();
+
+    ui->comboBoxModbusRtuPort->clear();
+
+    const auto ports = QSerialPortInfo::availablePorts();
+
+    for (const QSerialPortInfo &info : ports) {
+        ui->comboBoxModbusRtuPort->addItem(info.portName());
+    }
+
+    int index = ui->comboBoxModbusRtuPort->findText(current);
+    if (index >= 0) {
+        ui->comboBoxModbusRtuPort->setCurrentIndex(index);
+    }
+
+    appendLog(QString("[Modbus RTU Client] found %1 port(s)").arg(ports.size()));
+}
+void MainWindow::on_btnModbusRtuRefresh_clicked()
+{
+    refreshModbusRtuPorts();
+}
+void MainWindow::on_btnModbusRtuOpen_clicked()
+{
+    QString portName = ui->comboBoxModbusRtuPort->currentText().trimmed();
+
+    if (portName.isEmpty()) {
+        appendLog("[Modbus RTU Client] 串口号为空");
+        return;
+    }
+
+    bool okBaud = false;
+    qint32 baudRate = ui->comboBoxModbusRtuBaudRate->currentText().toInt(&okBaud);
+
+    if (!okBaud || baudRate <= 0) {
+        appendLog("[Modbus RTU Client] 波特率无效");
+        return;
+    }
+
+    QSerialPort::DataBits dataBits =
+        getSerialDataBitsFromText(ui->comboBoxModbusRtuDataBits->currentText());
+
+    QSerialPort::StopBits stopBits =
+        getSerialStopBitsFromText(ui->comboBoxModbusRtuStopBits->currentText());
+
+    QSerialPort::Parity parity =
+        getSerialParityFromText(ui->comboBoxModbusRtuParity->currentText());
+
+    appendLog(QString("[Modbus RTU Client] opening %1, baud=%2, data=%3, stop=%4, parity=%5")
+                  .arg(portName)
+                  .arg(baudRate)
+                  .arg(ui->comboBoxModbusRtuDataBits->currentText())
+                  .arg(ui->comboBoxModbusRtuStopBits->currentText())
+                  .arg(ui->comboBoxModbusRtuParity->currentText()));
+
+    bool ok = m_modbusRtuClient->open(portName,
+                                      baudRate,
+                                      dataBits,
+                                      parity,
+                                      stopBits);
+
+    if (!ok) {
+        appendLog("[Modbus RTU Client] open failed");
+    }
+}
+void MainWindow::on_btnModbusRtuClose_clicked()
+{
+    if (m_modbusRtuClient) {
+        m_modbusRtuClient->close();
+    }
+}
+void MainWindow::on_btnModbusRtuReadHolding_clicked()
+{
+    if (!m_modbusRtuClient || !m_modbusRtuClient->isOpen()) {
+        appendLog("[Modbus RTU Client] please open serial first");
+        return;
+    }
+
+    quint8 slaveId = static_cast<quint8>(ui->spinBoxModbusRtuSlaveId->value());
+    quint16 startAddr = static_cast<quint16>(ui->spinBoxModbusRtuStartAddr->value());
+    quint16 count = static_cast<quint16>(ui->spinBoxModbusRtuCount->value());
+
+    appendLog(QString("[Modbus RTU Client] Read Holding. slave=%1, start=%2, count=%3")
+                  .arg(slaveId)
+                  .arg(startAddr)
+                  .arg(count));
+
+    m_modbusRtuClient->readHoldingRegisters(slaveId, startAddr, count);
+}
+void MainWindow::on_btnModbusRtuWriteSingle_clicked()
+{
+    if (!m_modbusRtuClient || !m_modbusRtuClient->isOpen()) {
+        appendLog("[Modbus RTU Client] please open serial first");
+        return;
+    }
+
+    quint8 slaveId = static_cast<quint8>(ui->spinBoxModbusRtuSlaveId->value());
+    quint16 addr = static_cast<quint16>(ui->spinBoxModbusRtuWriteAddr->value());
+
+    QString valueText = ui->lineEditModbusRtuWriteValue->text().trimmed();
+
+    bool ok = false;
+    int value = valueText.toInt(&ok);
+
+    if (!ok || value < 0 || value > 65535) {
+        appendLog("[Modbus RTU Client] 写入值无效，范围 0~65535");
+        return;
+    }
+
+    appendLog(QString("[Modbus RTU Client] Write Single. slave=%1, addr=%2, value=%3")
+                  .arg(slaveId)
+                  .arg(addr)
+                  .arg(value));
+
+    m_modbusRtuClient->writeSingleHoldingRegister(slaveId,
+                                                  addr,
+                                                  static_cast<quint16>(value));
+}
+void MainWindow::on_btnModbusRtuWriteMultiple_clicked()
+{
+    if (!m_modbusRtuClient || !m_modbusRtuClient->isOpen()) {
+        appendLog("[Modbus RTU Client] please open serial first");
+        return;
+    }
+
+    quint8 slaveId = static_cast<quint8>(ui->spinBoxModbusRtuSlaveId->value());
+    quint16 startAddr = static_cast<quint16>(ui->spinBoxModbusRtuWriteAddr->value());
+
+    QString text = ui->lineEditModbusRtuWriteValue->text().trimmed();
+
+    if (text.isEmpty()) {
+        appendLog("[Modbus RTU Client] 写入内容为空");
+        return;
+    }
+
+    text.replace(",", " ");
+
+    QStringList parts = text.split(" ", Qt::SkipEmptyParts);
+
+    QVector<quint16> values;
+
+    for (const QString &part : parts) {
+        bool ok = false;
+        int value = part.toInt(&ok);
+
+        if (!ok || value < 0 || value > 65535) {
+            appendLog(QString("[Modbus RTU Client] 无效写入值：%1").arg(part));
+            return;
+        }
+
+        values.append(static_cast<quint16>(value));
+    }
+
+    if (values.isEmpty()) {
+        appendLog("[Modbus RTU Client] 没有有效写入值");
+        return;
+    }
+
+    appendLog(QString("[Modbus RTU Client] Write Multiple. slave=%1, start=%2, count=%3")
+                  .arg(slaveId)
+                  .arg(startAddr)
+                  .arg(values.size()));
+
+    m_modbusRtuClient->writeMultipleHoldingRegisters(slaveId,
+                                                     startAddr,
+                                                     values);
+}
+QSerialPort::DataBits MainWindow::getSerialDataBitsFromText(const QString &text) const
+{
+    if (text == "5") {
+        return QSerialPort::Data5;
+    }
+
+    if (text == "6") {
+        return QSerialPort::Data6;
+    }
+
+    if (text == "7") {
+        return QSerialPort::Data7;
+    }
+
+    return QSerialPort::Data8;
+}
+
+QSerialPort::StopBits MainWindow::getSerialStopBitsFromText(const QString &text) const
+{
+    if (text == "1.5") {
+        return QSerialPort::OneAndHalfStop;
+    }
+
+    if (text == "2") {
+        return QSerialPort::TwoStop;
+    }
+
+    return QSerialPort::OneStop;
+}
+
+QSerialPort::Parity MainWindow::getSerialParityFromText(const QString &text) const
+{
+    if (text == "Even") {
+        return QSerialPort::EvenParity;
+    }
+
+    if (text == "Odd") {
+        return QSerialPort::OddParity;
+    }
+
+    if (text == "Mark") {
+        return QSerialPort::MarkParity;
+    }
+
+    if (text == "Space") {
+        return QSerialPort::SpaceParity;
+    }
+
+    return QSerialPort::NoParity;
+}
+
+void MainWindow::initModbusRtuSlaveUi()
+{
+    m_modbusRtuSlaveSerial = new QSerialPort(this);
+
+    m_modbusRtuSlaveFrameTimer = new QTimer(this);
+    m_modbusRtuSlaveFrameTimer->setSingleShot(true);
+    m_modbusRtuSlaveFrameTimer->setInterval(30);   // RTU 帧间隔，第一版用 30ms 足够
+
+    connect(m_modbusRtuSlaveSerial, &QSerialPort::readyRead,
+            this, &MainWindow::onModbusRtuSlaveReadyRead);
+
+    connect(m_modbusRtuSlaveFrameTimer, &QTimer::timeout,
+            this, &MainWindow::processModbusRtuSlaveFrame);
+
+    connect(ui->btnModbusRtuSlaveRefreshPort, &QPushButton::clicked,
+            this, &MainWindow::refreshModbusRtuSlavePorts);
+
+    connect(ui->btnModbusRtuSlaveOpen, &QPushButton::clicked, this, [=]() {
+        QString portName = ui->comboBoxModbusRtuSlavePort->currentText();
+
+        if (portName.isEmpty()) {
+            appendLog("[RTU Slave] 串口为空");
+            return;
+        }
+
+        if (m_modbusRtuSlaveSerial->isOpen()) {
+            m_modbusRtuSlaveSerial->close();
+        }
+
+        m_modbusRtuSlaveSerial->setPortName(portName);
+        m_modbusRtuSlaveSerial->setBaudRate(ui->comboBoxModbusRtuSlaveBaudRate->currentText().toInt());
+
+        int dataBits = ui->comboBoxModbusRtuSlaveDataBits->currentText().toInt();
+        if (dataBits == 5) {
+            m_modbusRtuSlaveSerial->setDataBits(QSerialPort::Data5);
+        } else if (dataBits == 6) {
+            m_modbusRtuSlaveSerial->setDataBits(QSerialPort::Data6);
+        } else if (dataBits == 7) {
+            m_modbusRtuSlaveSerial->setDataBits(QSerialPort::Data7);
+        } else {
+            m_modbusRtuSlaveSerial->setDataBits(QSerialPort::Data8);
+        }
+
+        QString parity = ui->comboBoxModbusRtuSlaveParity->currentText();
+        if (parity == "None") {
+            m_modbusRtuSlaveSerial->setParity(QSerialPort::NoParity);
+        } else if (parity == "Odd") {
+            m_modbusRtuSlaveSerial->setParity(QSerialPort::OddParity);
+        } else if (parity == "Even") {
+            m_modbusRtuSlaveSerial->setParity(QSerialPort::EvenParity);
+        } else {
+            m_modbusRtuSlaveSerial->setParity(QSerialPort::NoParity);
+        }
+
+        QString stopBits = ui->comboBoxModbusRtuSlaveStopBits->currentText();
+        if (stopBits == "1") {
+            m_modbusRtuSlaveSerial->setStopBits(QSerialPort::OneStop);
+        } else if (stopBits == "1.5") {
+            m_modbusRtuSlaveSerial->setStopBits(QSerialPort::OneAndHalfStop);
+        } else if (stopBits == "2") {
+            m_modbusRtuSlaveSerial->setStopBits(QSerialPort::TwoStop);
+        } else {
+            m_modbusRtuSlaveSerial->setStopBits(QSerialPort::OneStop);
+        }
+
+        m_modbusRtuSlaveSerial->setFlowControl(QSerialPort::NoFlowControl);
+
+        if (!m_modbusRtuSlaveSerial->open(QIODevice::ReadWrite)) {
+            appendLog("[RTU Slave] 打开串口失败: " + m_modbusRtuSlaveSerial->errorString());
+            return;
+        }
+
+        m_modbusRtuSlaveRxBuffer.clear();
+
+        setModbusRtuSlaveOpenedState(true);
+
+        appendLog(QString("[RTU Slave] 打开串口成功: %1, %2, Slave ID=%3")
+                      .arg(portName)
+                      .arg(ui->comboBoxModbusRtuSlaveBaudRate->currentText())
+                      .arg(ui->spinBoxModbusRtuSlaveSelfId->value()));
+    });
+
+    connect(ui->btnModbusRtuSlaveClose, &QPushButton::clicked, this, [=]() {
+        if (m_modbusRtuSlaveSerial->isOpen()) {
+            m_modbusRtuSlaveSerial->close();
+        }
+
+        m_modbusRtuSlaveRxBuffer.clear();
+        setModbusRtuSlaveOpenedState(false);
+
+        appendLog("[RTU Slave] 串口已关闭");
+    });
+
+    connect(ui->btnModbusRtuSlaveInitRegisters, &QPushButton::clicked,
+            this, &MainWindow::initModbusRtuSlaveRegisters);
+
+    connect(ui->btnModbusRtuSlaveClearRegisters, &QPushButton::clicked, this, [=]() {
+        for (int i = 0; i < m_modbusRtuSlaveHoldingRegisters.size(); ++i) {
+            m_modbusRtuSlaveHoldingRegisters[i] = 0;
+        }
+
+        updateModbusRtuSlaveTable();
+        appendLog("[RTU Slave] 保持寄存器已清空");
+    });
+
+    connect(ui->tableWidgetModbusRtuSlaveHolding, &QTableWidget::cellChanged,
+            this, [=](int row, int column) {
+                if (column != 1) {
+                    return;
+                }
+
+                if (row < 0 || row >= m_modbusRtuSlaveHoldingRegisters.size()) {
+                    return;
+                }
+
+                bool ok = false;
+                int value = ui->tableWidgetModbusRtuSlaveHolding->item(row, column)->text().toInt(&ok);
+
+                if (!ok) {
+                    return;
+                }
+
+                if (value < 0) {
+                    value = 0;
+                }
+
+                if (value > 65535) {
+                    value = 65535;
+                }
+
+                m_modbusRtuSlaveHoldingRegisters[row] = static_cast<quint16>(value);
+            });
+
+    ui->comboBoxModbusRtuSlaveBaudRate->addItems({"9600", "19200", "38400", "57600", "115200"});
+    ui->comboBoxModbusRtuSlaveBaudRate->setCurrentText("9600");
+
+    ui->comboBoxModbusRtuSlaveDataBits->addItems({"8", "7", "6", "5"});
+    ui->comboBoxModbusRtuSlaveDataBits->setCurrentText("8");
+
+    ui->comboBoxModbusRtuSlaveParity->addItems({"None", "Even", "Odd"});
+    ui->comboBoxModbusRtuSlaveParity->setCurrentText("None");
+
+    ui->comboBoxModbusRtuSlaveStopBits->addItems({"1", "1.5", "2"});
+    ui->comboBoxModbusRtuSlaveStopBits->setCurrentText("1");
+
+    ui->spinBoxModbusRtuSlaveSelfId->setRange(1, 247);
+    ui->spinBoxModbusRtuSlaveSelfId->setValue(1);
+
+    ui->spinBoxModbusRtuSlaveRegisterCount->setRange(1, 1000);
+    ui->spinBoxModbusRtuSlaveRegisterCount->setValue(20);
+
+    ui->spinBoxModbusRtuSlaveStartAddress->setRange(0, 65535);
+    ui->spinBoxModbusRtuSlaveStartAddress->setValue(0);
+
+    ui->tableWidgetModbusRtuSlaveHolding->setColumnCount(2);
+    ui->tableWidgetModbusRtuSlaveHolding->setHorizontalHeaderLabels({"地址", "值"});
+    ui->tableWidgetModbusRtuSlaveHolding->horizontalHeader()->setStretchLastSection(true);
+
+    refreshModbusRtuSlavePorts();
+    initModbusRtuSlaveRegisters();
+    setModbusRtuSlaveOpenedState(false);
+}
+void MainWindow::refreshModbusRtuSlavePorts()
+{
+    ui->comboBoxModbusRtuSlavePort->clear();
+
+    const auto ports = QSerialPortInfo::availablePorts();
+    for (const QSerialPortInfo &info : ports) {
+        ui->comboBoxModbusRtuSlavePort->addItem(info.portName());
+    }
+
+    appendLog("[RTU Slave] 已刷新串口列表");
+}
+void MainWindow::initModbusRtuSlaveRegisters()
+{
+    int count = ui->spinBoxModbusRtuSlaveRegisterCount->value();
+
+    m_modbusRtuSlaveHoldingRegisters.clear();
+    m_modbusRtuSlaveHoldingRegisters.resize(count);
+
+    for (int i = 0; i < count; ++i) {
+        m_modbusRtuSlaveHoldingRegisters[i] = 0;
+    }
+
+    updateModbusRtuSlaveTable();
+
+    appendLog(QString("[RTU Slave] 初始化保持寄存器数量: %1").arg(count));
+}
+void MainWindow::updateModbusRtuSlaveTable()
+{
+    ui->tableWidgetModbusRtuSlaveHolding->blockSignals(true);
+
+    int startAddress = ui->spinBoxModbusRtuSlaveStartAddress->value();
+    int count = m_modbusRtuSlaveHoldingRegisters.size();
+
+    ui->tableWidgetModbusRtuSlaveHolding->setRowCount(count);
+
+    for (int i = 0; i < count; ++i) {
+        int address = startAddress + i;
+        quint16 value = m_modbusRtuSlaveHoldingRegisters[i];
+
+        QTableWidgetItem *addrItem = new QTableWidgetItem(QString::number(address));
+        addrItem->setFlags(addrItem->flags() & ~Qt::ItemIsEditable);
+
+        QTableWidgetItem *valueItem = new QTableWidgetItem(QString::number(value));
+
+        ui->tableWidgetModbusRtuSlaveHolding->setItem(i, 0, addrItem);
+        ui->tableWidgetModbusRtuSlaveHolding->setItem(i, 1, valueItem);
+    }
+
+    ui->tableWidgetModbusRtuSlaveHolding->blockSignals(false);
+}
+void MainWindow::setModbusRtuSlaveOpenedState(bool opened)
+{
+    ui->btnModbusRtuSlaveOpen->setEnabled(!opened);
+    ui->btnModbusRtuSlaveClose->setEnabled(opened);
+
+    ui->comboBoxModbusRtuSlavePort->setEnabled(!opened);
+    ui->comboBoxModbusRtuSlaveBaudRate->setEnabled(!opened);
+    ui->comboBoxModbusRtuSlaveDataBits->setEnabled(!opened);
+    ui->comboBoxModbusRtuSlaveParity->setEnabled(!opened);
+    ui->comboBoxModbusRtuSlaveStopBits->setEnabled(!opened);
+    ui->spinBoxModbusRtuSlaveSelfId->setEnabled(!opened);
+    ui->btnModbusRtuSlaveRefreshPort->setEnabled(!opened);
+}
+void MainWindow::onModbusRtuSlaveReadyRead()
+{
+    QByteArray data = m_modbusRtuSlaveSerial->readAll();
+
+    if (data.isEmpty()) {
+        return;
+    }
+
+    m_modbusRtuSlaveRxBuffer.append(data);
+
+    m_modbusRtuSlaveFrameTimer->start();
+
+    appendLog("[RTU Slave] RX Part: " + byteArrayToHexString(data));
+}
+void MainWindow::processModbusRtuSlaveFrame()
+{
+    if (m_modbusRtuSlaveRxBuffer.isEmpty()) {
+        return;
+    }
+
+    QByteArray frame = m_modbusRtuSlaveRxBuffer;
+    m_modbusRtuSlaveRxBuffer.clear();
+
+    appendLog("[RTU Slave] RX Frame: " + byteArrayToHexString(frame));
+
+    if (frame.size() < 4) {
+        appendLog("[RTU Slave] 帧长度过短");
+        return;
+    }
+
+    handleModbusRtuSlaveRequest(frame);
+}
+quint16 MainWindow::modbusRtuCrc16(const QByteArray &data)
+{
+    quint16 crc = 0xFFFF;
+
+    for (int i = 0; i < data.size(); ++i) {
+        crc ^= static_cast<quint8>(data.at(i));
+
+        for (int j = 0; j < 8; ++j) {
+            if (crc & 0x0001) {
+                crc >>= 1;
+                crc ^= 0xA001;
+            } else {
+                crc >>= 1;
+            }
+        }
+    }
+
+    return crc;
+}
+bool MainWindow::checkModbusRtuCrc(const QByteArray &frame)
+{
+    if (frame.size() < 4) {
+        return false;
+    }
+
+    QByteArray data = frame.left(frame.size() - 2);
+
+    quint16 calcCrc = modbusRtuCrc16(data);
+
+    quint8 crcLow = static_cast<quint8>(frame.at(frame.size() - 2));
+    quint8 crcHigh = static_cast<quint8>(frame.at(frame.size() - 1));
+
+    quint16 recvCrc = static_cast<quint16>(crcLow | (crcHigh << 8));
+
+    return calcCrc == recvCrc;
+}
+QByteArray MainWindow::appendModbusRtuCrc(const QByteArray &data)
+{
+    QByteArray frame = data;
+
+    quint16 crc = modbusRtuCrc16(data);
+
+    frame.append(static_cast<char>(crc & 0xFF));
+    frame.append(static_cast<char>((crc >> 8) & 0xFF));
+
+    return frame;
+}
+QString MainWindow::byteArrayToHexString(const QByteArray &data)
+{
+    QStringList list;
+
+    for (char ch : data) {
+        list << QString("%1")
+        .arg(static_cast<quint8>(ch), 2, 16, QChar('0'))
+            .toUpper();
+    }
+
+    return list.join(" ");
+}
+void MainWindow::handleModbusRtuSlaveRequest(const QByteArray &frame)
+{
+    if (!checkModbusRtuCrc(frame)) {
+        appendLog("[RTU Slave] CRC 校验失败");
+        return;
+    }
+
+    quint8 requestSlaveId = static_cast<quint8>(frame.at(0));
+    quint8 selfSlaveId = static_cast<quint8>(ui->spinBoxModbusRtuSlaveSelfId->value());
+
+    if (requestSlaveId != selfSlaveId) {
+        appendLog(QString("[RTU Slave] 站号不匹配，忽略。请求站号=%1，本机站号=%2")
+                      .arg(requestSlaveId)
+                      .arg(selfSlaveId));
+        return;
+    }
+
+    quint8 functionCode = static_cast<quint8>(frame.at(1));
+
+    switch (functionCode) {
+    case 0x03:
+        handleModbusRtuSlaveReadHolding(frame);
+        break;
+
+    case 0x06:
+        handleModbusRtuSlaveWriteSingleRegister(frame);
+        break;
+
+    case 0x10:
+        handleModbusRtuSlaveWriteMultipleRegisters(frame);
+        break;
+
+    default:
+        sendModbusRtuSlaveException(requestSlaveId, functionCode, 0x01);
+        break;
+    }
+}
+void MainWindow::handleModbusRtuSlaveReadHolding(const QByteArray &frame)
+{
+    if (frame.size() != 8) {
+        appendLog("[RTU Slave] 03 请求长度错误");
+        return;
+    }
+
+    quint8 slaveId = static_cast<quint8>(frame.at(0));
+
+    quint16 requestStartAddr =
+        (static_cast<quint8>(frame.at(2)) << 8) |
+        static_cast<quint8>(frame.at(3));
+
+    quint16 requestCount =
+        (static_cast<quint8>(frame.at(4)) << 8) |
+        static_cast<quint8>(frame.at(5));
+
+    int localStartAddress = ui->spinBoxModbusRtuSlaveStartAddress->value();
+
+    int startIndex = requestStartAddr - localStartAddress;
+
+    if (requestCount < 1 || requestCount > 125) {
+        sendModbusRtuSlaveException(slaveId, 0x03, 0x03);
+        return;
+    }
+
+    if (startIndex < 0 || startIndex + requestCount > m_modbusRtuSlaveHoldingRegisters.size()) {
+        sendModbusRtuSlaveException(slaveId, 0x03, 0x02);
+        return;
+    }
+
+    QByteArray response;
+    response.append(static_cast<char>(slaveId));
+    response.append(static_cast<char>(0x03));
+    response.append(static_cast<char>(requestCount * 2));
+
+    for (int i = 0; i < requestCount; ++i) {
+        quint16 value = m_modbusRtuSlaveHoldingRegisters[startIndex + i];
+
+        response.append(static_cast<char>((value >> 8) & 0xFF));
+        response.append(static_cast<char>(value & 0xFF));
+    }
+
+    QByteArray sendFrame = appendModbusRtuCrc(response);
+
+    m_modbusRtuSlaveSerial->write(sendFrame);
+
+    appendLog(QString("[RTU Slave] 03 读保持寄存器 addr=%1 count=%2")
+                  .arg(requestStartAddr)
+                  .arg(requestCount));
+    appendLog("[RTU Slave] TX: " + byteArrayToHexString(sendFrame));
+}
+void MainWindow::handleModbusRtuSlaveWriteSingleRegister(const QByteArray &frame)
+{
+    if (frame.size() != 8) {
+        appendLog("[RTU Slave] 06 请求长度错误");
+        return;
+    }
+
+    quint8 slaveId = static_cast<quint8>(frame.at(0));
+
+    quint16 requestAddr =
+        (static_cast<quint8>(frame.at(2)) << 8) |
+        static_cast<quint8>(frame.at(3));
+
+    quint16 value =
+        (static_cast<quint8>(frame.at(4)) << 8) |
+        static_cast<quint8>(frame.at(5));
+
+    int localStartAddress = ui->spinBoxModbusRtuSlaveStartAddress->value();
+    int index = requestAddr - localStartAddress;
+
+    if (index < 0 || index >= m_modbusRtuSlaveHoldingRegisters.size()) {
+        sendModbusRtuSlaveException(slaveId, 0x06, 0x02);
+        return;
+    }
+
+    m_modbusRtuSlaveHoldingRegisters[index] = value;
+    updateModbusRtuSlaveTable();
+
+    m_modbusRtuSlaveSerial->write(frame);
+
+    appendLog(QString("[RTU Slave] 06 写单个寄存器 addr=%1 value=%2")
+                  .arg(requestAddr)
+                  .arg(value));
+    appendLog("[RTU Slave] TX: " + byteArrayToHexString(frame));
+}
+void MainWindow::handleModbusRtuSlaveWriteMultipleRegisters(const QByteArray &frame)
+{
+    if (frame.size() < 11) {
+        appendLog("[RTU Slave] 10 请求长度过短");
+        return;
+    }
+
+    quint8 slaveId = static_cast<quint8>(frame.at(0));
+
+    quint16 requestStartAddr =
+        (static_cast<quint8>(frame.at(2)) << 8) |
+        static_cast<quint8>(frame.at(3));
+
+    quint16 requestCount =
+        (static_cast<quint8>(frame.at(4)) << 8) |
+        static_cast<quint8>(frame.at(5));
+
+    quint8 byteCount = static_cast<quint8>(frame.at(6));
+
+    if (requestCount < 1 || requestCount > 123) {
+        sendModbusRtuSlaveException(slaveId, 0x10, 0x03);
+        return;
+    }
+
+    if (byteCount != requestCount * 2) {
+        sendModbusRtuSlaveException(slaveId, 0x10, 0x03);
+        return;
+    }
+
+    int expectedFrameSize = 7 + byteCount + 2;
+    if (frame.size() != expectedFrameSize) {
+        appendLog("[RTU Slave] 10 请求长度与字节数不匹配");
+        return;
+    }
+
+    int localStartAddress = ui->spinBoxModbusRtuSlaveStartAddress->value();
+    int startIndex = requestStartAddr - localStartAddress;
+
+    if (startIndex < 0 || startIndex + requestCount > m_modbusRtuSlaveHoldingRegisters.size()) {
+        sendModbusRtuSlaveException(slaveId, 0x10, 0x02);
+        return;
+    }
+
+    for (int i = 0; i < requestCount; ++i) {
+        int dataIndex = 7 + i * 2;
+
+        quint16 value =
+            (static_cast<quint8>(frame.at(dataIndex)) << 8) |
+            static_cast<quint8>(frame.at(dataIndex + 1));
+
+        m_modbusRtuSlaveHoldingRegisters[startIndex + i] = value;
+    }
+
+    updateModbusRtuSlaveTable();
+
+    QByteArray response;
+    response.append(static_cast<char>(slaveId));
+    response.append(static_cast<char>(0x10));
+    response.append(static_cast<char>((requestStartAddr >> 8) & 0xFF));
+    response.append(static_cast<char>(requestStartAddr & 0xFF));
+    response.append(static_cast<char>((requestCount >> 8) & 0xFF));
+    response.append(static_cast<char>(requestCount & 0xFF));
+
+    QByteArray sendFrame = appendModbusRtuCrc(response);
+
+    m_modbusRtuSlaveSerial->write(sendFrame);
+
+    appendLog(QString("[RTU Slave] 10 写多个寄存器 addr=%1 count=%2")
+                  .arg(requestStartAddr)
+                  .arg(requestCount));
+    appendLog("[RTU Slave] TX: " + byteArrayToHexString(sendFrame));
+}
+void MainWindow::sendModbusRtuSlaveException(quint8 slaveId, quint8 functionCode, quint8 exceptionCode)
+{
+    QByteArray response;
+
+    response.append(static_cast<char>(slaveId));
+    response.append(static_cast<char>(functionCode | 0x80));
+    response.append(static_cast<char>(exceptionCode));
+
+    QByteArray sendFrame = appendModbusRtuCrc(response);
+
+    m_modbusRtuSlaveSerial->write(sendFrame);
+
+    appendLog(QString("[RTU Slave] 异常响应 func=0x%1 code=0x%2")
+                  .arg(functionCode, 2, 16, QChar('0'))
+                  .arg(exceptionCode, 2, 16, QChar('0'))
+                  .toUpper());
+
+    appendLog("[RTU Slave] TX: " + byteArrayToHexString(sendFrame));
 }

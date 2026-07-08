@@ -1,9 +1,13 @@
 #include "tcpclient.h"
+#include <QNetworkProxy>
 
 TcpClient::TcpClient(QObject *parent)
     : QObject(parent)
 {
     m_socket = new QTcpSocket(this);
+
+    // 禁用代理
+    m_socket->setProxy(QNetworkProxy::NoProxy);
 
     connect(m_socket, &QTcpSocket::connected,
             this, &TcpClient::connected);

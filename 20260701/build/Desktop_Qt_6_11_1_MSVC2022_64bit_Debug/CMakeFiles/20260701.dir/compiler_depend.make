@@ -85,6 +85,7 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSize \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QSizeF \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QString \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\QTimer \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QVariant \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\QVector \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\q17memory.h \
@@ -214,6 +215,7 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtenvironmentvariables.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtextstream.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtformat_impl.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtimer.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtmetamacros.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtnoop.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtpreprocessorsupport.h \
@@ -305,8 +307,10 @@
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qtserialbusexports.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qtserialbusglobal.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\QSerialPort \
+  C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\QSerialPortInfo \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\qserialport.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\qserialportglobal.h \
+  C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\qserialportinfo.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\qtserialportexports.h \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\QGraphicsPixmapItem \
   C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\QGraphicsScene \
@@ -789,6 +793,8 @@
   C:\qtdevelop\20260701\20260701\comm\commutils.h \
   C:\qtdevelop\20260701\20260701\comm\modbusclient.cpp \
   C:\qtdevelop\20260701\20260701\comm\modbusclient.h \
+  C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.cpp \
+  C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.h \
   C:\qtdevelop\20260701\20260701\comm\modbusserver.cpp \
   C:\qtdevelop\20260701\20260701\comm\modbusserver.h \
   C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.cpp \
@@ -1177,6 +1183,16 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsDependencies.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\QString:
 
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsTargets-relwithdebinfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Core\Qt6CoreTargets-relwithdebinfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsVersionlessTargets.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\QTimer:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractspinbox.h:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\QVariant:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\QVector:
@@ -1289,11 +1305,11 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcompare.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtGui\qbitmap.h:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcompare_impl.h:
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QMinimalIntegrationPluginTargets-debug.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargets.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6QMinimalIntegrationPluginTargets-debug.cmake:
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcompare_impl.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qcomparehelpers.h:
 
@@ -1399,9 +1415,9 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlocale.h:
 
 C:\opencv\build\include\opencv2\video\background_segm.hpp:
 
-C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlogging.h:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargets-relwithdebinfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qlogging.h:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Gui\Qt6GuiTargets.cmake:
 
@@ -1545,6 +1561,10 @@ C:\opencv\build\OpenCVConfig-version.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtextstream.h:
 
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6NetworkTargets-relwithdebinfo.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtimer.h:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtnoop.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtpreprocessorsupport.h:
@@ -1554,10 +1574,6 @@ C:\Qt\6.11.1\msvc2022_64\include\QtCore\qversiontagging.h:
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qttranslation.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtversion.h:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6SerialPort\Qt6SerialPortVersionlessAliasTargets.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargetsPrecheck.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtCore\qtversionchecks.h:
 
@@ -1767,9 +1783,15 @@ C:\Qt\6.11.1\msvc2022_64\include\QtSerialBus\qtserialbusglobal.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\QSerialPort:
 
+C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\QSerialPortInfo:
+
 C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\qserialport.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\qserialportglobal.h:
+
+C:\Qt\6.11.1\msvc2022_64\include\QtSerialPort\qserialportinfo.h:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsTargetsPrecheck.cmake:
 
 CMakeFiles\3.30.5\CMakeSystem.cmake:
 
@@ -1794,14 +1816,6 @@ C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractitemdelegate.h:
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6\QtPublicExternalProjectHelpers.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractitemview.h:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6WidgetsTools\Qt6WidgetsToolsTargets-relwithdebinfo.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Core\Qt6CoreTargets-relwithdebinfo.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6CoreTools\Qt6CoreToolsVersionlessTargets.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qabstractspinbox.h:
 
 C:\Qt\6.11.1\msvc2022_64\include\QtWidgets\qframe.h:
 
@@ -2073,8 +2087,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsConfigVersionImpl.cmak
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsTargets-relwithdebinfo.cmake:
 
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsTargetsPrecheck.cmake:
-
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6GuiTools\Qt6GuiToolsVersionlessTargets.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsAdditionalTargetInfo.cmake:
@@ -2082,6 +2094,10 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsAdditionalTa
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsConfigVersionImpl.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsMacros.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6SerialPort\Qt6SerialPortVersionlessAliasTargets.cmake:
+
+C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsTargetsPrecheck.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6LinguistTools\Qt6LinguistToolsVersionlessTargets.cmake:
 
@@ -2094,8 +2110,6 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6NetworkConfigVersionImpl.cmake:
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Widgets\Qt6WidgetsConfig.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6NetworkPlugins.cmake:
-
-C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6NetworkTargets-relwithdebinfo.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6NetworkTargets.cmake:
 
@@ -2114,6 +2128,8 @@ C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6QSchannelBackendPluginConfig.cm
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6QSchannelBackendPluginTargets-debug.cmake:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6QSchannelBackendPluginTargets-relwithdebinfo.cmake:
+
+C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.cpp:
 
 C:\Qt\6.11.1\msvc2022_64\lib\cmake\Qt6Network\Qt6QSchannelBackendPluginTargets.cmake:
 
@@ -2396,6 +2412,8 @@ CMakeFiles\3.30.5\CMakeCXXCompiler.cmake:
 CMakeFiles\3.30.5\CMakeRCCompiler.cmake:
 
 C:\qtdevelop\20260701\20260701\comm\modbusclient.h:
+
+C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.h:
 
 C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.cpp:
 

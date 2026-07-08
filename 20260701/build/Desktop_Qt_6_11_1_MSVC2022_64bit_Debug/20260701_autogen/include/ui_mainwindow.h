@@ -16,15 +16,18 @@
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -63,6 +66,8 @@ public:
     QLabel *label_13;
     QTextEdit *textEditTcpClientSend;
     QCheckBox *checkBoxTcpClientSendHex;
+    QLabel *labelTcpClientRxCount;
+    QPushButton *btnClearTcpClientRxCount;
     QPushButton *btnTcpClientSend;
     QWidget *tab_4;
     QVBoxLayout *verticalLayout_2;
@@ -77,6 +82,8 @@ public:
     QLabel *label_6;
     QTextEdit *textEditUdpSend;
     QCheckBox *checkBoxUdpSendHex;
+    QLabel *labelUdpRxCount;
+    QPushButton *btnClearUdpRxCount;
     QPushButton *btnUdpSend;
     QWidget *tab_5;
     QVBoxLayout *verticalLayout_3;
@@ -148,6 +155,79 @@ public:
     QTextEdit *textEditSerialSend;
     QCheckBox *checkBoxSerialSendHex;
     QPushButton *btnSerialSend;
+    QWidget *tab_7;
+    QGroupBox *groupBox_3;
+    QLabel *label_33;
+    QLabel *label_35;
+    QSpinBox *spinBoxModbusRtuStartAddr;
+    QSpinBox *spinBoxModbusRtuCount;
+    QPushButton *btnModbusRtuReadHolding;
+    QGroupBox *groupBox_4;
+    QLabel *label_36;
+    QSpinBox *spinBoxModbusRtuWriteAddr;
+    QLabel *label_37;
+    QLineEdit *lineEditModbusRtuWriteValue;
+    QPushButton *btnModbusRtuWriteSingle;
+    QPushButton *btnModbusRtuWriteMultiple;
+    QGroupBox *groupBox_5;
+    QLabel *label_26;
+    QLabel *label_27;
+    QLabel *label_28;
+    QLabel *label_29;
+    QLabel *label_30;
+    QLabel *label_31;
+    QComboBox *comboBoxModbusRtuPort;
+    QComboBox *comboBoxModbusRtuBaudRate;
+    QComboBox *comboBoxModbusRtuDataBits;
+    QComboBox *comboBoxModbusRtuStopBits;
+    QComboBox *comboBoxModbusRtuParity;
+    QSpinBox *spinBoxModbusRtuSlaveId;
+    QPushButton *btnModbusRtuOpen;
+    QPushButton *btnModbusRtuClose;
+    QPushButton *btnModbusRtuRefresh;
+    QWidget *tab_8;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QGroupBox *groupBox_6;
+    QPushButton *btnModbusRtuSlaveOpen;
+    QPushButton *btnModbusRtuSlaveClose;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout_16;
+    QLabel *label_38;
+    QComboBox *comboBoxModbusRtuSlavePort;
+    QPushButton *btnModbusRtuSlaveRefreshPort;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_18;
+    QLabel *label_39;
+    QComboBox *comboBoxModbusRtuSlaveBaudRate;
+    QWidget *horizontalLayoutWidget_3;
+    QHBoxLayout *horizontalLayout_19;
+    QLabel *label_40;
+    QComboBox *comboBoxModbusRtuSlaveDataBits;
+    QWidget *horizontalLayoutWidget_4;
+    QHBoxLayout *horizontalLayout_20;
+    QLabel *label_42;
+    QComboBox *comboBoxModbusRtuSlaveParity;
+    QWidget *horizontalLayoutWidget_5;
+    QHBoxLayout *horizontalLayout_21;
+    QLabel *label_41;
+    QComboBox *comboBoxModbusRtuSlaveStopBits;
+    QWidget *horizontalLayoutWidget_8;
+    QHBoxLayout *horizontalLayout_24;
+    QLabel *label_43;
+    QSpinBox *spinBoxModbusRtuSlaveSelfId;
+    QGroupBox *groupBox_7;
+    QPushButton *btnModbusRtuSlaveInitRegisters;
+    QPushButton *btnModbusRtuSlaveClearRegisters;
+    QWidget *horizontalLayoutWidget_6;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *label_44;
+    QSpinBox *spinBoxModbusRtuSlaveRegisterCount;
+    QWidget *horizontalLayoutWidget_7;
+    QHBoxLayout *horizontalLayout_23;
+    QLabel *label_45;
+    QSpinBox *spinBoxModbusRtuSlaveStartAddress;
+    QTableWidget *tableWidgetModbusRtuSlaveHolding;
     QGroupBox *groupBox_2;
     QVBoxLayout *verticalLayout_5;
     QTextEdit *textEditLog;
@@ -284,6 +364,16 @@ public:
 
         verticalLayout_6->addWidget(checkBoxTcpClientSendHex);
 
+        labelTcpClientRxCount = new QLabel(tab);
+        labelTcpClientRxCount->setObjectName("labelTcpClientRxCount");
+
+        verticalLayout_6->addWidget(labelTcpClientRxCount);
+
+        btnClearTcpClientRxCount = new QPushButton(tab);
+        btnClearTcpClientRxCount->setObjectName("btnClearTcpClientRxCount");
+
+        verticalLayout_6->addWidget(btnClearTcpClientRxCount);
+
         btnTcpClientSend = new QPushButton(tab);
         btnTcpClientSend->setObjectName("btnTcpClientSend");
 
@@ -348,6 +438,16 @@ public:
         checkBoxUdpSendHex->setObjectName("checkBoxUdpSendHex");
 
         verticalLayout_2->addWidget(checkBoxUdpSendHex);
+
+        labelUdpRxCount = new QLabel(tab_4);
+        labelUdpRxCount->setObjectName("labelUdpRxCount");
+
+        verticalLayout_2->addWidget(labelUdpRxCount);
+
+        btnClearUdpRxCount = new QPushButton(tab_4);
+        btnClearUdpRxCount->setObjectName("btnClearUdpRxCount");
+
+        verticalLayout_2->addWidget(btnClearUdpRxCount);
 
         btnUdpSend = new QPushButton(tab_4);
         btnUdpSend->setObjectName("btnUdpSend");
@@ -692,6 +792,268 @@ public:
         verticalLayout_9->addWidget(btnSerialSend);
 
         tabWidgetComm->addTab(tab_6, QString());
+        tab_7 = new QWidget();
+        tab_7->setObjectName("tab_7");
+        groupBox_3 = new QGroupBox(tab_7);
+        groupBox_3->setObjectName("groupBox_3");
+        groupBox_3->setGeometry(QRect(10, 270, 231, 111));
+        label_33 = new QLabel(groupBox_3);
+        label_33->setObjectName("label_33");
+        label_33->setGeometry(QRect(20, 20, 71, 20));
+        label_35 = new QLabel(groupBox_3);
+        label_35->setObjectName("label_35");
+        label_35->setGeometry(QRect(20, 60, 53, 15));
+        spinBoxModbusRtuStartAddr = new QSpinBox(groupBox_3);
+        spinBoxModbusRtuStartAddr->setObjectName("spinBoxModbusRtuStartAddr");
+        spinBoxModbusRtuStartAddr->setGeometry(QRect(70, 20, 101, 24));
+        spinBoxModbusRtuCount = new QSpinBox(groupBox_3);
+        spinBoxModbusRtuCount->setObjectName("spinBoxModbusRtuCount");
+        spinBoxModbusRtuCount->setGeometry(QRect(70, 50, 101, 24));
+        spinBoxModbusRtuCount->setValue(2);
+        btnModbusRtuReadHolding = new QPushButton(groupBox_3);
+        btnModbusRtuReadHolding->setObjectName("btnModbusRtuReadHolding");
+        btnModbusRtuReadHolding->setEnabled(false);
+        btnModbusRtuReadHolding->setGeometry(QRect(20, 80, 111, 23));
+        groupBox_4 = new QGroupBox(tab_7);
+        groupBox_4->setObjectName("groupBox_4");
+        groupBox_4->setGeometry(QRect(10, 390, 231, 111));
+        label_36 = new QLabel(groupBox_4);
+        label_36->setObjectName("label_36");
+        label_36->setGeometry(QRect(20, 20, 53, 15));
+        spinBoxModbusRtuWriteAddr = new QSpinBox(groupBox_4);
+        spinBoxModbusRtuWriteAddr->setObjectName("spinBoxModbusRtuWriteAddr");
+        spinBoxModbusRtuWriteAddr->setGeometry(QRect(70, 20, 101, 24));
+        label_37 = new QLabel(groupBox_4);
+        label_37->setObjectName("label_37");
+        label_37->setGeometry(QRect(30, 50, 41, 16));
+        lineEditModbusRtuWriteValue = new QLineEdit(groupBox_4);
+        lineEditModbusRtuWriteValue->setObjectName("lineEditModbusRtuWriteValue");
+        lineEditModbusRtuWriteValue->setGeometry(QRect(70, 50, 113, 23));
+        btnModbusRtuWriteSingle = new QPushButton(groupBox_4);
+        btnModbusRtuWriteSingle->setObjectName("btnModbusRtuWriteSingle");
+        btnModbusRtuWriteSingle->setEnabled(false);
+        btnModbusRtuWriteSingle->setGeometry(QRect(10, 80, 101, 23));
+        btnModbusRtuWriteMultiple = new QPushButton(groupBox_4);
+        btnModbusRtuWriteMultiple->setObjectName("btnModbusRtuWriteMultiple");
+        btnModbusRtuWriteMultiple->setEnabled(false);
+        btnModbusRtuWriteMultiple->setGeometry(QRect(120, 80, 101, 23));
+        groupBox_5 = new QGroupBox(tab_7);
+        groupBox_5->setObjectName("groupBox_5");
+        groupBox_5->setGeometry(QRect(10, 10, 231, 241));
+        label_26 = new QLabel(groupBox_5);
+        label_26->setObjectName("label_26");
+        label_26->setGeometry(QRect(10, 30, 53, 15));
+        label_27 = new QLabel(groupBox_5);
+        label_27->setObjectName("label_27");
+        label_27->setGeometry(QRect(10, 60, 53, 15));
+        label_28 = new QLabel(groupBox_5);
+        label_28->setObjectName("label_28");
+        label_28->setGeometry(QRect(10, 90, 53, 15));
+        label_29 = new QLabel(groupBox_5);
+        label_29->setObjectName("label_29");
+        label_29->setGeometry(QRect(10, 120, 53, 15));
+        label_30 = new QLabel(groupBox_5);
+        label_30->setObjectName("label_30");
+        label_30->setGeometry(QRect(10, 150, 53, 15));
+        label_31 = new QLabel(groupBox_5);
+        label_31->setObjectName("label_31");
+        label_31->setGeometry(QRect(20, 180, 53, 15));
+        comboBoxModbusRtuPort = new QComboBox(groupBox_5);
+        comboBoxModbusRtuPort->setObjectName("comboBoxModbusRtuPort");
+        comboBoxModbusRtuPort->setGeometry(QRect(50, 30, 91, 23));
+        comboBoxModbusRtuBaudRate = new QComboBox(groupBox_5);
+        comboBoxModbusRtuBaudRate->setObjectName("comboBoxModbusRtuBaudRate");
+        comboBoxModbusRtuBaudRate->setGeometry(QRect(50, 60, 91, 23));
+        comboBoxModbusRtuDataBits = new QComboBox(groupBox_5);
+        comboBoxModbusRtuDataBits->setObjectName("comboBoxModbusRtuDataBits");
+        comboBoxModbusRtuDataBits->setGeometry(QRect(50, 90, 91, 23));
+        comboBoxModbusRtuStopBits = new QComboBox(groupBox_5);
+        comboBoxModbusRtuStopBits->setObjectName("comboBoxModbusRtuStopBits");
+        comboBoxModbusRtuStopBits->setGeometry(QRect(50, 120, 91, 23));
+        comboBoxModbusRtuParity = new QComboBox(groupBox_5);
+        comboBoxModbusRtuParity->setObjectName("comboBoxModbusRtuParity");
+        comboBoxModbusRtuParity->setGeometry(QRect(50, 150, 91, 23));
+        spinBoxModbusRtuSlaveId = new QSpinBox(groupBox_5);
+        spinBoxModbusRtuSlaveId->setObjectName("spinBoxModbusRtuSlaveId");
+        spinBoxModbusRtuSlaveId->setGeometry(QRect(70, 180, 101, 24));
+        spinBoxModbusRtuSlaveId->setValue(1);
+        btnModbusRtuOpen = new QPushButton(groupBox_5);
+        btnModbusRtuOpen->setObjectName("btnModbusRtuOpen");
+        btnModbusRtuOpen->setGeometry(QRect(10, 210, 80, 23));
+        btnModbusRtuClose = new QPushButton(groupBox_5);
+        btnModbusRtuClose->setObjectName("btnModbusRtuClose");
+        btnModbusRtuClose->setGeometry(QRect(100, 210, 80, 23));
+        btnModbusRtuRefresh = new QPushButton(groupBox_5);
+        btnModbusRtuRefresh->setObjectName("btnModbusRtuRefresh");
+        btnModbusRtuRefresh->setGeometry(QRect(170, 30, 41, 23));
+        tabWidgetComm->addTab(tab_7, QString());
+        tab_8 = new QWidget();
+        tab_8->setObjectName("tab_8");
+        scrollArea = new QScrollArea(tab_8);
+        scrollArea->setObjectName("scrollArea");
+        scrollArea->setGeometry(QRect(0, 0, 251, 511));
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 249, 509));
+        groupBox_6 = new QGroupBox(scrollAreaWidgetContents);
+        groupBox_6->setObjectName("groupBox_6");
+        groupBox_6->setGeometry(QRect(10, 10, 231, 241));
+        btnModbusRtuSlaveOpen = new QPushButton(groupBox_6);
+        btnModbusRtuSlaveOpen->setObjectName("btnModbusRtuSlaveOpen");
+        btnModbusRtuSlaveOpen->setGeometry(QRect(10, 210, 80, 23));
+        btnModbusRtuSlaveClose = new QPushButton(groupBox_6);
+        btnModbusRtuSlaveClose->setObjectName("btnModbusRtuSlaveClose");
+        btnModbusRtuSlaveClose->setGeometry(QRect(100, 210, 80, 23));
+        horizontalLayoutWidget = new QWidget(groupBox_6);
+        horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
+        horizontalLayoutWidget->setGeometry(QRect(10, 20, 221, 31));
+        horizontalLayout_16 = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout_16->setObjectName("horizontalLayout_16");
+        horizontalLayout_16->setContentsMargins(0, 0, 0, 0);
+        label_38 = new QLabel(horizontalLayoutWidget);
+        label_38->setObjectName("label_38");
+
+        horizontalLayout_16->addWidget(label_38);
+
+        comboBoxModbusRtuSlavePort = new QComboBox(horizontalLayoutWidget);
+        comboBoxModbusRtuSlavePort->setObjectName("comboBoxModbusRtuSlavePort");
+
+        horizontalLayout_16->addWidget(comboBoxModbusRtuSlavePort);
+
+        btnModbusRtuSlaveRefreshPort = new QPushButton(horizontalLayoutWidget);
+        btnModbusRtuSlaveRefreshPort->setObjectName("btnModbusRtuSlaveRefreshPort");
+
+        horizontalLayout_16->addWidget(btnModbusRtuSlaveRefreshPort);
+
+        horizontalLayoutWidget_2 = new QWidget(groupBox_6);
+        horizontalLayoutWidget_2->setObjectName("horizontalLayoutWidget_2");
+        horizontalLayoutWidget_2->setGeometry(QRect(10, 50, 131, 31));
+        horizontalLayout_18 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_18->setObjectName("horizontalLayout_18");
+        horizontalLayout_18->setContentsMargins(0, 0, 0, 0);
+        label_39 = new QLabel(horizontalLayoutWidget_2);
+        label_39->setObjectName("label_39");
+
+        horizontalLayout_18->addWidget(label_39);
+
+        comboBoxModbusRtuSlaveBaudRate = new QComboBox(horizontalLayoutWidget_2);
+        comboBoxModbusRtuSlaveBaudRate->setObjectName("comboBoxModbusRtuSlaveBaudRate");
+
+        horizontalLayout_18->addWidget(comboBoxModbusRtuSlaveBaudRate);
+
+        horizontalLayoutWidget_3 = new QWidget(groupBox_6);
+        horizontalLayoutWidget_3->setObjectName("horizontalLayoutWidget_3");
+        horizontalLayoutWidget_3->setGeometry(QRect(10, 80, 131, 31));
+        horizontalLayout_19 = new QHBoxLayout(horizontalLayoutWidget_3);
+        horizontalLayout_19->setObjectName("horizontalLayout_19");
+        horizontalLayout_19->setContentsMargins(0, 0, 0, 0);
+        label_40 = new QLabel(horizontalLayoutWidget_3);
+        label_40->setObjectName("label_40");
+
+        horizontalLayout_19->addWidget(label_40);
+
+        comboBoxModbusRtuSlaveDataBits = new QComboBox(horizontalLayoutWidget_3);
+        comboBoxModbusRtuSlaveDataBits->setObjectName("comboBoxModbusRtuSlaveDataBits");
+
+        horizontalLayout_19->addWidget(comboBoxModbusRtuSlaveDataBits);
+
+        horizontalLayoutWidget_4 = new QWidget(groupBox_6);
+        horizontalLayoutWidget_4->setObjectName("horizontalLayoutWidget_4");
+        horizontalLayoutWidget_4->setGeometry(QRect(10, 110, 131, 31));
+        horizontalLayout_20 = new QHBoxLayout(horizontalLayoutWidget_4);
+        horizontalLayout_20->setObjectName("horizontalLayout_20");
+        horizontalLayout_20->setContentsMargins(0, 0, 0, 0);
+        label_42 = new QLabel(horizontalLayoutWidget_4);
+        label_42->setObjectName("label_42");
+
+        horizontalLayout_20->addWidget(label_42);
+
+        comboBoxModbusRtuSlaveParity = new QComboBox(horizontalLayoutWidget_4);
+        comboBoxModbusRtuSlaveParity->setObjectName("comboBoxModbusRtuSlaveParity");
+
+        horizontalLayout_20->addWidget(comboBoxModbusRtuSlaveParity);
+
+        horizontalLayoutWidget_5 = new QWidget(groupBox_6);
+        horizontalLayoutWidget_5->setObjectName("horizontalLayoutWidget_5");
+        horizontalLayoutWidget_5->setGeometry(QRect(10, 140, 131, 31));
+        horizontalLayout_21 = new QHBoxLayout(horizontalLayoutWidget_5);
+        horizontalLayout_21->setObjectName("horizontalLayout_21");
+        horizontalLayout_21->setContentsMargins(0, 0, 0, 0);
+        label_41 = new QLabel(horizontalLayoutWidget_5);
+        label_41->setObjectName("label_41");
+
+        horizontalLayout_21->addWidget(label_41);
+
+        comboBoxModbusRtuSlaveStopBits = new QComboBox(horizontalLayoutWidget_5);
+        comboBoxModbusRtuSlaveStopBits->setObjectName("comboBoxModbusRtuSlaveStopBits");
+
+        horizontalLayout_21->addWidget(comboBoxModbusRtuSlaveStopBits);
+
+        horizontalLayoutWidget_8 = new QWidget(groupBox_6);
+        horizontalLayoutWidget_8->setObjectName("horizontalLayoutWidget_8");
+        horizontalLayoutWidget_8->setGeometry(QRect(10, 170, 131, 31));
+        horizontalLayout_24 = new QHBoxLayout(horizontalLayoutWidget_8);
+        horizontalLayout_24->setObjectName("horizontalLayout_24");
+        horizontalLayout_24->setContentsMargins(0, 0, 0, 0);
+        label_43 = new QLabel(horizontalLayoutWidget_8);
+        label_43->setObjectName("label_43");
+
+        horizontalLayout_24->addWidget(label_43);
+
+        spinBoxModbusRtuSlaveSelfId = new QSpinBox(horizontalLayoutWidget_8);
+        spinBoxModbusRtuSlaveSelfId->setObjectName("spinBoxModbusRtuSlaveSelfId");
+        spinBoxModbusRtuSlaveSelfId->setValue(1);
+
+        horizontalLayout_24->addWidget(spinBoxModbusRtuSlaveSelfId);
+
+        groupBox_7 = new QGroupBox(scrollAreaWidgetContents);
+        groupBox_7->setObjectName("groupBox_7");
+        groupBox_7->setGeometry(QRect(10, 260, 231, 111));
+        btnModbusRtuSlaveInitRegisters = new QPushButton(groupBox_7);
+        btnModbusRtuSlaveInitRegisters->setObjectName("btnModbusRtuSlaveInitRegisters");
+        btnModbusRtuSlaveInitRegisters->setGeometry(QRect(10, 80, 101, 23));
+        btnModbusRtuSlaveClearRegisters = new QPushButton(groupBox_7);
+        btnModbusRtuSlaveClearRegisters->setObjectName("btnModbusRtuSlaveClearRegisters");
+        btnModbusRtuSlaveClearRegisters->setGeometry(QRect(110, 80, 101, 23));
+        horizontalLayoutWidget_6 = new QWidget(groupBox_7);
+        horizontalLayoutWidget_6->setObjectName("horizontalLayoutWidget_6");
+        horizontalLayoutWidget_6->setGeometry(QRect(40, 20, 160, 31));
+        horizontalLayout_22 = new QHBoxLayout(horizontalLayoutWidget_6);
+        horizontalLayout_22->setObjectName("horizontalLayout_22");
+        horizontalLayout_22->setContentsMargins(0, 0, 0, 0);
+        label_44 = new QLabel(horizontalLayoutWidget_6);
+        label_44->setObjectName("label_44");
+
+        horizontalLayout_22->addWidget(label_44);
+
+        spinBoxModbusRtuSlaveRegisterCount = new QSpinBox(horizontalLayoutWidget_6);
+        spinBoxModbusRtuSlaveRegisterCount->setObjectName("spinBoxModbusRtuSlaveRegisterCount");
+        spinBoxModbusRtuSlaveRegisterCount->setValue(20);
+
+        horizontalLayout_22->addWidget(spinBoxModbusRtuSlaveRegisterCount);
+
+        horizontalLayoutWidget_7 = new QWidget(groupBox_7);
+        horizontalLayoutWidget_7->setObjectName("horizontalLayoutWidget_7");
+        horizontalLayoutWidget_7->setGeometry(QRect(40, 50, 160, 31));
+        horizontalLayout_23 = new QHBoxLayout(horizontalLayoutWidget_7);
+        horizontalLayout_23->setObjectName("horizontalLayout_23");
+        horizontalLayout_23->setContentsMargins(0, 0, 0, 0);
+        label_45 = new QLabel(horizontalLayoutWidget_7);
+        label_45->setObjectName("label_45");
+
+        horizontalLayout_23->addWidget(label_45);
+
+        spinBoxModbusRtuSlaveStartAddress = new QSpinBox(horizontalLayoutWidget_7);
+        spinBoxModbusRtuSlaveStartAddress->setObjectName("spinBoxModbusRtuSlaveStartAddress");
+
+        horizontalLayout_23->addWidget(spinBoxModbusRtuSlaveStartAddress);
+
+        tableWidgetModbusRtuSlaveHolding = new QTableWidget(scrollAreaWidgetContents);
+        tableWidgetModbusRtuSlaveHolding->setObjectName("tableWidgetModbusRtuSlaveHolding");
+        tableWidgetModbusRtuSlaveHolding->setGeometry(QRect(0, 390, 241, 111));
+        scrollArea->setWidget(scrollAreaWidgetContents);
+        tabWidgetComm->addTab(tab_8, QString());
 
         horizontalLayout->addWidget(tabWidgetComm);
 
@@ -730,7 +1092,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidgetComm->setCurrentIndex(3);
+        tabWidgetComm->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -755,6 +1117,8 @@ public:
         btnTcpClientDisconnect->setText(QCoreApplication::translate("MainWindow", "\346\226\255\345\274\200", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "\345\217\221\351\200\201\345\206\205\345\256\271\357\274\232", nullptr));
         checkBoxTcpClientSendHex->setText(QCoreApplication::translate("MainWindow", "HEX\345\217\221\351\200\201", nullptr));
+        labelTcpClientRxCount->setText(QCoreApplication::translate("MainWindow", "TCP\346\216\245\346\224\266\346\254\241\346\225\260\357\274\2320", nullptr));
+        btnClearTcpClientRxCount->setText(QCoreApplication::translate("MainWindow", "\346\270\205\351\233\266", nullptr));
         btnTcpClientSend->setText(QCoreApplication::translate("MainWindow", "\345\217\221\351\200\201", nullptr));
         tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab), QCoreApplication::translate("MainWindow", "TCP Client", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "\346\234\254\345\234\260\347\253\257\345\217\243\357\274\232", nullptr));
@@ -767,6 +1131,8 @@ public:
         lineEditUdpTargetPort->setText(QCoreApplication::translate("MainWindow", "6000", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "\345\217\221\351\200\201\345\206\205\345\256\271:", nullptr));
         checkBoxUdpSendHex->setText(QCoreApplication::translate("MainWindow", "HEX\345\217\221\351\200\201", nullptr));
+        labelUdpRxCount->setText(QCoreApplication::translate("MainWindow", "UDP\346\216\245\346\224\266\346\254\241\346\225\260\357\274\2320", nullptr));
+        btnClearUdpRxCount->setText(QCoreApplication::translate("MainWindow", "\346\270\205\351\233\266", nullptr));
         btnUdpSend->setText(QCoreApplication::translate("MainWindow", "UDP\345\217\221\351\200\201", nullptr));
         tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_4), QCoreApplication::translate("MainWindow", "UDP", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "\347\253\257\345\217\243\357\274\232", nullptr));
@@ -780,7 +1146,7 @@ public:
         label_11->setText(QCoreApplication::translate("MainWindow", "\345\257\204\345\255\230\345\231\250\345\200\274\357\274\232", nullptr));
         lineEditModbusRegValue->setText(QCoreApplication::translate("MainWindow", "100", nullptr));
         btnModbusSetReg->setText(QCoreApplication::translate("MainWindow", "\350\256\276\347\275\256\345\257\204\345\255\230\345\231\250", nullptr));
-        tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Modbus Server", nullptr));
+        tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Modbus TCP Server", nullptr));
         label_20->setText(QCoreApplication::translate("MainWindow", "\347\233\256\346\240\207IP\357\274\232 ", nullptr));
         lineEditModbusClientIp->setText(QCoreApplication::translate("MainWindow", "127.0.0.1", nullptr));
         label_21->setText(QCoreApplication::translate("MainWindow", "\347\233\256\346\240\207\347\253\257\345\217\243\357\274\232", nullptr));
@@ -797,7 +1163,7 @@ public:
         label_25->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\205\245\345\244\232\344\270\252\347\244\272\344\276\213\357\274\23210,20,30 \346\210\22610 20 30", nullptr));
         btnModbusClientWriteSingle->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\215\225\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
         btnModbusClientWriteMultiple->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\244\232\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
-        tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Modbus Client", nullptr));
+        tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Modbus TCP Client", nullptr));
         label_14->setText(QCoreApplication::translate("MainWindow", "\344\270\262\345\217\243\345\217\267", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "\346\263\242\347\211\271\347\216\207", nullptr));
         label_17->setText(QCoreApplication::translate("MainWindow", "\346\225\260\346\215\256\344\275\215", nullptr));
@@ -810,6 +1176,43 @@ public:
         checkBoxSerialSendHex->setText(QCoreApplication::translate("MainWindow", "HEX \345\217\221\351\200\201", nullptr));
         btnSerialSend->setText(QCoreApplication::translate("MainWindow", "\345\217\221\351\200\201", nullptr));
         tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_6), QCoreApplication::translate("MainWindow", "COM/RS232", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "\350\257\273\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250 03", nullptr));
+        label_33->setText(QCoreApplication::translate("MainWindow", "\350\265\267\345\247\213\345\234\260\345\235\200", nullptr));
+        label_35->setText(QCoreApplication::translate("MainWindow", "\350\257\273\345\217\226\346\225\260\351\207\217", nullptr));
+        btnModbusRtuReadHolding->setText(QCoreApplication::translate("MainWindow", "\350\257\273\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250", nullptr));
+        groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "\345\206\231\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250 06 / 10", nullptr));
+        label_36->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\205\245\345\234\260\345\235\200", nullptr));
+        label_37->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\205\245\345\200\274", nullptr));
+        lineEditModbusRtuWriteValue->setText(QCoreApplication::translate("MainWindow", "123", nullptr));
+        btnModbusRtuWriteSingle->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\215\225\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
+        btnModbusRtuWriteMultiple->setText(QCoreApplication::translate("MainWindow", "\345\206\231\345\244\232\344\270\252\345\257\204\345\255\230\345\231\250", nullptr));
+        groupBox_5->setTitle(QCoreApplication::translate("MainWindow", "\350\256\276\347\275\256\344\270\262\345\217\243\345\217\202\346\225\260", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "\344\270\262\345\217\243\345\217\267 ", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "\346\263\242\347\211\271\347\216\207", nullptr));
+        label_28->setText(QCoreApplication::translate("MainWindow", "\346\225\260\346\215\256\344\275\215", nullptr));
+        label_29->setText(QCoreApplication::translate("MainWindow", "\345\201\234\346\255\242\344\275\215", nullptr));
+        label_30->setText(QCoreApplication::translate("MainWindow", "\346\240\241\351\252\214\344\275\215", nullptr));
+        label_31->setText(QCoreApplication::translate("MainWindow", "\344\273\216\347\253\231\345\234\260\345\235\200", nullptr));
+        btnModbusRtuOpen->setText(QCoreApplication::translate("MainWindow", "\346\211\223\345\274\200\344\270\262\345\217\243", nullptr));
+        btnModbusRtuClose->setText(QCoreApplication::translate("MainWindow", "\345\205\263\351\227\255\344\270\262\345\217\243", nullptr));
+        btnModbusRtuRefresh->setText(QCoreApplication::translate("MainWindow", "\345\210\267\346\226\260", nullptr));
+        tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_7), QCoreApplication::translate("MainWindow", "Modbus RTU Master", nullptr));
+        groupBox_6->setTitle(QCoreApplication::translate("MainWindow", "\350\256\276\347\275\256\344\270\262\345\217\243\345\217\202\346\225\260", nullptr));
+        btnModbusRtuSlaveOpen->setText(QCoreApplication::translate("MainWindow", "\346\211\223\345\274\200\344\270\262\345\217\243", nullptr));
+        btnModbusRtuSlaveClose->setText(QCoreApplication::translate("MainWindow", "\345\205\263\351\227\255\344\270\262\345\217\243", nullptr));
+        label_38->setText(QCoreApplication::translate("MainWindow", "\344\270\262\345\217\243\345\217\267 ", nullptr));
+        btnModbusRtuSlaveRefreshPort->setText(QCoreApplication::translate("MainWindow", "\345\210\267\346\226\260", nullptr));
+        label_39->setText(QCoreApplication::translate("MainWindow", "\346\263\242\347\211\271\347\216\207", nullptr));
+        label_40->setText(QCoreApplication::translate("MainWindow", "\346\225\260\346\215\256\344\275\215", nullptr));
+        label_42->setText(QCoreApplication::translate("MainWindow", "\346\240\241\351\252\214\344\275\215", nullptr));
+        label_41->setText(QCoreApplication::translate("MainWindow", "\345\201\234\346\255\242\344\275\215", nullptr));
+        label_43->setText(QCoreApplication::translate("MainWindow", "\344\273\216\347\253\231\345\234\260\345\235\200", nullptr));
+        groupBox_7->setTitle(QCoreApplication::translate("MainWindow", "\345\257\204\345\255\230\345\231\250\351\205\215\347\275\256", nullptr));
+        btnModbusRtuSlaveInitRegisters->setText(QCoreApplication::translate("MainWindow", "\345\210\235\345\247\213\345\214\226\345\257\204\345\255\230\345\231\250", nullptr));
+        btnModbusRtuSlaveClearRegisters->setText(QCoreApplication::translate("MainWindow", "\346\270\205\347\251\272\345\257\204\345\255\230\345\231\250", nullptr));
+        label_44->setText(QCoreApplication::translate("MainWindow", "\344\277\235\346\214\201\345\257\204\345\255\230\345\231\250\346\225\260\351\207\217", nullptr));
+        label_45->setText(QCoreApplication::translate("MainWindow", "\350\265\267\345\247\213\345\234\260\345\235\200", nullptr));
+        tabWidgetComm->setTabText(tabWidgetComm->indexOf(tab_8), QCoreApplication::translate("MainWindow", "Modbus RTU Slave ", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "\346\227\245\345\277\227", nullptr));
         btnSaveLog->setText(QCoreApplication::translate("MainWindow", "\344\277\235\345\255\230\346\227\245\345\277\227\345\210\260...", nullptr));
         btnClearLog->setText(QCoreApplication::translate("MainWindow", "\346\270\205\347\251\272\346\227\245\345\277\227", nullptr));

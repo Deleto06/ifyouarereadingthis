@@ -3,10 +3,12 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QNetworkProxy>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QNetworkProxy::setApplicationProxy(QNetworkProxy::NoProxy);
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

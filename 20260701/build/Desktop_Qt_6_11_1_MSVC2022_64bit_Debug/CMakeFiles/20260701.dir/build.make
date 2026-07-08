@@ -265,10 +265,30 @@ CMakeFiles\20260701.dir\comm\modbusserver.cpp.s: cmake_force
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\20260701.dir\comm\modbusserver.cpp.s /c C:\qtdevelop\20260701\20260701\comm\modbusserver.cpp
 <<
 
+CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj: CMakeFiles\20260701.dir\flags.make
+CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj: C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.cpp
+CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj: CMakeFiles\20260701.dir\compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/20260701.dir/comm/modbusrtuclient.cpp.obj"
+	$(CMAKE_COMMAND) -E cmake_cl_compile_depends --dep-file=CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj.d --working-dir=C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug --filter-prefix="注意: 包含文件:  " -- C:\PROGRA~1\MICROS~2\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\HostX64\x64\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /showIncludes /FoCMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj /FdCMakeFiles\20260701.dir\ /FS -c C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.cpp
+<<
+
+CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/20260701.dir/comm/modbusrtuclient.cpp.i"
+	C:\PROGRA~1\MICROS~2\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\HostX64\x64\cl.exe > CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.cpp
+<<
+
+CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/20260701.dir/comm/modbusrtuclient.cpp.s"
+	C:\PROGRA~1\MICROS~2\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\HostX64\x64\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.s /c C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.cpp
+<<
+
 CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj: CMakeFiles\20260701.dir\flags.make
 CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj: C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.cpp
 CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj: CMakeFiles\20260701.dir\compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/20260701.dir/comm/modbustcpclientcomm.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/20260701.dir/comm/modbustcpclientcomm.cpp.obj"
 	$(CMAKE_COMMAND) -E cmake_cl_compile_depends --dep-file=CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj.d --working-dir=C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug --filter-prefix="注意: 包含文件:  " -- C:\PROGRA~1\MICROS~2\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\HostX64\x64\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /showIncludes /FoCMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj /FdCMakeFiles\20260701.dir\ /FS -c C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.cpp
 <<
@@ -297,6 +317,7 @@ CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.s: cmake_force
 "CMakeFiles\20260701.dir\comm\serialcomm.cpp.obj" \
 "CMakeFiles\20260701.dir\comm\modbusclient.cpp.obj" \
 "CMakeFiles\20260701.dir\comm\modbusserver.cpp.obj" \
+"CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj" \
 "CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj"
 
 # External object files for target 20260701
@@ -312,6 +333,7 @@ CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.s: cmake_force
 20260701.exe: CMakeFiles\20260701.dir\comm\serialcomm.cpp.obj
 20260701.exe: CMakeFiles\20260701.dir\comm\modbusclient.cpp.obj
 20260701.exe: CMakeFiles\20260701.dir\comm\modbusserver.cpp.obj
+20260701.exe: CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj
 20260701.exe: CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj
 20260701.exe: CMakeFiles\20260701.dir\build.make
 20260701.exe: C:\Qt\6.11.1\msvc2022_64\lib\Qt6Widgetsd.lib
@@ -340,7 +362,7 @@ CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.s: cmake_force
 20260701.exe: C:\Qt\6.11.1\msvc2022_64\lib\Qt6EntryPointd.lib
 20260701.exe: 20260701.exe.manifest
 20260701.exe: CMakeFiles\20260701.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable 20260701.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable 20260701.exe"
 	C:\Qt\Tools\CMake_64\bin\cmake.exe -E vs_link_exe --intdir=CMakeFiles\20260701.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100280~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100280~1.0\x64\mt.exe --manifests 20260701.exe.manifest -- C:\PROGRA~1\MICROS~2\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\20260701.dir\objects1.rsp @<<
  /out:20260701.exe /implib:20260701.lib /pdb:C:\qtdevelop\20260701\20260701\build\Desktop_Qt_6_11_1_MSVC2022_64bit_Debug\20260701.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:windows /MANIFEST:NO  C:\Qt\6.11.1\msvc2022_64\lib\Qt6Widgetsd.lib C:\Qt\6.11.1\msvc2022_64\lib\Qt6SerialBusd.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\opencv\build\x64\vc16\lib\opencv_world500d.lib C:\Qt\6.11.1\msvc2022_64\lib\Qt6Guid.lib d3d11.lib dxgi.lib dxguid.lib d3d12.lib C:\Qt\6.11.1\msvc2022_64\lib\Qt6Networkd.lib ws2_32.lib C:\Qt\6.11.1\msvc2022_64\lib\Qt6SerialPortd.lib C:\Qt\6.11.1\msvc2022_64\lib\Qt6Cored.lib mpr.lib userenv.lib C:\Qt\6.11.1\msvc2022_64\lib\Qt6EntryPointd.lib shell32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<

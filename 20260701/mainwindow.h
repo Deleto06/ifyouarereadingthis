@@ -17,6 +17,12 @@
 #include "comm/modbusclient.h"
 #include "comm/modbusserver.h"
 #include "comm/commutils.h"
+#include "comm/modbusrtuclient.h"
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QTimer>
+#include <QVector>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -74,6 +80,13 @@ private slots:
 
     void on_btnClearLog_clicked();
     void on_btnSaveLog_clicked();
+
+    void on_btnModbusRtuOpen_clicked();
+    void on_btnModbusRtuClose_clicked();
+    void on_btnModbusRtuReadHolding_clicked();
+    void on_btnModbusRtuWriteSingle_clicked();
+    void on_btnModbusRtuWriteMultiple_clicked();
+    void on_btnModbusRtuRefresh_clicked();
 private:
     Ui::MainWindow *ui;
     // ==================== 图像显示相关 ====================
@@ -89,7 +102,7 @@ private:
     ModbusClient *m_modbusClient = nullptr;
     ModbusServer *m_modbusServer = nullptr;
     // 核心功能函数
-
+    ModbusRtuClient *m_modbusRtuClient = nullptr;
     QString byteArrayToPrintableText(const QByteArray &data);
     QListWidgetItem *m_leftPressedItem = nullptr;
     QPoint m_leftPressedPos;
@@ -97,6 +110,18 @@ private:
     QByteArray hexStringToByteArray(const QString &hexText, bool *ok = nullptr);
     QByteArray textToUtf8Bytes(const QString &text);
     QString bytesToUtf8Text(const QByteArray &data);
+
+    QSerialPort::DataBits getSerialDataBitsFromText(const QString &text) const;
+    QSerialPort::StopBits getSerialStopBitsFromText(const QString &text) const;
+    QSerialPort::Parity getSerialParityFromText(const QString &text) const;
+
+    QSerialPort *m_modbusRtuSlaveSerial = nullptr;
+    QByteArray m_modbusRtuSlaveRxBuffer;
+    QTimer *m_modbusRtuSlaveFrameTimer = nullptr;
+    QVector<quint16> m_modbusRtuSlaveHoldingRegisters;
+
+    quint64 m_tcpClientRxCount = 0;
+    quint64 m_udpRxCount = 0;
 
     bool m_isLeftButtonPressed = false;
     void loadSettings();    // 软件启动时加载配置
@@ -116,6 +141,28 @@ private:
     void appendLog(const QString &text);
     void initSerialUi();
     void refreshSerialPorts();
+
+    void initModbusRtuUi();
+    void initModbusRtuSignals();
+    void refreshModbusRtuPorts();
+
+    void initModbusRtuSlaveUi();
+    void refreshModbusRtuSlavePorts();
+    void initModbusRtuSlaveRegisters();
+    void updateModbusRtuSlaveTable();
+    void setModbusRtuSlaveOpenedState(bool opened);
+    void onModbusRtuSlaveReadyRead();
+    void processModbusRtuSlaveFrame();
+    quint16 modbusRtuCrc16(const QByteArray &data);
+    bool checkModbusRtuCrc(const QByteArray &frame);
+    QByteArray appendModbusRtuCrc(const QByteArray &data);
+    QString byteArrayToHexString(const QByteArray &data);
+    void handleModbusRtuSlaveRequest(const QByteArray &frame);
+    void handleModbusRtuSlaveReadHolding(const QByteArray &frame);
+    void handleModbusRtuSlaveWriteSingleRegister(const QByteArray &frame);
+    void handleModbusRtuSlaveWriteMultipleRegisters(const QByteArray &frame);
+    void sendModbusRtuSlaveException(quint8 slaveId, quint8 functionCode, quint8 exceptionCode);
+
 
 };
 

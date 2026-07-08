@@ -56,6 +56,8 @@ set(PROJECT_SOURCES
         comm/modbusserver.h
         comm/modbusserver.cpp
 
+        comm/modbusrtuclient.h
+        comm/modbusrtuclient.cpp
         ${TS_FILES}
 )
 

@@ -502,6 +502,12 @@
 			null
 		],
 		[
+			"C:/qtdevelop/20260701/20260701/comm/modbusrtuclient.h",
+			"MU",
+			"OAICSMGZH2/moc_modbusrtuclient.cpp",
+			null
+		],
+		[
 			"C:/qtdevelop/20260701/20260701/comm/modbusserver.h",
 			"MU",
 			"OAICSMGZH2/moc_modbusserver.cpp",
@@ -609,6 +615,7 @@
 	[
 		[ "C:/qtdevelop/20260701/20260701/comm/commutils.cpp", "MU", null ],
 		[ "C:/qtdevelop/20260701/20260701/comm/modbusclient.cpp", "MU", null ],
+		[ "C:/qtdevelop/20260701/20260701/comm/modbusrtuclient.cpp", "MU", null ],
 		[ "C:/qtdevelop/20260701/20260701/comm/modbusserver.cpp", "MU", null ],
 		[
 			"C:/qtdevelop/20260701/20260701/comm/modbustcpclientcomm.cpp",
