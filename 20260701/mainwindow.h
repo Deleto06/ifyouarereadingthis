@@ -95,8 +95,15 @@ private:
     cv::Mat cvImage;
     QStringList m_imagePaths;
     // ==================== 通讯模块相关 ====================
+
     TcpClient *m_tcpClient = nullptr;
     TcpServer *m_tcpServer = nullptr;
+    // TCP Client 掉线重连
+    QTimer *m_tcpReconnectTimer = nullptr;
+    bool m_tcpWantConnected = false;
+    QString m_tcpTargetIp;
+    quint16 m_tcpTargetPort = 0;
+
     UdpComm *m_udpComm = nullptr;
     SerialComm *m_serialComm = nullptr;
     ModbusClient *m_modbusClient = nullptr;
@@ -119,6 +126,11 @@ private:
     QByteArray m_modbusRtuSlaveRxBuffer;
     QTimer *m_modbusRtuSlaveFrameTimer = nullptr;
     QVector<quint16> m_modbusRtuSlaveHoldingRegisters;
+
+    QTimer *m_modbusTcpReconnectTimer = nullptr;
+    bool m_modbusTcpWantConnected = false;
+    QString m_modbusTcpTargetIp;
+    quint16 m_modbusTcpTargetPort = 0;
 
     quint64 m_tcpClientRxCount = 0;
     quint64 m_udpRxCount = 0;

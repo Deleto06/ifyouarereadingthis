@@ -812,6 +812,30 @@
   C:\qtdevelop\20260701\20260701\mainwindow.h \
   C:\qtdevelop\20260701\20260701\mainwindow.ui
 
+CMakeFiles\20260701.dir\20260701_autogen\mocs_compilation.cpp.obj: 20260701_autogen\mocs_compilation.cpp
+
+CMakeFiles\20260701.dir\comm\commutils.cpp.obj: C:\qtdevelop\20260701\20260701\comm\commutils.cpp
+
+CMakeFiles\20260701.dir\comm\modbusclient.cpp.obj: C:\qtdevelop\20260701\20260701\comm\modbusclient.cpp
+
+CMakeFiles\20260701.dir\comm\modbusrtuclient.cpp.obj: C:\qtdevelop\20260701\20260701\comm\modbusrtuclient.cpp
+
+CMakeFiles\20260701.dir\comm\modbusserver.cpp.obj: C:\qtdevelop\20260701\20260701\comm\modbusserver.cpp
+
+CMakeFiles\20260701.dir\comm\modbustcpclientcomm.cpp.obj: C:\qtdevelop\20260701\20260701\comm\modbustcpclientcomm.cpp
+
+CMakeFiles\20260701.dir\comm\serialcomm.cpp.obj: C:\qtdevelop\20260701\20260701\comm\serialcomm.cpp
+
+CMakeFiles\20260701.dir\comm\tcpclient.cpp.obj: C:\qtdevelop\20260701\20260701\comm\tcpclient.cpp
+
+CMakeFiles\20260701.dir\comm\tcpserver.cpp.obj: C:\qtdevelop\20260701\20260701\comm\tcpserver.cpp
+
+CMakeFiles\20260701.dir\comm\udpcomm.cpp.obj: C:\qtdevelop\20260701\20260701\comm\udpcomm.cpp
+
+CMakeFiles\20260701.dir\main.cpp.obj: C:\qtdevelop\20260701\20260701\main.cpp
+
+CMakeFiles\20260701.dir\mainwindow.cpp.obj: C:\qtdevelop\20260701\20260701\mainwindow.cpp
+
 
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\iostream":
 
@@ -2432,3 +2456,5 @@ C:\qtdevelop\20260701\20260701\main.cpp:
 C:\qtdevelop\20260701\20260701\mainwindow.cpp:
 
 C:\qtdevelop\20260701\20260701\mainwindow.h:
+
+20260701_autogen\mocs_compilation.cpp:

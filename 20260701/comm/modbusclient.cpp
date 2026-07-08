@@ -66,6 +66,7 @@ ModbusClient::~ModbusClient()
     }
 }
 
+
 bool ModbusClient::connectToServer(const QString &ip, int port)
 {
     if (!m_client) {
@@ -84,24 +85,28 @@ bool ModbusClient::connectToServer(const QString &ip, int port)
     }
 
     if (state == QModbusDevice::ConnectingState) {
-        emit logMessage("[Modbus TCP Client] already connecting, please wait");
+        emit logMessage("[Modbus TCP Client] already connecting, wait next retry");
         return false;
     }
 
     if (state == QModbusDevice::ClosingState) {
-        emit logMessage("[Modbus TCP Client] device is closing, please wait");
+        emit logMessage("[Modbus TCP Client] device is closing, wait next retry");
         return false;
     }
 
-    emit logMessage(QString("[Modbus TCP Client] connecting to %1:%2")
-                        .arg(ip)
-                        .arg(port));
-
+    /*
+     * 走到这里，正常应该是 UnconnectedState
+     * 自动重连时，每次都会重新设置 IP 和端口
+     */
     m_client->setConnectionParameter(QModbusDevice::NetworkAddressParameter, ip);
     m_client->setConnectionParameter(QModbusDevice::NetworkPortParameter, port);
 
     m_client->setTimeout(3000);
     m_client->setNumberOfRetries(3);
+
+    emit logMessage(QString("[Modbus TCP Client] connecting to %1:%2")
+                        .arg(ip)
+                        .arg(port));
 
     bool ok = m_client->connectDevice();
 
@@ -113,26 +118,14 @@ bool ModbusClient::connectToServer(const QString &ip, int port)
 
     if (!ok) {
         QString err = m_client->errorString();
+        if (err.isEmpty()) {
+            err = "connectDevice failed";
+        }
+
         emit logMessage("[Modbus TCP Client] connectDevice failed: " + err);
         emit errorOccurred(err);
         return false;
     }
-
-    QTimer::singleShot(1000, this, [this]() {
-        if (!m_client) {
-            return;
-        }
-
-        emit logMessage(QString("[Modbus TCP Client] state after 1s: %1")
-                            .arg(m_client->state()));
-
-        if (m_client->state() == QModbusDevice::ConnectedState) {
-            emit logMessage("[Modbus TCP Client] check result: connected");
-        } else {
-            emit logMessage("[Modbus TCP Client] check result: not connected, error="
-                            + m_client->errorString());
-        }
-    });
 
     return true;
 }

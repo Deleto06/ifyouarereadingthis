@@ -692,6 +692,31 @@ void MainWindow::initCommunication()
     m_modbusServer = new ModbusServer(this);
     m_modbusRtuClient = new ModbusRtuClient(this);
 
+    m_modbusTcpReconnectTimer = new QTimer(this);
+    m_modbusTcpReconnectTimer->setInterval(3000);
+    m_modbusTcpReconnectTimer->setSingleShot(false);
+
+    connect(m_modbusTcpReconnectTimer, &QTimer::timeout,
+            this,
+            [=]() {
+                if (!m_modbusTcpWantConnected) {
+                    m_modbusTcpReconnectTimer->stop();
+                    return;
+                }
+
+                if (m_modbusClient->isConnected()) {
+                    m_modbusTcpReconnectTimer->stop();
+                    return;
+                }
+
+                appendLog(QString("[Modbus TCP Client] try reconnect to %1:%2")
+                              .arg(m_modbusTcpTargetIp)
+                              .arg(m_modbusTcpTargetPort));
+
+                m_modbusClient->connectToServer(m_modbusTcpTargetIp,
+                                                m_modbusTcpTargetPort);
+            });
+
     initCommunicationSignals();
 
     appendLog("通讯模块初始化完成");
@@ -788,11 +813,18 @@ void MainWindow::initCommunicationSignals()
             this,
             [=]() {
                 appendLog("[Modbus TCP Client] connected");
+
+                if (m_modbusTcpReconnectTimer) {
+                    m_modbusTcpReconnectTimer->stop();
+                }
+
                 ui->btnModbusClientConnect->setEnabled(false);
                 ui->btnModbusClientDisconnect->setEnabled(true);
+
                 ui->btnModbusClientReadHolding->setEnabled(true);
                 ui->btnModbusClientWriteSingle->setEnabled(true);
                 ui->btnModbusClientWriteMultiple->setEnabled(true);
+
                 ui->lineEditModbusClientIp->setEnabled(false);
                 ui->lineEditModbusClientPort->setEnabled(false);
             });
@@ -802,20 +834,57 @@ void MainWindow::initCommunicationSignals()
             [=]() {
                 appendLog("[Modbus TCP Client] disconnected");
 
-                ui->btnModbusClientConnect->setEnabled(true);
-                ui->btnModbusClientDisconnect->setEnabled(false);
                 ui->btnModbusClientReadHolding->setEnabled(false);
                 ui->btnModbusClientWriteSingle->setEnabled(false);
                 ui->btnModbusClientWriteMultiple->setEnabled(false);
 
-                ui->lineEditModbusClientIp->setEnabled(true);
-                ui->lineEditModbusClientPort->setEnabled(true);
+                if (m_modbusTcpWantConnected) {
+                    appendLog("[Modbus TCP Client] disconnected unexpectedly, auto reconnect after 3s");
+
+                    if (m_modbusTcpReconnectTimer &&
+                        !m_modbusTcpReconnectTimer->isActive()) {
+                        m_modbusTcpReconnectTimer->start(3000);
+                    }
+
+                    // 自动重连期间，不允许用户改 IP 和端口
+                    ui->btnModbusClientConnect->setEnabled(false);
+                    ui->btnModbusClientDisconnect->setEnabled(true);
+
+                    ui->lineEditModbusClientIp->setEnabled(false);
+                    ui->lineEditModbusClientPort->setEnabled(false);
+                } else {
+                    // 用户主动断开
+                    ui->btnModbusClientConnect->setEnabled(true);
+                    ui->btnModbusClientDisconnect->setEnabled(false);
+
+                    ui->lineEditModbusClientIp->setEnabled(true);
+                    ui->lineEditModbusClientPort->setEnabled(true);
+                }
             });
 
     connect(m_modbusClient, &ModbusClient::errorOccurred,
             this,
             [=](const QString &error) {
                 appendLog(QString("[Modbus TCP Client Error] %1").arg(error));
+
+                if (m_modbusTcpWantConnected) {
+                    if (m_modbusTcpReconnectTimer &&
+                        !m_modbusTcpReconnectTimer->isActive()) {
+
+                        appendLog("[Modbus TCP Client] error occurred, auto reconnect after 3s");
+                        m_modbusTcpReconnectTimer->start(3000);
+                    }
+
+                    ui->btnModbusClientConnect->setEnabled(false);
+                    ui->btnModbusClientDisconnect->setEnabled(true);
+
+                    ui->btnModbusClientReadHolding->setEnabled(false);
+                    ui->btnModbusClientWriteSingle->setEnabled(false);
+                    ui->btnModbusClientWriteMultiple->setEnabled(false);
+
+                    ui->lineEditModbusClientIp->setEnabled(false);
+                    ui->lineEditModbusClientPort->setEnabled(false);
+                }
             });
 
     connect(m_modbusClient, &ModbusClient::holdingRegistersRead,
@@ -886,31 +955,38 @@ void MainWindow::initCommunicationSignals()
                 appendLog(QString("[Serial Error] %1").arg(error));
             });
     // ==================== TCP Client ====================
-    connect(m_tcpClient, &TcpClient::connected,
-            this,
-            [=]() {
-                appendLog("[TCP Client] connected");
-                ui->btnTcpClientConnect->setEnabled(false);
-                ui->btnTcpClientDisconnect->setEnabled(true);
-                ui->btnTcpClientSend->setEnabled(true);
-                ui->lineEditTcpClientIp->setEnabled(false);
-                ui->lineEditTcpClientPort->setEnabled(false);
-            });
-    connect(m_tcpClient, &TcpClient::disconnected,
-            this,
-            [=]() {
-                appendLog("[TCP Client] disconnected");
 
-                // 断开连接时清零接收次数
-                m_tcpClientRxCount = 0;
-                ui->labelTcpClientRxCount->setText("TCP接收次数：0");
+    connect(m_tcpClient, &TcpClient::connected, this, [=]() {
+        appendLog("[TCP Client] connected");
 
-                ui->btnTcpClientConnect->setEnabled(true);
-                ui->btnTcpClientDisconnect->setEnabled(false);
-                ui->btnTcpClientSend->setEnabled(false);
-                ui->lineEditTcpClientIp->setEnabled(true);
-                ui->lineEditTcpClientPort->setEnabled(true);
-            });
+        if (m_tcpReconnectTimer) {
+            m_tcpReconnectTimer->stop();
+        }
+
+        ui->btnTcpClientConnect->setEnabled(false);
+        ui->btnTcpClientDisconnect->setEnabled(true);
+    });
+
+    connect(m_tcpClient, &TcpClient::disconnected, this, [=]() {
+        appendLog("[TCP Client] disconnected");
+
+        ui->btnTcpClientConnect->setEnabled(true);
+        ui->btnTcpClientDisconnect->setEnabled(false);
+
+        // 如果不是用户主动断开，则启动自动重连
+        if (m_tcpWantConnected) {
+            appendLog("[TCP Client] disconnected unexpectedly, auto reconnect after 3s");
+
+            if (m_tcpReconnectTimer) {
+                m_tcpReconnectTimer->start(3000);
+            }
+
+            // 重连期间，断开按钮仍然可用，方便用户取消重连
+            ui->btnTcpClientConnect->setEnabled(false);
+            ui->btnTcpClientDisconnect->setEnabled(true);
+        }
+    });
+
     connect(m_tcpClient, &TcpClient::dataReceived,
             this,
             [=](const QByteArray &data) {
@@ -1379,31 +1455,49 @@ void MainWindow::on_btnSaveLog_clicked()
 void MainWindow::on_btnTcpClientConnect_clicked()
 {
     QString ip = ui->lineEditTcpClientIp->text().trimmed();
+    quint16 port = ui->lineEditTcpClientPort->text().toUShort();
 
-    bool okPort = false;
-    quint16 port = ui->lineEditTcpClientPort->text().trimmed().toUShort(&okPort);
-
-    if (ip.isEmpty()) {
-        appendLog("[TCP Client] 服务器 IP 为空");
+    if (ip.isEmpty() || port == 0) {
+        appendLog("[TCP Client] ip or port invalid");
         return;
     }
 
-    if (!okPort || port == 0) {
-        appendLog("[TCP Client] 服务器端口无效");
-        return;
+    // 记录目标地址
+    m_tcpTargetIp = ip;
+    m_tcpTargetPort = port;
+
+    // 用户希望保持连接
+    m_tcpWantConnected = true;
+
+    // 停止旧的重连定时器
+    if (m_tcpReconnectTimer) {
+        m_tcpReconnectTimer->stop();
     }
 
-    appendLog(QString("[TCP Client] connecting to %1:%2 ...")
-                  .arg(ip)
-                  .arg(port));
+    appendLog(QString("[TCP Client] connect to %1:%2")
+                  .arg(m_tcpTargetIp)
+                  .arg(m_tcpTargetPort));
 
-    m_tcpClient->connectToServer(ip, port);
+    m_tcpClient->connectToServer(m_tcpTargetIp, m_tcpTargetPort);
+
+    ui->btnTcpClientConnect->setEnabled(false);
+    ui->btnTcpClientDisconnect->setEnabled(true);
 }
 void MainWindow::on_btnTcpClientDisconnect_clicked()
 {
+    // 用户主动断开，不再自动重连
+    m_tcpWantConnected = false;
+
+    if (m_tcpReconnectTimer) {
+        m_tcpReconnectTimer->stop();
+    }
+
     m_tcpClient->disconnectFromServer();
 
-    appendLog("[TCP Client] disconnect request");
+    appendLog("[TCP Client] disconnect by user");
+
+    ui->btnTcpClientConnect->setEnabled(true);
+    ui->btnTcpClientDisconnect->setEnabled(false);
 }
 void MainWindow::on_btnTcpClientSend_clicked()
 {
@@ -1643,36 +1737,64 @@ void MainWindow::initModbusClientUi()
 }
 void MainWindow::on_btnModbusClientConnect_clicked()
 {
-    if (!m_modbusClient) {
-        appendLog("[Modbus TCP Client] client object is null");
-        return;
-    }
-
-    if (m_modbusClient->isConnected()) {
-        appendLog("[Modbus TCP Client] already connected");
-        return;
-    }
-
     QString ip = ui->lineEditModbusClientIp->text().trimmed();
-
-    bool okPort = false;
-    int port = ui->lineEditModbusClientPort->text().trimmed().toInt(&okPort);
+    int port = ui->lineEditModbusClientPort->text().toInt();
 
     if (ip.isEmpty()) {
-        appendLog("[Modbus TCP Client] IP为空");
+        appendLog("[Modbus TCP Client] IP is empty");
         return;
     }
 
-    if (!okPort || port <= 0 || port > 65535) {
-        appendLog("[Modbus TCP Client] 端口无效");
+    if (port <= 0 || port > 65535) {
+        appendLog("[Modbus TCP Client] port invalid");
         return;
     }
 
-    m_modbusClient->connectToServer(ip, port);
+    m_modbusTcpTargetIp = ip;
+    m_modbusTcpTargetPort = static_cast<quint16>(port);
+
+    // 用户希望保持连接
+    m_modbusTcpWantConnected = true;
+
+    if (m_modbusTcpReconnectTimer) {
+        m_modbusTcpReconnectTimer->stop();
+    }
+
+    appendLog(QString("[Modbus TCP Client] connect to %1:%2")
+                  .arg(m_modbusTcpTargetIp)
+                  .arg(m_modbusTcpTargetPort));
+
+    m_modbusClient->connectToServer(m_modbusTcpTargetIp,
+                                    m_modbusTcpTargetPort);
+
+    ui->btnModbusClientConnect->setEnabled(false);
+    ui->btnModbusClientDisconnect->setEnabled(true);
+
+    ui->lineEditModbusClientIp->setEnabled(false);
+    ui->lineEditModbusClientPort->setEnabled(false);
 }
 void MainWindow::on_btnModbusClientDisconnect_clicked()
 {
+    // 用户主动断开，不再自动重连
+    m_modbusTcpWantConnected = false;
+
+    if (m_modbusTcpReconnectTimer) {
+        m_modbusTcpReconnectTimer->stop();
+    }
+
     m_modbusClient->disconnectFromServer();
+
+    appendLog("[Modbus TCP Client] disconnect by user");
+
+    ui->btnModbusClientConnect->setEnabled(true);
+    ui->btnModbusClientDisconnect->setEnabled(false);
+
+    ui->btnModbusClientReadHolding->setEnabled(false);
+    ui->btnModbusClientWriteSingle->setEnabled(false);
+    ui->btnModbusClientWriteMultiple->setEnabled(false);
+
+    ui->lineEditModbusClientIp->setEnabled(true);
+    ui->lineEditModbusClientPort->setEnabled(true);
 }
 void MainWindow::on_btnModbusClientReadHolding_clicked()
 {

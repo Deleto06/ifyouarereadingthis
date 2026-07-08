@@ -28,6 +28,15 @@
 			"expression" : "C:/qtdevelop/20260701/20260701/*.cpp",
 			"paths" : 
 			[
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/EWIEGA46WW/moc_mainwindow.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_modbusclient.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_modbusrtuclient.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_modbusserver.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_serialcomm.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_tcpclient.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_tcpserver.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/OAICSMGZH2/moc_udpcomm.cpp",
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/mocs_compilation.cpp",
 				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.cpp",
 				"C:/qtdevelop/20260701/20260701/comm/commutils.cpp",
 				"C:/qtdevelop/20260701/20260701/comm/modbusclient.cpp",
@@ -52,6 +61,7 @@
 			"expression" : "C:/qtdevelop/20260701/20260701/*.h",
 			"paths" : 
 			[
+				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/20260701_autogen/include/ui_mainwindow.h",
 				"C:/qtdevelop/20260701/20260701/build/Desktop_Qt_6_11_1_MSVC2022_64bit_Debug/CMakeFiles/ShowIncludes/foo.h",
 				"C:/qtdevelop/20260701/20260701/comm/commutils.h",
 				"C:/qtdevelop/20260701/20260701/comm/modbusclient.h",
